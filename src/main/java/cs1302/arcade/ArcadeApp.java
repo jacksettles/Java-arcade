@@ -59,9 +59,8 @@ public class ArcadeApp extends Application {
             case DOWN: //KeyCode.DOWN
                 r.setY(r.getY() + 10.0);
                 break;
-                //default:
-                // do nothing
             } // switch
+            // boundary checking
             if (r.getX() > 620.0) {
                 r.setX(r.getX() - 10.0);
             } else if (r.getX() < 0.0) {
