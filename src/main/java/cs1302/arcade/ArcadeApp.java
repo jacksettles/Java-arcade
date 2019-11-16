@@ -56,7 +56,7 @@ public class ArcadeApp extends Application {
             default:
                 // do nothing
             } // switch
-            // TODO bounds checking
+            // TODO bounds checking,
         };
     } // createKeyHandler
 
