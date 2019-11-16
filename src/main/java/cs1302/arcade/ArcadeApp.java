@@ -32,8 +32,11 @@ public class ArcadeApp extends Application {
     private EventHandler<? super MouseEvent> createMouseHandler() {
         return event -> {
             System.out.println(event);
-            r.setX(rng.nextDouble() * (640 - r.getWidth()));
-            r.setY(rng.nextDouble() * (480 - r.getHeight()));
+            Rectangle newR = new Rectangle(20, 20);
+            newR.setX(rng.nextDouble() * (640 - newR.getWidth()));
+            newR.setY(rng.nextDouble() * (480 - newR.getHeight()));
+            group.getChildren().add(newR);
+            newR.setOnMouseClicked(createMouseHandler());
         };
     } // createMouseHandler
 
