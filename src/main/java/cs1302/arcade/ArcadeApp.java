@@ -45,7 +45,7 @@ public class ArcadeApp extends Application {
      */
     private EventHandler<? super KeyEvent> createKeyHandler() {
         return event -> {
-            System.out.println(event);
+            //System.out.println(event);
             switch (event.getCode()) {
             case LEFT:  // KeyCode.LEFT
                 r.setX(r.getX() - 10.0);
@@ -53,10 +53,25 @@ public class ArcadeApp extends Application {
             case RIGHT: // KeyCode.RIGHT
                 r.setX(r.getX() + 10.0);
                 break;
-            default:
+            case UP: // KeyCode.UP
+                r.setY(r.getY() - 10.0);
+                break;
+            case DOWN: //KeyCode.DOWN
+                r.setY(r.getY() + 10.0);
+                break;
+                //default:
                 // do nothing
             } // switch
-            // TODO bounds checking
+            if (r.getX() > 620.0) {
+                r.setX(r.getX() - 10.0);
+            } else if (r.getX() < 0.0) {
+                r.setX(r.getX() + 10.0);
+            }
+            if (r.getY() > 460.0) {
+                r.setY(r.getY() - 10.0);
+            } else if (r.getY() < 0.0) {
+                r.setY(r.getY() + 10.0);
+            }
         };
     } // createKeyHandler
 
