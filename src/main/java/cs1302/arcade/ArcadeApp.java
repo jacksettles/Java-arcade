@@ -52,7 +52,7 @@ public class ArcadeApp extends Application {
     private EventHandler<? super KeyEvent> moveShip() {
         return event -> {
             switch (event.getCode()) {
-            case LEFT:  // KeyCode.LEFT
+                case LEFT:  // KeyCode.LEFT
                 Double[] lX = ship.getX();
                 Double[] nlX = new Double[3];
                 for (int i = 0; i < 3; i++) {
