@@ -51,12 +51,8 @@ public class Ship extends Polygon {
         }
         centerX /= 3;
         centerY /= 3;
-        if (init) {
-            center = center.add(centerX, centerY);
-            //System.out.println(center.toString());
-        } else {
-            center = new Point2D(centerX, centerY);
-        }
+        center = null;
+        center = new Point2D(centerX, centerY);
         //System.out.println(center.toString());
     }
 

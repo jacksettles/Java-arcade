@@ -26,8 +26,8 @@ public class ArcadeApp extends Application {
     Group group = new Group();           // main container
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
-    Double[] xCords = {0.0, 20.0, 10.0};
-    Double[] yCords = {0.0, 10.0, 20.0};
+    Double[] xCords = {320.0, 327.071, 312.929};
+    Double[] yCords = {225.858, 247.071, 247.071};
     Ship ship = new Ship(xCords, yCords);
     Point2D shipCenter;
     Rotate right;
@@ -87,11 +87,13 @@ public class ArcadeApp extends Application {
             case D:
                 shipCenter = ship.getCenter();
                 right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
+                System.out.println(shipCenter.getX() + ", " + shipCenter.getY());
                 ship.getTransforms().add(right);
                 break;
             case W:
                 shipCenter = ship.getCenter();
                 left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
+                System.out.println(shipCenter.getX() + ", " + shipCenter.getY());
                 ship.getTransforms().add(left);
                 break;
             } // switch
