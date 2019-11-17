@@ -1,16 +1,24 @@
 package cs1302.arcade;
 
+import javafx.scene.transform.Rotate;
 import javafx.scene.shape.Polygon;
+import javafx.geometry.Point2D;
 
 public class Ship extends Polygon {
 
     private Double[] xCords;
     private Double[] yCords;
     private boolean init = false;
+    private Point2D center;
 
     public Ship(Double[] x, Double[] y) {
         setPos(x, y);
         init = true;
+    }
+
+    public Point2D getCenter() {
+        Point2D copy = center;
+        return copy;
     }
 
     public void setPos(Double[] x, Double[] y) {
@@ -29,6 +37,27 @@ public class Ship extends Polygon {
         }
         xCords = x;
         yCords = y;
+        makeCenter();
+    }
+
+    private void makeCenter() {
+        double centerX = 0.0;
+        double centerY = 0.0;
+        for (Double val : xCords) {
+            centerX += val;
+        }
+        for (Double val : yCords) {
+            centerY += val;
+        }
+        centerX /= 3;
+        centerY /= 3;
+        if (init) {
+            center = center.add(centerX, centerY);
+            //System.out.println(center.toString());
+        } else {
+            center = new Point2D(centerX, centerY);
+        }
+        //System.out.println(center.toString());
     }
 
     public Double[] getX() {

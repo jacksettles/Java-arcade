@@ -1,5 +1,7 @@
 package cs1302.arcade;
 
+import javafx.scene.transform.Rotate;
+import javafx.geometry.Point2D;
 import cs1302.arcade.Ship;
 import javafx.scene.shape.Polygon;
 import java.util.Random;
@@ -27,6 +29,9 @@ public class ArcadeApp extends Application {
     Double[] xCords = {0.0, 20.0, 10.0};
     Double[] yCords = {0.0, 10.0, 20.0};
     Ship ship = new Ship(xCords, yCords);
+    Point2D shipCenter;
+    Rotate right;
+    Rotate left;
 
     /**
      * Return a mouse event handler that moves to the rectangle to a random
@@ -44,7 +49,7 @@ public class ArcadeApp extends Application {
         };
     } // createMouseHandler
 
-     private EventHandler<? super KeyEvent> moveShip() {
+    private EventHandler<? super KeyEvent> moveShip() {
         return event -> {
             switch (event.getCode()) {
             case LEFT:  // KeyCode.LEFT
@@ -79,10 +84,19 @@ public class ArcadeApp extends Application {
                 }
                 ship.setPos(ship.getX(), ndY);
                 break;
+            case D:
+                shipCenter = ship.getCenter();
+                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
+                ship.getTransforms().add(right);
+                break;
+            case W:
+                shipCenter = ship.getCenter();
+                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
+                ship.getTransforms().add(left);
+                break;
             } // switch
         };
     }
-
 
     /**
      * Return a key event handler that moves to the rectangle to the left
