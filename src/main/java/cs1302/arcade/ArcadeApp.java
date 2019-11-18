@@ -89,14 +89,17 @@ public class ArcadeApp extends Application {
                 Double[] Y = ship.getY();
                 Double[] newX = new Double[3];
                 Double[] newY = new Double[3];
-                System.out.println(ship.getAngle());
-                Double x = 10.0 * Math.cos(ship.getAngle()); // amt to move by on x axis
-                System.out.println(x);
-                Double y = 10.0 * Math.sin(ship.getAngle()); // amt to move by on y axis
-                System.out.println(y);
+                Double radAng = Math.toRadians(ship.getAngle());
+                //System.out.println("Ship's angle is: " + ship.getAngle() + " degrees");
+                Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
+                //System.out.println("Should move in x direction by: " + x);
+                Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
+                //System.out.println("Should move in y direction by: " + y);
                 for (int i = 0; i < 3; i++) {
                     newX[i] = X[i] + x;
-                    newY[i] = Y[i] + y;
+                    newY[i] = Y[i] - y;
+                    System.out.println("Old: " + X[i] + ", " + Y[i]);
+                    System.out.println("New: " + newX[i] + ", " + newY[i]);
                 }
                 ship.setPos(newX, newY);
                 break;
