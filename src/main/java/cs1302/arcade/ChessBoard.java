@@ -15,10 +15,13 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
+import javafx.scene.input.KeyCode;
 
 public class ChessBoard {
-
+    Stage stage;
     Scene chessScene;
+    Scene switchBack;
     GridPane chessGrid = new GridPane();
     final int boardSize = 8;
     public ChessBoard() {
@@ -45,11 +48,21 @@ public class ChessBoard {
                                                                  Priority.ALWAYS,
                                                                  VPos.CENTER, true));
         } //for
+        chessScene = new Scene(chessGrid, 480, 480);
+        chessScene.setOnKeyPressed(e -> {
+                if (e.getCode() == KeyCode.Q) {
+                    stage.setScene(switchBack);
+                }
+            });
     } //ChessBoard Construct
 
     public Scene getScene() {
-        chessScene = new Scene(chessGrid, 480, 480);
         return chessScene;
     } //getScene
+
+    public void getSwitch(Stage stage, Scene scene) {
+        this.stage = stage;
+        switchBack = scene;
+    } //getSwitch
 
 } //ChessBoard
