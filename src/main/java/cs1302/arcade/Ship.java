@@ -23,10 +23,13 @@ public class Ship extends Polygon {
     }
 
     public void addAngle(Double ang) {
-        angle += ang;/*
-        if (angle - 360.0 <= 0.0001) {
+        angle += ang;
+        if (Math.abs(angle - 360.0) <= 0.0001) {
             angle = 0.0;
-            }*/
+        }
+        if (angle < 0.0) {
+            angle += 360.0;
+        }
     }
 
     public Point2D getCenter() {
