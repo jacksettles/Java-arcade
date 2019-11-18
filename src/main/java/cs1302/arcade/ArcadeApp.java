@@ -84,17 +84,33 @@ public class ArcadeApp extends Application {
                 }
                 ship.setPos(ship.getX(), ndY);
                 break;*/
+            case UP:
+                Double[] X = ship.getX();
+                Double[] Y = ship.getY();
+                Double[] newX = new Double[3];
+                Double[] newY = new Double[3];
+                System.out.println(ship.getAngle());
+                Double x = 10.0 * Math.cos(ship.getAngle()); // amt to move by on x axis
+                System.out.println(x);
+                Double y = 10.0 * Math.sin(ship.getAngle()); // amt to move by on y axis
+                System.out.println(y);
+                for (int i = 0; i < 3; i++) {
+                    newX[i] = X[i] + x;
+                    newY[i] = Y[i] + y;
+                }
+                ship.setPos(newX, newY);
+                break;
             case RIGHT:
                 shipCenter = ship.getCenter();
-                right = new Rotate(90.0, shipCenter.getX(), shipCenter.getY());
-                ship.addAngle(-90.0);
+                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
+                ship.addAngle(-15.0);
                 System.out.println(ship.getAngle());
                 ship.getTransforms().add(right);
                 break;
             case LEFT:
                 shipCenter = ship.getCenter();
-                left = new Rotate(-90.0, shipCenter.getX(), shipCenter.getY());
-                ship.addAngle(90.0);
+                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
+                ship.addAngle(15.0);
                 System.out.println(ship.getAngle());
                 ship.getTransforms().add(left);
                 break;

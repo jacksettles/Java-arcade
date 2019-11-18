@@ -23,6 +23,10 @@ public class Ship extends Polygon {
     }
 
     public void addAngle(Double ang) {
+        if (ang >= 360.0 || ang < -360.0) {
+            throw new IllegalArgumentException("ang parmeter must be between"
+                                               + " -360.0 inclusive and 360.0 degrees exclusive");
+        }
         angle += ang;
         if (Math.abs(angle - 360.0) <= 0.0001) {
             angle = 0.0;
