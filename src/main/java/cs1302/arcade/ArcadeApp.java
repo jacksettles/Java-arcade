@@ -52,7 +52,7 @@ public class ArcadeApp extends Application {
     private EventHandler<? super KeyEvent> moveShip() {
         return event -> {
             switch (event.getCode()) {
-                case LEFT:  // KeyCode.LEFT
+                /*case LEFT:  // KeyCode.LEFT
                 Double[] lX = ship.getX();
                 Double[] nlX = new Double[3];
                 for (int i = 0; i < 3; i++) {
@@ -83,17 +83,19 @@ public class ArcadeApp extends Application {
                     ndY[i] = dY[i] + 10.0;
                 }
                 ship.setPos(ship.getX(), ndY);
-                break;
-            case D:
+                break;*/
+            case RIGHT:
                 shipCenter = ship.getCenter();
-                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
-                System.out.println(shipCenter.getX() + ", " + shipCenter.getY());
+                right = new Rotate(90.0, shipCenter.getX(), shipCenter.getY());
+                ship.addAngle(-90.0);
+                System.out.println(ship.getAngle());
                 ship.getTransforms().add(right);
                 break;
-            case W:
+            case LEFT:
                 shipCenter = ship.getCenter();
-                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
-                System.out.println(shipCenter.getX() + ", " + shipCenter.getY());
+                left = new Rotate(-90.0, shipCenter.getX(), shipCenter.getY());
+                ship.addAngle(90.0);
+                System.out.println(ship.getAngle());
                 ship.getTransforms().add(left);
                 break;
             } // switch
@@ -151,6 +153,7 @@ public class ArcadeApp extends Application {
         r.setY(50);                                // 50ps in the y direction (down)
         group.getChildren().add(ship);                // add to main container
         ship.setOnKeyPressed(moveShip());
+        System.out.println("Starting angle: " + ship.getAngle());
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
 
