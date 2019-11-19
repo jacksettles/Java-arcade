@@ -16,3 +16,12 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 3. **PROB:** Had a hard time scheduling physicial meetings with each other at
    first, but now that we've settled on a regular day/time things are looking
    great!
+
+
+## SAT 2019-11-16 @ 1:00PM EST
+
+1. **DONE:** Read project Desc. Familerized with starter code and event handler functionality. Decided Games: Astriods/Chess. ChessBoard has been created. implemented way to swap scenes with current main scene. ChessPiece Parent class created.
+
+2. **TODO:** RD - Make piece classes containing move variants. Make peices interactable and  JS - Start Asteriods class work on interaction with ship Object.
+
+3. **PROB:** Git merging errors. Conflict problems. Converting classes to scenes.
