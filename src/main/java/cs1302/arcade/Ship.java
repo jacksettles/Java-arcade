@@ -18,6 +18,19 @@ public class Ship extends Polygon {
         init = true;
     }
 
+    public void flip() {
+        if (this.getTranslateX() >= 330.0) {
+            this.setTranslateX(-330.0);
+        } else if (this.getTranslateX() <= -330.0) {
+            this.setTranslateX(330.0);
+        }
+        if (this.getTranslateY() >= 250.0) {
+            this.setTranslateY(-250.0);
+        } else if (this.getTranslateY() <= -250.0) {
+            this.setTranslateY(250.0);
+        }
+    }
+
     public Double getAngle() {
         Double ret = angle;
         return ret;
@@ -84,3 +97,47 @@ public class Ship extends Polygon {
         return yCords;
     }
 } // Asteroids
+
+/*
+    Double[] xCords = {320.0, 312.929, 327.071};
+    Double[] yCords = {225.858, 247.071, 247.071};
+    Ship ship = new Ship(xCords, yCords);
+    Point2D shipCenter;
+    Rotate right;
+    Rotate left;
+
+    private EventHandler<? super KeyEvent> moveShip() {
+        return event -> {
+            switch (event.getCode()) {
+            case UP:
+                Double radAng = Math.toRadians(ship.getAngle());
+                Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
+                Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
+                ship.setTranslateX(ship.getTranslateX() + x);
+                ship.setTranslateY(ship.getTranslateY() - y);
+                ship.flip();
+                break;
+            case RIGHT:
+                shipCenter = ship.getCenter();
+                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
+                ship.addAngle(-15.0);
+                System.out.println(ship.getAngle());
+                ship.getTransforms().add(right);
+                break;
+            case LEFT:
+                shipCenter = ship.getCenter();
+                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
+                ship.addAngle(15.0);
+                System.out.println(ship.getAngle());
+                ship.getTransforms().add(left);
+                break;
+            } // switch
+        };
+    }
+
+
+        ship.setOnKeyPressed(moveShip());
+
+        ship.requestFocus();
+
+ */

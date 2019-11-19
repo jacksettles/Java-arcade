@@ -58,6 +58,7 @@ public class ArcadeApp extends Application {
                 Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
                 ship.setTranslateX(ship.getTranslateX() + x);
                 ship.setTranslateY(ship.getTranslateY() - y);
+                ship.flip();
                 break;
             case RIGHT:
                 shipCenter = ship.getCenter();
@@ -128,8 +129,6 @@ public class ArcadeApp extends Application {
         r.setY(50);                                // 50ps in the y direction (down)
         group.getChildren().add(ship);                // add to main container
         ship.setOnKeyPressed(moveShip());
-        System.out.println(ship.getCenter().toString());
-        System.out.println("Starting angle: " + ship.getAngle());
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
 
