@@ -100,9 +100,9 @@ public class ArcadeApp extends Application {
                 break;
             case RIGHT:
                 shipCenter = ship.getCenter();
-                //right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
+                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(-15.0);
-                System.out.println(ship.getAngle());
+                /*System.out.println(ship.getAngle());
                 Double[] rX = new Double[3];
                 Double[] rY = new Double[3];
                 Double radA = Math.toRadians(ship.getAngle());
@@ -114,14 +114,14 @@ public class ArcadeApp extends Application {
                 rY[1] = (10 * Math.sin(radB)) - shipCenter.getY();
                 rX[2] = (10 * Math.cos(radC)) + shipCenter.getX();
                 rY[2] = (10 * Math.sin(radC)) - shipCenter.getY();
-                ship.setPos(rX, rY);
-                //ship.getTransforms().add(right);
+                ship.setPos(rX, rY);*/
+                ship.getTransforms().add(right);
                 break;
             case LEFT:
                 shipCenter = ship.getCenter();
-                //left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
+                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(15.0);
-                System.out.println(ship.getAngle());
+                /*System.out.println(ship.getAngle());
                 Double[] lX = new Double[3];
                 Double[] lY = new Double[3];
                 Double ladA = Math.toRadians(ship.getAngle());
@@ -133,8 +133,8 @@ public class ArcadeApp extends Application {
                 lY[1] = (10 * Math.sin(ladB)) - shipCenter.getY();
                 lX[2] = (10 * Math.cos(ladC)) + shipCenter.getX();
                 lY[2] = (10 * Math.sin(ladC)) - shipCenter.getY();
-                ship.setPos(lX, lY);
-                //ship.getTransforms().add(left);
+                ship.setPos(lX, lY);*/
+                ship.getTransforms().add(left);
                 break;
             } // switch
         };
