@@ -52,88 +52,25 @@ public class ArcadeApp extends Application {
     private EventHandler<? super KeyEvent> moveShip() {
         return event -> {
             switch (event.getCode()) {
-                /*case LEFT:  // KeyCode.LEFT
-                Double[] lX = ship.getX();
-                Double[] nlX = new Double[3];
-                for (int i = 0; i < 3; i++) {
-                    nlX[i] = lX[i] - 10.0;
-                }
-                ship.setPos(nlX, ship.getY());
-                break;
-            case RIGHT: // KeyCode.RIGHT
-                Double[] rX = ship.getX();
-                Double[] nrX = new Double[3];
-                for (int i = 0; i < 3; i++) {
-                    nrX[i] = rX[i] + 10.0;
-                }
-                ship.setPos(nrX, ship.getY());
-                break;
-            case UP: // KeyCode.UP
-                Double[] uY = ship.getY();
-                Double[] nuY = new Double[3];
-                for (int i = 0; i < 3; i++) {
-                    nuY[i] = uY[i] - 10.0;
-                }
-                ship.setPos(ship.getX(), nuY);
-                break;
-            case DOWN: //KeyCode.DOWN
-                Double[] dY = ship.getY();
-                Double[] ndY = new Double[3];
-                for (int i = 0; i < 3; i++) {
-                    ndY[i] = dY[i] + 10.0;
-                }
-                ship.setPos(ship.getX(), ndY);
-                break;*/
             case UP:
-                Double[] X = ship.getX();
-                Double[] Y = ship.getY();
-                Double[] newX = new Double[3];
-                Double[] newY = new Double[3];
                 Double radAng = Math.toRadians(ship.getAngle());
                 Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
                 Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
-                for (int i = 0; i < 3; i++) {
-                    newX[i] = X[i] + x;
-                    newY[i] = Y[i] - y;
-                }
-                ship.setPos(newX, newY);
+                ship.setTranslateX(ship.getTranslateX() + x);
+                ship.setTranslateY(ship.getTranslateY() - y);
                 break;
             case RIGHT:
                 shipCenter = ship.getCenter();
                 right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(-15.0);
-                /*System.out.println(ship.getAngle());
-                Double[] rX = new Double[3];
-                Double[] rY = new Double[3];
-                Double radA = Math.toRadians(ship.getAngle());
-                Double radB = Math.toRadians(ship.getAngle() + 135.0);
-                Double radC = Math.toRadians(ship.getAngle() + 225.0);
-                rX[0] = (14.142 * Math.cos(radA)) + shipCenter.getX();
-                rY[0] = (14.142 * Math.sin(radA)) - shipCenter.getY();
-                rX[1] = (10 * Math.cos(radB)) + shipCenter.getX();
-                rY[1] = (10 * Math.sin(radB)) - shipCenter.getY();
-                rX[2] = (10 * Math.cos(radC)) + shipCenter.getX();
-                rY[2] = (10 * Math.sin(radC)) - shipCenter.getY();
-                ship.setPos(rX, rY);*/
+                System.out.println(ship.getAngle());
                 ship.getTransforms().add(right);
                 break;
             case LEFT:
                 shipCenter = ship.getCenter();
                 left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(15.0);
-                /*System.out.println(ship.getAngle());
-                Double[] lX = new Double[3];
-                Double[] lY = new Double[3];
-                Double ladA = Math.toRadians(ship.getAngle());
-                Double ladB = Math.toRadians(ship.getAngle() + 135.0);
-                Double ladC = Math.toRadians(ship.getAngle() + 225.0);
-                lX[0] = (14.142 * Math.cos(ladA)) + shipCenter.getX();
-                lY[0] = (14.142 * Math.sin(ladA)) - shipCenter.getY();
-                lX[1] = (10 * Math.cos(ladB)) + shipCenter.getX();
-                lY[1] = (10 * Math.sin(ladB)) - shipCenter.getY();
-                lX[2] = (10 * Math.cos(ladC)) + shipCenter.getX();
-                lY[2] = (10 * Math.sin(ladC)) - shipCenter.getY();
-                ship.setPos(lX, lY);*/
+                System.out.println(ship.getAngle());
                 ship.getTransforms().add(left);
                 break;
             } // switch
