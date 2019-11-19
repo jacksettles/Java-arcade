@@ -20,8 +20,8 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 
 ## SAT 2019-11-16 @ 1:00PM EST
 
-1. **DONE:** Read project Desc. Familerized with starter code and event handler functionality. Decided Games: Astriods/Chess.
+1. **DONE:** Read project Desc. Familerized with starter code and event handler functionality. Decided Games: Astriods/Chess. ChessBoard has been created. implemented way to swap scenes with current main scene. ChessPiece Parent class created.
 
-2. **TODO:** RD - Start Chess class work on gridpane/Setup. JS - Start Asteriods class work on interaction with ship Object.
+2. **TODO:** RD - Make piece classes containing move variants. Make peices interactable and  JS - Start Asteriods class work on interaction with ship Object.
 
 3. **PROB:** Git merging errors. Conflict problems. Converting classes to scenes.

@@ -17,6 +17,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyCode;
+import cs1302.arcade.ChessPiece;
+import javafx.scene.shape.Rectangle;
 
 public class ChessBoard {
     Stage stage;
@@ -39,20 +41,29 @@ public class ChessBoard {
         // Wouldn't work for the longest time with just code above
         // Had to add constraints to see Color.
         for (int i = 0; i < boardSize; i++) {
-            chessGrid.getColumnConstraints().add(new ColumnConstraints(5, Control.USE_COMPUTED_SIZE,
-                                                                       Double.POSITIVE_INFINITY,
-                                                                       Priority.ALWAYS,
-                                                                       HPos.CENTER, true));
-            chessGrid.getRowConstraints().add(new RowConstraints(5, Control.USE_COMPUTED_SIZE,
-                                                                 Double.POSITIVE_INFINITY,
-                                                                 Priority.ALWAYS,
-                                                                 VPos.CENTER, true));
+            chessGrid.getColumnConstraints().add(new ColumnConstraints(480/8, 560/8, 720/8));
+            chessGrid.getRowConstraints().add(new RowConstraints(480/8, 560/8, 720/8));
         } //for
-        chessScene = new Scene(chessGrid, 480, 480);
-        chessScene.setOnKeyPressed(e -> {
+
+        //Piecs add Test
+        for (int i = 0; i < boardSize; i++) {
+            ChessPiece c = new ChessPiece(false, 0, i);
+            chessGrid.add(c.getRect(), c.getCol(), c.getRow());
+            c = new ChessPiece(false, 1, i);
+            chessGrid.add(c.getRect(), c.getCol(), c.getRow());
+        } //for
+        for (int i = 0; i < boardSize; i++) {
+            ChessPiece c = new ChessPiece(true, 7, i);
+            chessGrid.add(c.getRect(), c.getCol(), c.getRow());
+            c = new ChessPiece(true, 6, i);
+            chessGrid.add(c.getRect(), c.getCol(), c.getRow());
+        } //for
+
+        chessScene = new Scene(chessGrid, 560, 560);
+        chessScene.setOnKeyPressed(e -> { //Able to go back and forth from main to chess
                 if (e.getCode() == KeyCode.Q) {
                     stage.setScene(switchBack);
-                }
+                } //if
             });
     } //ChessBoard Construct
 
