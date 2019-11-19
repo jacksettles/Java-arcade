@@ -26,7 +26,7 @@ public class ArcadeApp extends Application {
     Group group = new Group();           // main container
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
-    Double[] xCords = {320.0, 327.071, 312.929};
+    Double[] xCords = {320.0, 312.929, 327.071};
     Double[] yCords = {225.858, 247.071, 247.071};
     Ship ship = new Ship(xCords, yCords);
     Point2D shipCenter;
@@ -90,32 +90,51 @@ public class ArcadeApp extends Application {
                 Double[] newX = new Double[3];
                 Double[] newY = new Double[3];
                 Double radAng = Math.toRadians(ship.getAngle());
-                //System.out.println("Ship's angle is: " + ship.getAngle() + " degrees");
                 Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
-                //System.out.println("Should move in x direction by: " + x);
                 Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
-                //System.out.println("Should move in y direction by: " + y);
                 for (int i = 0; i < 3; i++) {
                     newX[i] = X[i] + x;
                     newY[i] = Y[i] - y;
-                    System.out.println("Old: " + X[i] + ", " + Y[i]);
-                    System.out.println("New: " + newX[i] + ", " + newY[i]);
                 }
                 ship.setPos(newX, newY);
                 break;
             case RIGHT:
                 shipCenter = ship.getCenter();
-                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
+                //right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(-15.0);
                 System.out.println(ship.getAngle());
-                ship.getTransforms().add(right);
+                Double[] rX = new Double[3];
+                Double[] rY = new Double[3];
+                Double radA = Math.toRadians(ship.getAngle());
+                Double radB = Math.toRadians(ship.getAngle() + 135.0);
+                Double radC = Math.toRadians(ship.getAngle() + 225.0);
+                rX[0] = (14.142 * Math.cos(radA)) + shipCenter.getX();
+                rY[0] = (14.142 * Math.sin(radA)) - shipCenter.getY();
+                rX[1] = (10 * Math.cos(radB)) + shipCenter.getX();
+                rY[1] = (10 * Math.sin(radB)) - shipCenter.getY();
+                rX[2] = (10 * Math.cos(radC)) + shipCenter.getX();
+                rY[2] = (10 * Math.sin(radC)) - shipCenter.getY();
+                ship.setPos(rX, rY);
+                //ship.getTransforms().add(right);
                 break;
             case LEFT:
                 shipCenter = ship.getCenter();
-                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
+                //left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(15.0);
                 System.out.println(ship.getAngle());
-                ship.getTransforms().add(left);
+                Double[] lX = new Double[3];
+                Double[] lY = new Double[3];
+                Double ladA = Math.toRadians(ship.getAngle());
+                Double ladB = Math.toRadians(ship.getAngle() + 135.0);
+                Double ladC = Math.toRadians(ship.getAngle() + 225.0);
+                lX[0] = (14.142 * Math.cos(ladA)) + shipCenter.getX();
+                lY[0] = (14.142 * Math.sin(ladA)) - shipCenter.getY();
+                lX[1] = (10 * Math.cos(ladB)) + shipCenter.getX();
+                lY[1] = (10 * Math.sin(ladB)) - shipCenter.getY();
+                lX[2] = (10 * Math.cos(ladC)) + shipCenter.getX();
+                lY[2] = (10 * Math.sin(ladC)) - shipCenter.getY();
+                ship.setPos(lX, lY);
+                //ship.getTransforms().add(left);
                 break;
             } // switch
         };
@@ -172,6 +191,7 @@ public class ArcadeApp extends Application {
         r.setY(50);                                // 50ps in the y direction (down)
         group.getChildren().add(ship);                // add to main container
         ship.setOnKeyPressed(moveShip());
+        System.out.println(ship.getCenter().toString());
         System.out.println("Starting angle: " + ship.getAngle());
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle

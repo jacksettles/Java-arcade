@@ -19,7 +19,8 @@ public class Ship extends Polygon {
     }
 
     public Double getAngle() {
-        return angle;
+        Double ret = angle;
+        return ret;
     }
 
     public void addAngle(Double ang) {
