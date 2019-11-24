@@ -15,7 +15,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-
+import cs1302.arcade.MainMenu;
 
 /**
  * Application subclass for {@code ArcadeApp}.
@@ -26,41 +26,8 @@ public class ArcadeApp extends Application {
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
     ChessBoard chess = new ChessBoard();
-    Double[] xCords = {320.0, 312.929, 327.071};
-    Double[] yCords = {225.858, 247.071, 247.071};
-    Ship ship = new Ship(xCords, yCords);
-    Point2D shipCenter;
-    Rotate right;
-    Rotate left;
-
-    private EventHandler<? super KeyEvent> moveShip() {
-        return event -> {
-            switch (event.getCode()) {
-            case UP:
-                Double radAng = Math.toRadians(ship.getAngle());
-                Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
-                Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
-                ship.setTranslateX(ship.getTranslateX() + x);
-                ship.setTranslateY(ship.getTranslateY() - y);
-                ship.flip();
-                break;
-            case RIGHT:
-                shipCenter = ship.getCenter();
-                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
-                ship.addAngle(-15.0);
-                System.out.println(ship.getAngle());
-                ship.getTransforms().add(right);
-                break;
-            case LEFT:
-                shipCenter = ship.getCenter();
-                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
-                ship.addAngle(15.0);
-                System.out.println(ship.getAngle());
-                ship.getTransforms().add(left);
-                break;
-            } // switch
-        };
-    }
+    AsteroidsGame asteroids = new AsteroidsGame();
+    MainMenu menu = new MainMenu();
 
     /**
      * Return a key event handler that moves to the rectangle to the left
@@ -89,8 +56,10 @@ public class ArcadeApp extends Application {
                 break;
             case DIGIT1:
                 stage.setScene(chess.getScene());
-                //default:
-                // do nothing
+                break;
+            case DIGIT2:
+                stage.setScene(asteroids.getScene());
+                break;
             } // switch
             // boundary checking
             if (r.getX() > 620.0) {
@@ -118,23 +87,20 @@ public class ArcadeApp extends Application {
 
         r.setX(50);                                // 50px in the x direction (right)
         r.setY(50);                                // 50ps in the y direction (down)
-        group.getChildren().add(ship);                // add to main container
-        ship.setOnKeyPressed(moveShip());
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
-        group.setOnKeyPressed(createKeyHandler(stage)); // left-right key presses move the rectangle
-        //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
+        menu.getRoot().setOnKeyPressed(createKeyHandler(stage)); // left-right key presses move the rectangle
 
-        Scene scene = new Scene(group, 640, 480);
+        //Scene scene = new Scene(group, 640, 480);
+        Scene scene = menu.getScene();
+        menu.getSwitch(stage, scene);
         chess.getSwitch(stage, scene);
+        asteroids.getSwitch(stage, scene);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
 
-        // the group must request input focus to receive key events
-        // @see https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Node.html#requestFocus--
-        //group.requestFocus();
-        ship.requestFocus();
+        menu.getRoot().requestFocus();
     } // start
 
     /**
