@@ -25,6 +25,7 @@ import cs1302.arcade.Ship;
 import javafx.scene.transform.Rotate;
 import javafx.scene.shape.Polygon;
 import javafx.geometry.Point2D;
+import cs1302.arcade.Bullet;
 
 public class AsteroidsGame {
     Stage stage;
@@ -73,6 +74,16 @@ public class AsteroidsGame {
                 break;
             case Q:
                 stage.setScene(switchBack);
+                break;
+            case SPACE:
+                double rad = Math.toRadians(ship.getAngle());
+                double centerX = ship.getLayoutBounds().getWidth() * Math.cos(rad);
+                double centerY = ship.getLayoutBounds().getHeight() * -Math.sin(rad);
+                centerX += ship.getTranslateX() + 320.0;
+                centerY += ship.getTranslateY() + 240.0;
+                System.out.println(centerX + ", " + centerY);
+                Bullet b = new Bullet(centerX, centerY, 2.0);
+                group.getChildren().add(b);
                 break;
             } // switch
         };
