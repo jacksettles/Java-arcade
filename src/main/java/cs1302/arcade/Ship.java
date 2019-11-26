@@ -1,5 +1,6 @@
 package cs1302.arcade;
 
+import cs1302.arcade.Bullet;
 import javafx.scene.transform.Rotate;
 import javafx.scene.shape.Polygon;
 import javafx.geometry.Point2D;
@@ -107,49 +108,15 @@ public class Ship extends Polygon {
         swapScene = scene;
     } //setS
 
-
-} // Asteroids
-
-/*
-    Double[] xCords = {320.0, 312.929, 327.071};
-    Double[] yCords = {225.858, 247.071, 247.071};
-    Ship ship = new Ship(xCords, yCords);
-    Point2D shipCenter;
-    Rotate right;
-    Rotate left;
-
-    private EventHandler<? super KeyEvent> moveShip() {
-        return event -> {
-            switch (event.getCode()) {
-            case UP:
-                Double radAng = Math.toRadians(ship.getAngle());
-                Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
-                Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
-                ship.setTranslateX(ship.getTranslateX() + x);
-                ship.setTranslateY(ship.getTranslateY() - y);
-                ship.flip();
-                break;
-            case RIGHT:
-                shipCenter = ship.getCenter();
-                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
-                ship.addAngle(-15.0);
-                System.out.println(ship.getAngle());
-                ship.getTransforms().add(right);
-                break;
-            case LEFT:
-                shipCenter = ship.getCenter();
-                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
-                ship.addAngle(15.0);
-                System.out.println(ship.getAngle());
-                ship.getTransforms().add(left);
-                break;
-            } // switch
-        };
+    public Bullet shoot() {
+        Bullet b;
+        double rad = Math.toRadians(this.getAngle());
+        double centerX = this.getLayoutBounds().getWidth() * Math.cos(rad);
+        double centerY = this.getLayoutBounds().getHeight() * -Math.sin(rad);
+        centerX += this.getTranslateX() + 320.0;
+        centerY += this.getTranslateY() + 240.0;
+        b = new Bullet(centerX, centerY, 2.0);
+        return b;
     }
 
-
-        ship.setOnKeyPressed(moveShip());
-
-        ship.requestFocus();
-
- */
+} // Asteroids
