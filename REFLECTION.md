@@ -27,6 +27,9 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 3. **PROB:** Git merging errors. Conflict problems. Converting classes to scenes.
 
 
+    **There was another update here for 2019-11-19, but it looks like it was last with complications due to merging**
+
+
 ## TUE 2019-11-26 @ 4:30PM EST
 
 1. **DONE:** ChessPiece child classes made and integrated into ChessBoard grid. Main Menu created and swapping between scenes functionality implemented. Messed with ASCII animation through setText() and timeline.
