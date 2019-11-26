@@ -27,6 +27,11 @@ import javafx.scene.shape.Polygon;
 import javafx.geometry.Point2D;
 import cs1302.arcade.Bullet;
 import javafx.concurrent.Task;
+import javafx.application.Platform;
+import javafx.util.Duration;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.event.ActionEvent;
 
 public class AsteroidsGame {
     Stage stage;
@@ -79,19 +84,7 @@ public class AsteroidsGame {
             case SPACE:
                 Bullet b = ship.shoot();
                 group.getChildren().add(b);
-                Task go = new Task<Void>() {
-                        @Override public Void call() {
-                            for (int i = 0; i < 10; i++) {
-                                Double radAng = Math.toRadians(ship.getAngle());
-                                Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
-                                Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
-                                b.setTranslateX(b.getTranslateX() + x);
-                                b.setTranslateY(b.getTranslateY() - y);
-                            }
-                            return null;
-                        }
-                    };
-                    new Thread(go).start();
+                b.fly(ship);
                 break;
             } // switch
         };
