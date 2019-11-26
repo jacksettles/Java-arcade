@@ -20,7 +20,7 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 
 ## SAT 2019-11-16 @ 1:00PM EST
 
-1. **DONE:** Read project Desc. Familerized with starter code and event handler functionality. Decided Games: Astriods/Chess. ChessBoard has been created. implemented way to swap scenes with current main scene. ChessPiece Parent class created.
+1. **DONE:** Read project Desc. Familerized with starter code and event handler functionality. Decided Games: Astriods/Chess. ChessBoard has been created. Implemented way to swap scenes with current main scene. ChessPiece Parent class created.
 
 2. **TODO:** RD - Make piece classes containing move variants. Make peices interactable and  JS - Start Asteriods class work on interaction with ship Object.
 
@@ -34,3 +34,13 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 2. **TODO:** Make a main menu to switch scenes. Give Asteroids its own scene so we can swap. Make an AsteroidsGame.java file to hold all asteroids related stuff.
 
 3. **PROB:** Getting the ship to fly to where I wanted it to fly. Getting chessboard to size correctly. Getting chess colors to show - had to use constraints. Merging problems again.
+    **There was another update here for 2019-11-19, but it looks like it was lost with complications due to merging**
+
+
+## TUE 2019-11-26 @ 4:30PM EST
+
+1. **DONE:** ChessPiece child classes made and integrated into ChessBoard grid. Main Menu created and swapping between scenes functionality implemented. Messed with ASCII animation through setText() and timeline. JS - Got the ship to shoot bullets in the right directions that the ship is pointing in.
+
+2. **TODO:** Figure out ChessPiece interaction with onMouseClicked then work on restrictions for movement. Decide if ChessPieces will have ImageViews as Objects for astetic. Make Asteroid class and work on collision detection.
+
+3. **PROB:** Interaction between ChessPiece and onMouseClicked. Trying to get Coords of Obj selected and moved. Getting the bullet's to move over time.

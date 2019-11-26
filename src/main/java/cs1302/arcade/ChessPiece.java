@@ -2,6 +2,8 @@ package cs1302.arcade;
 
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.application.Application;
+
 public class ChessPiece {
 
     public boolean isWhite;
