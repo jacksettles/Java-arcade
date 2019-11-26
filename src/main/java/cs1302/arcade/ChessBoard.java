@@ -75,6 +75,7 @@ public class ChessBoard {
         //if(c.canMove()) {
         return event -> {
             chessGrid.getChildren().remove(p);
+            //Work in Progress gotta figure out how to get pieces to be clicked
         };
         // }//if
     } //move
