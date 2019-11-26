@@ -25,3 +25,12 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 2. **TODO:** RD - Make piece classes containing move variants. Make peices interactable and  JS - Start Asteriods class work on interaction with ship Object.
 
 3. **PROB:** Git merging errors. Conflict problems. Converting classes to scenes.
+
+
+## TUE 2019-11-19 @ 2:48PM EST
+
+1. **DONE:** App opens to asteroids; asteroids has a ship in it that can move forward and rotate and go off screen and reappear. 1 key changes to chess! Chessboard has dynamic sizingand chess pieces. Handled merge conflicts.
+
+2. **TODO:** Make a main menu to switch scenes. Give Asteroids its own scene so we can swap. Make an AsteroidsGame.java file to hold all asteroids related stuff.
+
+3. **PROB:** Getting the ship to fly to where I wanted it to fly. Getting chessboard to size correctly. Getting chess colors to show - had to use constraints. Merging problems again.
