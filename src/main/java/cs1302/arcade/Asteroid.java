@@ -60,6 +60,7 @@ public class Asteroid extends Rectangle {
             Double y2 = 1.0 * Math.sin(rad); // amt to move by on y axis
             this.setTranslateX(this.getTranslateX() + x2);
             this.setTranslateY(this.getTranslateY() - y2);
+            this.flip();
         };
         Duration dur = new Duration(100.0);
         KeyFrame kf = new KeyFrame(dur, moveAst);
