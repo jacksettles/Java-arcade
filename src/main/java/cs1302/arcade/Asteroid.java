@@ -21,8 +21,14 @@ public class Asteroid extends Rectangle {
 
     public Asteroid() {
         super(40, 40);
-        this.setX(randX());
-        this.setY(randY());
+        Double randX = randX();
+        Double randY = randY();
+        this.setX(randX);
+        this.setY(randY);
+//        this.setTranslateX(randX);
+//        this.setTranslateY(randY);
+//        System.out.println(this.getX() + ", " + this.getY());
+//        System.out.println(this.getTranslateX() + ", " + this.getTranslateY());
         init = true;
         this.setFill(ip);
         this.drift();
@@ -41,15 +47,23 @@ public class Asteroid extends Rectangle {
     }
 
     public void flip() {
-        if (this.getTranslateX() >= 330.0) {
-            this.setTranslateX(-330.0);
-        } else if (this.getTranslateX() <= -330.0) {
-            this.setTranslateX(330.0);
+        if (this.getTranslateX() >= 640.0 - this.getX()) {
+            //System.out.println(this.getTranslateX());
+            this.setTranslateX(0.0);
+            this.setX(0.0);
+        } else if (0 >= this.getX() + this.getTranslateX()) {
+            //System.out.println(this.getTranslateX());
+            this.setTranslateX(640.0);
+            this.setX(640.0);
         }
-        if (this.getTranslateY() >= 250.0) {
-            this.setTranslateY(-250.0);
-        } else if (this.getTranslateY() <= -250.0) {
-            this.setTranslateY(250.0);
+        if (this.getTranslateY() >= 480.0 - this.getY()) {
+            //System.out.println(this.getTranslateY());
+            this.setTranslateY(0.0);
+            this.setY(0.0);
+        } else if (0 >= this.getY() + this.getTranslateY()) {
+            //System.out.println(this.getTranslateY());
+            this.setTranslateY(480.0);
+            this.setY(480.0);
         }
     }
 
@@ -60,6 +74,7 @@ public class Asteroid extends Rectangle {
             Double y2 = 1.0 * Math.sin(rad); // amt to move by on y axis
             this.setTranslateX(this.getTranslateX() + x2);
             this.setTranslateY(this.getTranslateY() - y2);
+            //System.out.println(this.getX() + ", " + this.getY());
             this.flip();
         };
         Duration dur = new Duration(100.0);
