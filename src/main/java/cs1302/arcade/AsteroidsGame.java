@@ -46,26 +46,17 @@ public class AsteroidsGame {
     Point2D shipCenter;
     Rotate right;
     Rotate left;
-    Double[] astCordsX = new Double[8];
-    Double[] astCordsY = new Double[8];
-    Asteroid ast;
-
-    public Double rand() {
-        return Math.random() * 50.0;
-    }
+    Asteroid[] ast = new Asteroid[15];
 
     public AsteroidsGame() {
         ship = new Ship(xCords, yCords);
         ship.setFill(Color.GOLD);
-        for (int i = 0; i < 8; i++) {
-            double randX = rand();
-            double randY = rand();
-            astCordsX[i] = randX;
-            astCordsY[i] = randY;
+        for (int i = 0; i < 15; i++) {
+            ast[i] = new Asteroid();
         }
-        ast = new Asteroid(astCordsX, astCordsY);
         group = new Group();
-        group.getChildren().addAll(ship, ast);
+        group.getChildren().add(ship);
+        group.getChildren().addAll(ast);
         asteroidsScene = new Scene(group, 640, 480);
         asteroidsScene.setOnKeyPressed(moveShip());
         asteroidsScene.setFill(Color.BLACK);
