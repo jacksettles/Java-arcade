@@ -1,5 +1,6 @@
 package cs1302.arcade;
 
+import javafx.scene.paint.Color;
 import cs1302.arcade.Bullet;
 import javafx.scene.transform.Rotate;
 import javafx.scene.shape.Polygon;
@@ -116,6 +117,7 @@ public class Ship extends Polygon {
         centerX += this.getTranslateX() + 320.0;
         centerY += this.getTranslateY() + 240.0;
         b = new Bullet(centerX, centerY, 2.0);
+        b.setFill(Color.RED);
         return b;
     }
 

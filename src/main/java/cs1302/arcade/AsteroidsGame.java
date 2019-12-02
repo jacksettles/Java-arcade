@@ -32,6 +32,8 @@ import javafx.util.Duration;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
+import cs1302.arcade.Asteroid;
+import javafx.scene.paint.Color;
 
 public class AsteroidsGame {
     Stage stage;
@@ -44,13 +46,29 @@ public class AsteroidsGame {
     Point2D shipCenter;
     Rotate right;
     Rotate left;
+    Double[] astCordsX = new Double[8];
+    Double[] astCordsY = new Double[8];
+    Asteroid ast;
+
+    public Double rand() {
+        return Math.random() * 50.0;
+    }
 
     public AsteroidsGame() {
         ship = new Ship(xCords, yCords);
+        ship.setFill(Color.GOLD);
+        for (int i = 0; i < 8; i++) {
+            double randX = rand();
+            double randY = rand();
+            astCordsX[i] = randX;
+            astCordsY[i] = randY;
+        }
+        ast = new Asteroid(astCordsX, astCordsY);
         group = new Group();
-        group.getChildren().add(ship);
+        group.getChildren().addAll(ship, ast);
         asteroidsScene = new Scene(group, 640, 480);
         asteroidsScene.setOnKeyPressed(moveShip());
+        asteroidsScene.setFill(Color.BLACK);
     }
 
     private EventHandler<? super KeyEvent> moveShip() {
