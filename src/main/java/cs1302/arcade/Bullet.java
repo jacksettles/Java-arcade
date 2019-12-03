@@ -7,11 +7,22 @@ import javafx.util.Duration;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
+import javafx.geometry.Bounds;
+import cs1302.arcade.Asteroid;
 
 public class Bullet extends Circle {
 
-    public Bullet(double centerX, double centerY, double radius) {
+    private Bounds bulletBounds;
+    private Asteroid[] targets;
+
+    public Bullet(double centerX, double centerY, double radius, Asteroid[] ast) {
         super(centerX, centerY, radius);
+        setAsteroids(ast);
+        bulletBounds = this.getBoundsInParent();
+    }
+
+    public void setAsteroids(Asteroid[] ast) {
+        targets = ast;
     }
 
     public boolean isOnScreen() {
@@ -25,6 +36,17 @@ public class Bullet extends Circle {
         return onScreen;
     } // isOnScreen
 
+    public boolean check() {
+        boolean hit = false;
+        for (Asteroid a : targets) {
+            if (bulletBounds.intersects(a.getBoundsInParent())) {
+                hit = true;
+                break;
+            }
+        }
+        return hit;
+    }
+
     public void fly(Ship ship) {
         EventHandler<ActionEvent> moveBullet = e -> {
             if (this.isOnScreen()) {
@@ -33,6 +55,10 @@ public class Bullet extends Circle {
                 Double y2 = 10.0 * Math.sin(rad); // amt to move by on y axis
                 this.setTranslateX(this.getTranslateX() + x2);
                 this.setTranslateY(this.getTranslateY() - y2);
+                bulletBounds = this.getBoundsInParent();
+                if (this.check()) {
+                  System.out.println("It's a hit!");
+                }
             }
         };
         Duration dur = new Duration(15.0);

@@ -52,7 +52,7 @@ public class AsteroidsGame {
         ship = new Ship(xCords, yCords);
         ship.setFill(Color.GOLD);
         for (int i = 0; i < 15; i++) {
-            ast[i] = new Asteroid();
+            ast[i] = new Asteroid(40.0, ship);
         }
         group = new Group();
         group.getChildren().add(ship);
@@ -93,7 +93,7 @@ public class AsteroidsGame {
                 stage.setScene(switchBack);
                 break;
             case SPACE:
-                Bullet b = ship.shoot();
+                Bullet b = ship.shoot(ast);
                 group.getChildren().add(b);
                 b.fly(ship);
                 break;

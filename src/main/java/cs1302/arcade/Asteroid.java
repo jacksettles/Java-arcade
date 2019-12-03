@@ -7,8 +7,10 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.scene.paint.*;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
 import javafx.event.EventHandler;
+import cs1302.arcade.Ship;
 
 /**
  * This class represents an {@code Asteroid} object
@@ -20,15 +22,22 @@ public class Asteroid extends Rectangle {
     private Image astIm = new Image("http://clipart-library.com/image_gallery/275522.png");
     private ImagePattern ip = new ImagePattern(astIm);
     private Double rad;
+    private Double sideLength;
     private Bounds astBounds;
     private Timeline tm;
+    private Ship ship;
+    //private Circle follower;
 
-    public Asteroid() {
-        super(40, 40);
+    public Asteroid(Double length, Ship s) {
+        super(length, length);
+        sideLength = length;
+//        follower = new Circle(length / 2.0);
+//        follower.setFill(Color.WHITE);
         Double randX = randX();
         Double randY = randY();
         this.setX(randX);
         this.setY(randY);
+        ship = s;
         astBounds = this.getBoundsInParent();
         init = true;
         this.setFill(ip);
@@ -78,6 +87,14 @@ public class Asteroid extends Rectangle {
         }
     }
 
+    public boolean check() {
+        boolean hitShip = false;
+        if (astBounds.intersects(ship.getBoundsInParent())) {
+            hitShip = true;
+        }
+        return hitShip;
+    }
+
     public void drift() {
         rad = Math.toRadians(randAngle());
         EventHandler<ActionEvent> moveAst = e -> {
@@ -86,6 +103,9 @@ public class Asteroid extends Rectangle {
             this.setTranslateX(this.getTranslateX() + x2);
             this.setTranslateY(this.getTranslateY() - y2);
             astBounds = this.getBoundsInParent();
+            if (this.check()) {
+                System.out.println("Crashed into an asteroid :(");
+            }
             this.flip(astBounds, x2, y2);
         };
         Duration dur = new Duration(100.0);
