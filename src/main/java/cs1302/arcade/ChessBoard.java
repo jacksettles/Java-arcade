@@ -54,11 +54,11 @@ public class ChessBoard {
 
         //Piecs add Test
         for (int i = 0; i < boardSize; i++) {
-            pawnsBlack[i] = new Pawn(false, 1, i);
+            pawnsBlack[i] = new Pawn(false, 1, i, chessGrid);
             chessGrid.add(pawnsBlack[i].getRect(), pawnsBlack[i].getCol(), pawnsBlack[i].getRow());
         } //for
         for (int i = 0; i < boardSize; i++) {
-            pawnsWhite[i] = new Pawn(true, 6, i);
+            pawnsWhite[i] = new Pawn(true, 6, i, chessGrid);
             chessGrid.add(pawnsWhite[i].getRect(), pawnsWhite[i].getCol(), pawnsWhite[i].getRow());
         } //for
         addPieces();
@@ -90,38 +90,38 @@ public class ChessBoard {
     } //getSwitch
 
     public void addPieces() {
-        Rook rookLW = new Rook(true, 7, 0);
+        Rook rookLW = new Rook(true, 7, 0, chessGrid);
         chessGrid.add(rookLW.getRect(), rookLW.getCol(), rookLW.getRow());
-        Rook rookRW = new Rook(true, 7, 7);
+        Rook rookRW = new Rook(true, 7, 7, chessGrid);
         chessGrid.add(rookRW.getRect(), rookRW.getCol(), rookRW.getRow());
-        Knight knightLW = new Knight(true, 7, 1);
+        Knight knightLW = new Knight(true, 7, 1, chessGrid);
         chessGrid.add(knightLW.getRect(), knightLW.getCol(), knightLW.getRow());
-        Knight knightRW = new Knight(true, 7, 6);
+        Knight knightRW = new Knight(true, 7, 6, chessGrid);
         chessGrid.add(knightRW.getRect(), knightRW.getCol(), knightRW.getRow());
-        Bishop bishopLW = new Bishop(true, 7, 2);
+        Bishop bishopLW = new Bishop(true, 7, 2, chessGrid);
         chessGrid.add(bishopLW.getRect(), bishopLW.getCol(), bishopLW.getRow());
-        Bishop bishopRW = new Bishop(true, 7, 5);
+        Bishop bishopRW = new Bishop(true, 7, 5, chessGrid);
         chessGrid.add(bishopRW.getRect(), bishopRW.getCol(), bishopRW.getRow());
-        King kingW = new King(true, 7, 4);
+        King kingW = new King(true, 7, 4, chessGrid);
         chessGrid.add(kingW.getRect(), kingW.getCol(), kingW.getRow());
-        Queen queenW = new Queen(true, 7, 3);
+        Queen queenW = new Queen(true, 7, 3, chessGrid);
         chessGrid.add(queenW.getRect(), queenW.getCol(), queenW.getRow());
 
-        Rook rookLB = new Rook(false, 0, 0);
+        Rook rookLB = new Rook(false, 0, 0, chessGrid);
         chessGrid.add(rookLB.getRect(), rookLB.getCol(), rookLB.getRow());
-        Rook rookRB = new Rook(false, 0, 7);
+        Rook rookRB = new Rook(false, 0, 7, chessGrid);
         chessGrid.add(rookRB.getRect(), rookRB.getCol(), rookRB.getRow());
-        Knight knightLB = new Knight(false, 0, 1);
+        Knight knightLB = new Knight(false, 0, 1, chessGrid);
         chessGrid.add(knightLB.getRect(), knightLB.getCol(), knightLB.getRow());
-        Knight knightRB = new Knight(false, 0, 6);
+        Knight knightRB = new Knight(false, 0, 6, chessGrid);
         chessGrid.add(knightRB.getRect(), knightRB.getCol(), knightRB.getRow());
-        Bishop bishopLB = new Bishop(false, 0, 2);
+        Bishop bishopLB = new Bishop(false, 0, 2, chessGrid);
         chessGrid.add(bishopLB.getRect(), bishopLB.getCol(), bishopLB.getRow());
-        Bishop bishopRB = new Bishop(false, 0, 5);
+        Bishop bishopRB = new Bishop(false, 0, 5, chessGrid);
         chessGrid.add(bishopRB.getRect(), bishopRB.getCol(), bishopRB.getRow());
-        King kingB = new King(false, 0, 4);
+        King kingB = new King(false, 0, 4, chessGrid);
         chessGrid.add(kingB.getRect(), kingB.getCol(), kingB.getRow());
-        Queen queenB = new Queen(false, 0, 3);
+        Queen queenB = new Queen(false, 0, 3, chessGrid);
         chessGrid.add(queenB.getRect(), queenB.getCol(), queenB.getRow());
     } //addPeices
 

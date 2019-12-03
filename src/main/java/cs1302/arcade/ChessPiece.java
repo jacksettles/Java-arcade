@@ -3,6 +3,9 @@ package cs1302.arcade;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 
 public class ChessPiece {
 
@@ -10,9 +13,11 @@ public class ChessPiece {
     public int row;
     public int col;
     public Rectangle r;
+    public GridPane chessGrid;
 
-    public ChessPiece(boolean isWhite, int row, int col) {
+    public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid) {
 
+        this.chessGrid = chessGrid;
         this.isWhite = isWhite;
         this.row = row;
         this.col = col;
@@ -21,6 +26,7 @@ public class ChessPiece {
         } else {
             r = new Rectangle(40, 40, Color.BLACK);
         } //if
+        r.setOnMouseClicked(move());
     } //ChessPConstruct
 
     public Rectangle getRect() {
@@ -46,5 +52,14 @@ public class ChessPiece {
     public int getCol() {
         return col;
     } //getCol
+
+    private EventHandler<? super MouseEvent> move() {
+        //if(c.canMove()) {
+        return event -> {
+            chessGrid.getChildren().remove(this.r);
+            //Work in Progress gotta figure out how to get pieces to be clicked
+        };
+        //} //if
+    } //move
 
 } //ChessPiece
