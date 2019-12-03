@@ -38,8 +38,8 @@ public class Asteroid extends Rectangle {
         roomLeft = 0 - this.getX();
         roomDown = 480 - this.getY();
         roomUp = 0 - this.getY();
-        System.out.println(roomLeft);
-        System.out.println(roomUp);
+//        System.out.println(roomLeft);
+//        System.out.println(roomUp);
         init = true;
         this.setFill(ip);
         this.drift();
@@ -58,23 +58,15 @@ public class Asteroid extends Rectangle {
     }
 
     public void flip() {
-        if (this.getTranslateX() >= roomRight) {
+        if (this.getX() + this.getTranslateX() >= 640.0) {
             this.setTranslateX(0.0);
-            this.setX(0.0);
-            roomRight = 640.0;
-        } else if (this.getTranslateX() <= roomLeft) {
+        } else if (this.getX() + this.getTranslateX() <= 0.0) {
             this.setTranslateX(640.0);
-            this.setX(640.0);
-            roomLeft = -640.0;
         }
-        if (this.getTranslateY() <= roomUp) {
-            this.setTranslateY(480.0);
-            this.setY(480.0);
-            roomUp = -480.0;
-        } else if (this.getTranslateY() >= roomDown) {
+        if (this.getY() + this.getTranslateY() >= 480.0) {
             this.setTranslateY(0.0);
-            this.setY(0.0);
-            roomDown = 480.0;
+        } else if (this.getY() + this.getTranslateY() <= 0.0) {
+            this.setTranslateY(480.0);
         }
     }
 
