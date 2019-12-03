@@ -10,7 +10,7 @@ public class Knight extends ChessPiece {
 
     public boolean canMove() {
         //TODO: Movement variables
-        return false;
+        return true;
     } //canMove
 
 } //Knight

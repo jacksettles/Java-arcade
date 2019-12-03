@@ -10,7 +10,7 @@ public class Pawn extends ChessPiece {
 
     public boolean canMove() {
         //TODO: Movement variables
-        return false;
+        return true;
     } //canMove
 
 } //Pawn

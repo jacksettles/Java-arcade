@@ -71,15 +71,6 @@ public class ChessBoard {
             });
     } //ChessBoard Construct
 
-    private EventHandler<? super MouseEvent> move(ChessPiece p) {
-        //if(c.canMove()) {
-        return event -> {
-            chessGrid.getChildren().remove(p);
-            //Work in Progress gotta figure out how to get pieces to be clicked
-        };
-        // }//if
-    } //move
-
     public Scene getScene() {
         return chessScene;
     } //getScene

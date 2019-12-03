@@ -21,6 +21,7 @@ import cs1302.arcade.MainMenu;
  * Application subclass for {@code ArcadeApp}.
  * @version 2019.fa
  */
+
 public class ArcadeApp extends Application {
     Group group = new Group();           // main container
     Random rng = new Random();           // random number generator
@@ -88,7 +89,7 @@ public class ArcadeApp extends Application {
         r.setX(50);                                // 50px in the x direction (right)
         r.setY(50);                                // 50ps in the y direction (down)
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
-        menu.getRoot().setOnKeyPressed(createKeyHandler(stage)); // left-right key presses move the rectangle
+        menu.getRoot().setOnKeyPressed(createKeyHandler(stage));// left-right key presses move the rectangle
 
         //Scene scene = new Scene(group, 640, 480);
         Scene scene = menu.getScene();

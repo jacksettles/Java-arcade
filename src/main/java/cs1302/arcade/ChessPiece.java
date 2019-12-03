@@ -13,10 +13,15 @@ public class ChessPiece {
     public int row;
     public int col;
     public Rectangle r;
+    public Rectangle prevR;
     public GridPane chessGrid;
+    public boolean firstClick = true;
+    public int xFrom;
+    public int yFrom;
+    public int xTo;
+    public int yTo;
 
     public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid) {
-
         this.chessGrid = chessGrid;
         this.isWhite = isWhite;
         this.row = row;
@@ -54,12 +59,8 @@ public class ChessPiece {
     } //getCol
 
     private EventHandler<? super MouseEvent> move() {
-        //if(c.canMove()) {
         return event -> {
-            chessGrid.getChildren().remove(this.r);
-            //Work in Progress gotta figure out how to get pieces to be clicked
+            chessGrid.getChildren().remove(r);
         };
-        //} //if
     } //move
-
 } //ChessPiece
