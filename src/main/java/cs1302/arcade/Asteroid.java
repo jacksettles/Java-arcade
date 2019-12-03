@@ -19,10 +19,9 @@ public class Asteroid extends Rectangle {
     private boolean init = false;
     private Image astIm = new Image("http://clipart-library.com/image_gallery/275522.png");
     private ImagePattern ip = new ImagePattern(astIm);
-    private Double xPos;
-    private Double yPos;
     private Double rad;
     private Bounds astBounds;
+    private Timeline tm;
 
     public Asteroid() {
         super(40, 40);
@@ -34,6 +33,10 @@ public class Asteroid extends Rectangle {
         init = true;
         this.setFill(ip);
         this.drift();
+    }
+
+    public Timeline getTimeLine() {
+        return tm;
     }
 
     public Double randX() {
@@ -87,9 +90,8 @@ public class Asteroid extends Rectangle {
         };
         Duration dur = new Duration(100.0);
         KeyFrame kf = new KeyFrame(dur, moveAst);
-        Timeline tm = new Timeline();
+        tm = new Timeline();
         tm.setCycleCount(Timeline.INDEFINITE);
         tm.getKeyFrames().add(kf);
-        tm.play();
     }
 }

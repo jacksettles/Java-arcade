@@ -62,6 +62,10 @@ public class AsteroidsGame {
         asteroidsScene.setFill(Color.BLACK);
     }
 
+    public Asteroid[] getAsteroids() {
+        return ast;
+    }
+
     private EventHandler<? super KeyEvent> moveShip() {
         return event -> {
             switch (event.getCode()) {
@@ -77,14 +81,12 @@ public class AsteroidsGame {
                 shipCenter = ship.getCenter();
                 right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(-15.0);
-                //System.out.println(ship.getAngle());
                 ship.getTransforms().add(right);
                 break;
             case LEFT:
                 shipCenter = ship.getCenter();
                 left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(15.0);
-                //System.out.println(ship.getAngle());
                 ship.getTransforms().add(left);
                 break;
             case Q:
