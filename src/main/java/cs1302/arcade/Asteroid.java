@@ -1,5 +1,6 @@
 package cs1302.arcade;
 
+import javafx.geometry.Bounds;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
@@ -18,14 +19,15 @@ public class Asteroid extends Rectangle {
     private boolean init = false;
     private Image astIm = new Image("http://clipart-library.com/image_gallery/275522.png");
     private ImagePattern ip = new ImagePattern(astIm);
-    private Double roomRight;
-    private Double roomLeft;
-    private Double roomUp;
-    private Double roomDown;
+    //private Double roomRight;
+    //private Double roomLeft;
+    //private Double roomUp;
+    //private Double roomDown;
     private Double xPos;
     private Double yPos;
-    private boolean hasCrossed = false;
-    private static final Double compare = 0.01;
+    //private boolean hasCrossed = false;
+//    private static final Double compare = 0.000001;
+    private Bounds astBounds;
 
     public Asteroid() {
         super(40, 40);
@@ -33,16 +35,17 @@ public class Asteroid extends Rectangle {
         Double randY = randY();
         this.setX(randX);
         this.setY(randY);
-        xPos = this.getX() + this.getTranslateX();
-        yPos = this.getY() - this.getTranslateY();
+        astBounds = this.getBoundsInParent();
+//        xPos = this.getX() + this.getTranslateX();
+//        yPos = this.getY() - this.getTranslateY();
 //        this.setTranslateX(randX);
 //        this.setTranslateY(randY);
 //        System.out.println(this.getX() + ", " + this.getY());
 //        System.out.println(this.getTranslateX() + ", " + this.getTranslateY());
-        roomRight = 640 - this.getX();
-        roomLeft = 0 - this.getX();
-        roomDown = 480 - this.getY();
-        roomUp = 0 - this.getY();
+//        roomRight = 640 - this.getX();
+//        roomLeft = 0 - this.getX();
+//        roomDown = 480 - this.getY();
+//        roomUp = 0 - this.getY();
 //        System.out.println(roomLeft);
 //        System.out.println(roomUp);
         init = true;
@@ -62,20 +65,25 @@ public class Asteroid extends Rectangle {
         return Math.random() * 360.0;
     }
 
-    public void flip() {
-        if (xPos - 640.0 <= compare) {
-            System.out.println("Should flip to left");
-            this.setTranslateX(0.0);
-        } else if (xPos - 0.0 <= compare) {
-            System.out.println("Should flip to right");
-            this.setTranslateX(640.0);
+    public void flip(Bounds b) {
+        double minX = b.getMinX();
+        double minY = b.getMinY();
+        double maxX = b.getMaxX();
+        double maxY = b.getMaxY();
+        if (minX >= 640.0) {
+            System.out.println(-40.0 - this.getX());
+            this.setTranslateX(-40.0 - this.getX());
+        } else if (maxX <= 0.0) {
+            System.out.println(660.0 - this.getX());
+            this.setTranslateX(660.0 - this.getX());
         }
-        if (yPos - 480.0 <= compare) {
-            System.out.println("Should flip to up");
-            this.setTranslateY(0.0);
-        } else if (yPos - 0.0 <= compare) {
-            System.out.println("Should flip to down");
-            this.setTranslateY(480.0);
+        if (minY >= 480.0) {
+            System.out.println(-40.0 - this.getY());
+            this.setTranslateY(-40.0 - this.getY());
+        } else if (maxY <= 0.0) {
+//            System.out.println("Should flip to down");
+            System.out.println(500.0 - this.getY());
+            this.setTranslateY(500.0 - this.getY());
         }
     }
 
@@ -86,12 +94,14 @@ public class Asteroid extends Rectangle {
             Double y2 = 1.0 * Math.sin(rad); // amt to move by on y axis
             this.setTranslateX(this.getTranslateX() + x2);
             this.setTranslateY(this.getTranslateY() - y2);
-            xPos += x2;
-            yPos -= y2;
-            System.out.println(xPos+ ", " + yPos);
-            this.flip();
+            astBounds = this.getBoundsInParent();
+            //System.out.println(astBounds.getMinX() + ", " + astBounds.getMinY());
+//            xPos += x2;
+//            yPos -= y2;
+//            System.out.println(xPos+ ", " + yPos);
+            this.flip(astBounds);
         };
-        Duration dur = new Duration(1000.0);
+        Duration dur = new Duration(100.0);
         KeyFrame kf = new KeyFrame(dur, moveAst);
         Timeline tm = new Timeline();
         tm.setCycleCount(Timeline.INDEFINITE);
