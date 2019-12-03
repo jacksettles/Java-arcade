@@ -22,7 +22,10 @@ public class Asteroid extends Rectangle {
     private Double roomLeft;
     private Double roomUp;
     private Double roomDown;
+    private Double xPos;
+    private Double yPos;
     private boolean hasCrossed = false;
+    private static final Double compare = 0.01;
 
     public Asteroid() {
         super(40, 40);
@@ -30,6 +33,8 @@ public class Asteroid extends Rectangle {
         Double randY = randY();
         this.setX(randX);
         this.setY(randY);
+        xPos = this.getX() + this.getTranslateX();
+        yPos = this.getY() - this.getTranslateY();
 //        this.setTranslateX(randX);
 //        this.setTranslateY(randY);
 //        System.out.println(this.getX() + ", " + this.getY());
@@ -58,14 +63,18 @@ public class Asteroid extends Rectangle {
     }
 
     public void flip() {
-        if (this.getX() + this.getTranslateX() >= 640.0) {
+        if (xPos - 640.0 <= compare) {
+            System.out.println("Should flip to left");
             this.setTranslateX(0.0);
-        } else if (this.getX() + this.getTranslateX() <= 0.0) {
+        } else if (xPos - 0.0 <= compare) {
+            System.out.println("Should flip to right");
             this.setTranslateX(640.0);
         }
-        if (this.getY() + this.getTranslateY() >= 480.0) {
+        if (yPos - 480.0 <= compare) {
+            System.out.println("Should flip to up");
             this.setTranslateY(0.0);
-        } else if (this.getY() + this.getTranslateY() <= 0.0) {
+        } else if (yPos - 0.0 <= compare) {
+            System.out.println("Should flip to down");
             this.setTranslateY(480.0);
         }
     }
@@ -77,10 +86,12 @@ public class Asteroid extends Rectangle {
             Double y2 = 1.0 * Math.sin(rad); // amt to move by on y axis
             this.setTranslateX(this.getTranslateX() + x2);
             this.setTranslateY(this.getTranslateY() - y2);
-            //System.out.println(this.getTranslateX() + ", " + this.getTranslateY());
+            xPos += x2;
+            yPos -= y2;
+            System.out.println(xPos+ ", " + yPos);
             this.flip();
         };
-        Duration dur = new Duration(100.0);
+        Duration dur = new Duration(1000.0);
         KeyFrame kf = new KeyFrame(dur, moveAst);
         Timeline tm = new Timeline();
         tm.setCycleCount(Timeline.INDEFINITE);
