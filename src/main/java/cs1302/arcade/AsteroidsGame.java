@@ -46,12 +46,12 @@ public class AsteroidsGame {
     Point2D shipCenter;
     Rotate right;
     Rotate left;
-    Asteroid[] ast = new Asteroid[1];
+    Asteroid[] ast = new Asteroid[15];
 
     public AsteroidsGame() {
         ship = new Ship(xCords, yCords);
         ship.setFill(Color.GOLD);
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 15; i++) {
             ast[i] = new Asteroid();
         }
         group = new Group();
