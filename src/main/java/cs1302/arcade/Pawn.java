@@ -13,7 +13,7 @@ public class Pawn extends ChessPiece {
     int newY;
     int newX;
     Rectangle[] possibleMoves = new Rectangle[4];
-
+    ChessPiece[] pieces = new ChessPiece[3];
 
     public Pawn(boolean isWhite, int row, int col, GridPane chessGrid) {
         super(isWhite, row, col, chessGrid);
@@ -28,7 +28,7 @@ public class Pawn extends ChessPiece {
     private EventHandler<? super MouseEvent> move() {
         return event -> {
             canMove();
-        };
+        }; //return
     } //move
 
     private EventHandler<? super MouseEvent> replace(int index) {
@@ -45,12 +45,12 @@ public class Pawn extends ChessPiece {
             this.setRow(row);
             this.setCol(col);
             chessGrid.add(this.getRect(), col, row);
-        };
+        }; //return
     } //move
 
     public void canMove() {
         if (isWhite) {
-            if(firstMove) {
+            if (firstMove) {
                 chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() - 1);
                 chessGrid.add(possibleMoves[1], this.getCol(), this.getRow() - 2);
                 firstMove = false;
@@ -58,7 +58,7 @@ public class Pawn extends ChessPiece {
                 chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() - 1);
             } //if
         } else {
-            if(firstMove) {
+            if (firstMove) {
                 chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
                 chessGrid.add(possibleMoves[1], this.getCol(), this.getRow() + 2);
                 firstMove = false;
