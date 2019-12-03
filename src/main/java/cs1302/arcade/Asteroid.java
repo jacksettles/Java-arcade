@@ -18,6 +18,11 @@ public class Asteroid extends Rectangle {
     private boolean init = false;
     private Image astIm = new Image("http://clipart-library.com/image_gallery/275522.png");
     private ImagePattern ip = new ImagePattern(astIm);
+    private Double roomRight;
+    private Double roomLeft;
+    private Double roomUp;
+    private Double roomDown;
+    private boolean hasCrossed = false;
 
     public Asteroid() {
         super(40, 40);
@@ -29,6 +34,12 @@ public class Asteroid extends Rectangle {
 //        this.setTranslateY(randY);
 //        System.out.println(this.getX() + ", " + this.getY());
 //        System.out.println(this.getTranslateX() + ", " + this.getTranslateY());
+        roomRight = 640 - this.getX();
+        roomLeft = 0 - this.getX();
+        roomDown = 480 - this.getY();
+        roomUp = 0 - this.getY();
+        System.out.println(roomLeft);
+        System.out.println(roomUp);
         init = true;
         this.setFill(ip);
         this.drift();
@@ -47,23 +58,23 @@ public class Asteroid extends Rectangle {
     }
 
     public void flip() {
-        if (this.getTranslateX() >= 640.0 - this.getX()) {
-            //System.out.println(this.getTranslateX());
+        if (this.getTranslateX() >= roomRight) {
             this.setTranslateX(0.0);
             this.setX(0.0);
-        } else if (0 >= this.getX() + this.getTranslateX()) {
-            //System.out.println(this.getTranslateX());
+            roomRight = 640.0;
+        } else if (this.getTranslateX() <= roomLeft) {
             this.setTranslateX(640.0);
             this.setX(640.0);
+            roomLeft = -640.0;
         }
-        if (this.getTranslateY() >= 480.0 - this.getY()) {
-            //System.out.println(this.getTranslateY());
-            this.setTranslateY(0.0);
-            this.setY(0.0);
-        } else if (0 >= this.getY() + this.getTranslateY()) {
-            //System.out.println(this.getTranslateY());
+        if (this.getTranslateY() <= roomUp) {
             this.setTranslateY(480.0);
             this.setY(480.0);
+            roomUp = -480.0;
+        } else if (this.getTranslateY() >= roomDown) {
+            this.setTranslateY(0.0);
+            this.setY(0.0);
+            roomDown = 480.0;
         }
     }
 
@@ -74,7 +85,7 @@ public class Asteroid extends Rectangle {
             Double y2 = 1.0 * Math.sin(rad); // amt to move by on y axis
             this.setTranslateX(this.getTranslateX() + x2);
             this.setTranslateY(this.getTranslateY() - y2);
-            //System.out.println(this.getX() + ", " + this.getY());
+            //System.out.println(this.getTranslateX() + ", " + this.getTranslateY());
             this.flip();
         };
         Duration dur = new Duration(100.0);
