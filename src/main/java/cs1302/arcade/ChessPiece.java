@@ -6,6 +6,12 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import cs1302.arcade.Rook;
+import cs1302.arcade.Pawn;
+import cs1302.arcade.Knight;
+import cs1302.arcade.Bishop;
+import cs1302.arcade.King;
+import cs1302.arcade.Queen;
 
 public class ChessPiece {
 
@@ -31,12 +37,15 @@ public class ChessPiece {
         } else {
             r = new Rectangle(40, 40, Color.BLACK);
         } //if
-        r.setOnMouseClicked(move());
     } //ChessPConstruct
 
     public Rectangle getRect() {
         return r;
     } //getRect
+
+    public void setRect(Rectangle r) {
+        this.r = r;
+    } //setRect
 
     public boolean isWhite() {
         return isWhite;
@@ -58,9 +67,4 @@ public class ChessPiece {
         return col;
     } //getCol
 
-    private EventHandler<? super MouseEvent> move() {
-        return event -> {
-            chessGrid.getChildren().remove(r);
-        };
-    } //move
 } //ChessPiece
