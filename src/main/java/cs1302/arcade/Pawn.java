@@ -27,6 +27,13 @@ public class Pawn extends ChessPiece {
 
     private EventHandler<? super MouseEvent> move() {
         return event -> {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board[i][j] != null) {
+                        board[i][j].getRect().setDisable(true);
+                    } //if
+                } //for
+            } //for
             canMove();
         }; //return
     } //move
@@ -45,6 +52,13 @@ public class Pawn extends ChessPiece {
             this.setRow(row);
             this.setCol(col);
             chessGrid.add(this.getRect(), col, row);
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board[i][j] != null) {
+                        board[i][j].getRect().setDisable(false);
+                    } //if
+                } //for
+            } //for
         }; //return
     } //move
 
@@ -57,6 +71,7 @@ public class Pawn extends ChessPiece {
             } else {
                 chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() - 1);
             } //if
+            this.setClicked(true);
         } else {
             if (firstMove) {
                 chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
@@ -65,6 +80,7 @@ public class Pawn extends ChessPiece {
             } else {
                 chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
             } //if
+            this.setClicked(true);
         } //if
     } //canMove
 

@@ -27,7 +27,7 @@ public class ChessPiece {
     public int xTo;
     public int yTo;
     public ChessPiece[][] board;
-
+    public boolean isClicked = false;
 
     public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
         this.chessGrid = chessGrid;
@@ -73,5 +73,13 @@ public class ChessPiece {
     public ChessPiece[][] getBoard() {
         return board;
     } //getB
+
+    public void setClicked(boolean clicked) {
+        this.isClicked = clicked;
+    } //isClicked
+
+    public boolean getClicked() {
+        return isClicked;
+    } //getClicked
 
 } //ChessPiece
