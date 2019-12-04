@@ -27,6 +27,8 @@ public class Asteroid extends Rectangle {
     private Timeline tm;
     private Ship ship;
     //private Circle follower;
+    private int hitCount = 0;
+    private boolean isActive = true;
 
     public Asteroid(Double length, Ship s) {
         super(length, length);
@@ -42,6 +44,18 @@ public class Asteroid extends Rectangle {
         init = true;
         this.setFill(ip);
         this.drift();
+    }
+
+    public void addHit() {
+        hitCount++;
+    }
+
+    public int getHitCount() {
+        return hitCount;
+    }
+
+    public void setActive(boolean b) {
+        isActive = b;
     }
 
     public Timeline getTimeLine() {
@@ -103,7 +117,7 @@ public class Asteroid extends Rectangle {
             this.setTranslateX(this.getTranslateX() + x2);
             this.setTranslateY(this.getTranslateY() - y2);
             astBounds = this.getBoundsInParent();
-            if (this.check()) {
+            if (this.check() && isActive) {
                 System.out.println("Crashed into an asteroid :(");
             }
             this.flip(astBounds, x2, y2);

@@ -60,10 +60,27 @@ public class AsteroidsGame {
         asteroidsScene = new Scene(group, 640, 480);
         asteroidsScene.setOnKeyPressed(moveShip());
         asteroidsScene.setFill(Color.BLACK);
+        this.removeAsteroid();
     }
 
     public Asteroid[] getAsteroids() {
         return ast;
+    }
+
+    public void removeAsteroid() {
+        EventHandler<ActionEvent> remove = e -> {
+            for (int i = 0; i < ast.length; i++) {
+                if (ast[i].getHitCount() >= 4) {
+                    group.getChildren().remove(ast[i]);
+                }
+            }
+        };
+        Duration dur = new Duration(2000.0);
+        KeyFrame kf = new KeyFrame(dur, remove);
+        Timeline tm = new Timeline();
+        tm.setCycleCount(Timeline.INDEFINITE);
+        tm.getKeyFrames().add(kf);
+        tm.play();
     }
 
     private EventHandler<? super KeyEvent> moveShip() {

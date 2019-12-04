@@ -1,5 +1,6 @@
 package cs1302.arcade;
 
+import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
 import javafx.scene.shape.Circle;
 import cs1302.arcade.Ship;
@@ -9,11 +10,20 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.geometry.Bounds;
 import cs1302.arcade.Asteroid;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 public class Bullet extends Circle {
 
     private Bounds bulletBounds;
     private Asteroid[] targets;
+    private boolean alreadyHit = false;
+    private String picLink = "https://media.istockphoto.com/illustrations/explosion"
+        + "-fire-isolated-on-black-background-detonation-bomb-as-game-illustration-"
+        + "id637859556?k=6&m=637859556&s=612x612&w=0&h=XYjy3d7YSrMpRgZFUte7DvL2yJkM"
+        + "ssE3CGcgIGZB1lA=";
+    private Image explosion = new Image(picLink);
+    private ImagePattern explode = new ImagePattern(explosion);
 
     public Bullet(double centerX, double centerY, double radius, Asteroid[] ast) {
         super(centerX, centerY, radius);
@@ -41,6 +51,12 @@ public class Bullet extends Circle {
         for (Asteroid a : targets) {
             if (bulletBounds.intersects(a.getBoundsInParent())) {
                 hit = true;
+                alreadyHit = true;
+                a.addHit();
+                if (a.getHitCount() == 4) {
+                    a.setFill(explode);
+                    a.setActive(false);
+                }
                 break;
             }
         }
@@ -56,8 +72,8 @@ public class Bullet extends Circle {
                 this.setTranslateX(this.getTranslateX() + x2);
                 this.setTranslateY(this.getTranslateY() - y2);
                 bulletBounds = this.getBoundsInParent();
-                if (this.check()) {
-                  System.out.println("It's a hit!");
+                if (!alreadyHit && this.check()) {
+//                    System.out.println("It's a hit!");
                 }
             }
         };
