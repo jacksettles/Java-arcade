@@ -82,4 +82,8 @@ public class ChessPiece {
         return isClicked;
     } //getClicked
 
+    public void setBoard(ChessPiece[][] board) {
+        this.board = board;
+    } //setB
+
 } //ChessPiece

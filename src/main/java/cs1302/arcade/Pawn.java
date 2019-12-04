@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import java.util.Arrays;
 
 public class Pawn extends ChessPiece {
 
@@ -14,6 +15,7 @@ public class Pawn extends ChessPiece {
     int newX;
     Rectangle[] possibleMoves = new Rectangle[4];
     ChessPiece[] pieces = new ChessPiece[3];
+    ChessPiece[][] board = new ChessPiece[8][8];
 
     public Pawn(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
         super(isWhite, row, col, chessGrid, board);
@@ -46,16 +48,19 @@ public class Pawn extends ChessPiece {
                 } //if
             } //for
             chessGrid.getChildren().remove(this.getRect());
+            this.board[row][col] = null;
             this.row = GridPane.getRowIndex(possibleMoves[index]);
             this.col = GridPane.getColumnIndex(possibleMoves[index]);
             chessGrid.getChildren().remove(possibleMoves[index]);
             this.setRow(row);
             this.setCol(col);
             chessGrid.add(this.getRect(), col, row);
+            this.board[row][col] = this;
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-                    if (board[i][j] != null) {
-                        board[i][j].getRect().setDisable(false);
+                    if (this.board[i][j] != null) {
+                        this.board[i][j].getRect().setDisable(false);
+                        this.board[i][j].setBoard(this.board);
                     } //if
                 } //for
             } //for
@@ -63,23 +68,68 @@ public class Pawn extends ChessPiece {
     } //move
 
     public void canMove() {
+        boolean moved = false;
+        boolean noJump = true;
+        this.board = this.getBoard();
+        System.out.println(Arrays.deepToString(this.board));
         if (isWhite) {
             if (firstMove) {
-                chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() - 1);
-                chessGrid.add(possibleMoves[1], this.getCol(), this.getRow() - 2);
-                firstMove = false;
+                if (this.board[this.getRow() - 1][this.getCol()] == null) {
+                    chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() - 1);
+                    moved = true;
+                } else {
+                    noJump = false;
+                } //if
+                if (noJump) {
+                    if (this.board[this.getRow() - 2][this.getCol()] == null) {
+                        chessGrid.add(possibleMoves[1], this.getCol(), this.getRow() - 2);
+                        moved = true;
+                    } //if
+                } //if
+                if (moved) {
+                    firstMove = false;
+                } //if
             } else {
-                chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() - 1);
+                if (this.board[this.getRow() - 1][this.getCol()] == null) {
+                    chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() - 1);
+                    moved = true;
+                } //if
             } //if
             this.setClicked(true);
-        } else {
+        } else { //isBlack
             if (firstMove) {
-                chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
-                chessGrid.add(possibleMoves[1], this.getCol(), this.getRow() + 2);
-                firstMove = false;
+                if (this.board[this.getRow() + 1][this.getCol()] == null) {
+                    chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
+                    moved = true;
+                } else {
+                    noJump = false;
+                } //if
+                if (noJump) {
+                    if (this.board[this.getRow() + 2][this.getCol()] == null) {
+                        chessGrid.add(possibleMoves[1], this.getCol(), this.getRow() + 2);
+                        moved = true;
+                    } //if
+                } //if
+                if (moved) {
+                    firstMove = false;
+                } //if
             } else {
-                chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
+                if (this.board[this.getRow() + 1][this.getCol()] == null) {
+                    chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
+                    moved = true;
+                } //if
             } //if
+        } //if
+        if (!moved) {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (this.board[i][j] != null) {
+                        this.board[i][j].getRect().setDisable(false);
+                        this.board[i][j].setBoard(this.board);
+                    } //if
+                } //for
+            } //for
+        } else {
             this.setClicked(true);
         } //if
     } //canMove
