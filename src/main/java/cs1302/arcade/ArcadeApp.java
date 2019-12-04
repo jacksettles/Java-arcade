@@ -38,6 +38,7 @@ public class ArcadeApp extends Application {
      * node.
      * @return the key event handler
      */
+
     private EventHandler<? super KeyEvent> createKeyHandler(Stage stage, Scene scene) {
         return event -> {
             switch (event.getCode()) {
@@ -45,6 +46,8 @@ public class ArcadeApp extends Application {
                 System.exit(0);
                 break;
             case DIGIT1:
+                chess = new ChessBoard();
+                chess.getSwitch(stage, scene);
                 stage.setScene(chess.getScene());
                 break;
             case DIGIT2:
@@ -78,7 +81,6 @@ public class ArcadeApp extends Application {
         Scene scene = menu.getScene();
         menu.getRoot().setOnKeyPressed(createKeyHandler(stage, scene));
         menu.getSwitch(stage, scene);
-        chess.getSwitch(stage, scene);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();

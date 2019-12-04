@@ -6,6 +6,12 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import cs1302.arcade.Rook;
+import cs1302.arcade.Pawn;
+import cs1302.arcade.Knight;
+import cs1302.arcade.Bishop;
+import cs1302.arcade.King;
+import cs1302.arcade.Queen;
 
 public class ChessPiece {
 
@@ -20,23 +26,29 @@ public class ChessPiece {
     public int yFrom;
     public int xTo;
     public int yTo;
+    public ChessPiece[][] board;
+    public boolean isClicked = false;
 
-    public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid) {
+    public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
         this.chessGrid = chessGrid;
         this.isWhite = isWhite;
         this.row = row;
         this.col = col;
+        this.board = board;
         if (isWhite) {
             r = new Rectangle(40, 40, Color.WHITE);
         } else {
             r = new Rectangle(40, 40, Color.BLACK);
         } //if
-        r.setOnMouseClicked(move());
     } //ChessPConstruct
 
     public Rectangle getRect() {
         return r;
     } //getRect
+
+    public void setRect(Rectangle r) {
+        this.r = r;
+    } //setRect
 
     public boolean isWhite() {
         return isWhite;
@@ -58,9 +70,20 @@ public class ChessPiece {
         return col;
     } //getCol
 
-    private EventHandler<? super MouseEvent> move() {
-        return event -> {
-            chessGrid.getChildren().remove(r);
-        };
-    } //move
+    public ChessPiece[][] getBoard() {
+        return board;
+    } //getB
+
+    public void setClicked(boolean clicked) {
+        this.isClicked = clicked;
+    } //isClicked
+
+    public boolean getClicked() {
+        return isClicked;
+    } //getClicked
+
+    public void setBoard(ChessPiece[][] board) {
+        this.board = board;
+    } //setB
+
 } //ChessPiece
