@@ -54,13 +54,14 @@ public class Bullet extends Circle {
                 hit = true;
                 alreadyHit = true;
                 a.addHit();
+                a.setFill(explode);
+                a.setActive(false);
                 if (a.getSideLength() == 50.0) {
-
+                    //update score
                 } else if (a.getSideLength() == 30.0) {
-                    System.out.println(30.0);
+                    //update score
                 } else if (a.getSideLength() == 15.0) {
-                    a.setFill(explode);
-                    a.setActive(false);
+                    //update score
                 }
                 break;
             }
