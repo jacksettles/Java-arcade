@@ -37,7 +37,7 @@ public class ArcadeApp extends Application {
      * node.
      * @return the key event handler
      */
-    private EventHandler<? super KeyEvent> createKeyHandler(Stage stage) {
+    private EventHandler<? super KeyEvent> createKeyHandler(Stage stage, Scene scene) {
         return event -> {
             switch (event.getCode()) {
             case Q:
@@ -49,7 +49,7 @@ public class ArcadeApp extends Application {
             case DIGIT2:
                 asteroids = new AsteroidsGame();
                 gameAsteroids = asteroids.getAsteroids();
-                asteroids.getSwitch(stage, menu.getScene());
+                asteroids.getSwitch(stage, scene);
                 stage.setScene(asteroids.getScene());
                 startAsteroids();
                 break;
@@ -66,13 +66,12 @@ public class ArcadeApp extends Application {
     /** {@inheritDoc} */
     @Override
     public void start(Stage stage) {
-        menu.getRoot().setOnKeyPressed(createKeyHandler(stage));
 
         //Scene scene = new Scene(group, 640, 480);
         Scene scene = menu.getScene();
+        menu.getRoot().setOnKeyPressed(createKeyHandler(stage, scene));
         menu.getSwitch(stage, scene);
         chess.getSwitch(stage, scene);
-        //asteroids.getSwitch(stage, scene);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();

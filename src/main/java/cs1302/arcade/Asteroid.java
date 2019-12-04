@@ -26,15 +26,12 @@ public class Asteroid extends Rectangle {
     private Bounds astBounds;
     private Timeline tm;
     private Ship ship;
-    //private Circle follower;
     private int hitCount = 0;
     private boolean isActive = true;
 
     public Asteroid(Double length, Ship s) {
         super(length, length);
         sideLength = length;
-//        follower = new Circle(length / 2.0);
-//        follower.setFill(Color.WHITE);
         Double randX = randX();
         Double randY = randY();
         this.setX(randX);
@@ -44,6 +41,10 @@ public class Asteroid extends Rectangle {
         init = true;
         this.setFill(ip);
         this.drift();
+    }
+
+    public Double getSideLength() {
+        return sideLength;
     }
 
     public void addHit() {

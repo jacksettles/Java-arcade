@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.geometry.Bounds;
+import javafx.scene.Group;
 
 public class Ship extends Polygon {
 
@@ -97,7 +98,7 @@ public class Ship extends Polygon {
         centerY /= 3;
         center = null;
         center = new Point2D(centerX, centerY);
-        }
+    }
 
     public Double[] getX() {
         return xCords;

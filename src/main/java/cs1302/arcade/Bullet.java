@@ -12,17 +12,18 @@ import javafx.geometry.Bounds;
 import cs1302.arcade.Asteroid;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.Group;
 
 public class Bullet extends Circle {
 
     private Bounds bulletBounds;
     private Asteroid[] targets;
     private boolean alreadyHit = false;
-    private String picLink = "https://media.istockphoto.com/illustrations/explosion"
+    private String explodeLink = "https://media.istockphoto.com/illustrations/explosion"
         + "-fire-isolated-on-black-background-detonation-bomb-as-game-illustration-"
         + "id637859556?k=6&m=637859556&s=612x612&w=0&h=XYjy3d7YSrMpRgZFUte7DvL2yJkM"
         + "ssE3CGcgIGZB1lA=";
-    private Image explosion = new Image(picLink);
+    private Image explosion = new Image(explodeLink);
     private ImagePattern explode = new ImagePattern(explosion);
 
     public Bullet(double centerX, double centerY, double radius, Asteroid[] ast) {
@@ -53,7 +54,11 @@ public class Bullet extends Circle {
                 hit = true;
                 alreadyHit = true;
                 a.addHit();
-                if (a.getHitCount() == 4) {
+                if (a.getSideLength() == 50.0) {
+
+                } else if (a.getSideLength() == 30.0) {
+                    System.out.println(30.0);
+                } else if (a.getSideLength() == 15.0) {
                     a.setFill(explode);
                     a.setActive(false);
                 }
@@ -74,6 +79,7 @@ public class Bullet extends Circle {
                 bulletBounds = this.getBoundsInParent();
                 if (!alreadyHit && this.check()) {
 //                    System.out.println("It's a hit!");
+                    // this could be where you deactivate the bullet
                 }
             }
         };

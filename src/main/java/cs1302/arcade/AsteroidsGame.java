@@ -52,7 +52,20 @@ public class AsteroidsGame {
         ship = new Ship(xCords, yCords);
         ship.setFill(Color.GOLD);
         for (int i = 0; i < 15; i++) {
-            ast[i] = new Asteroid(40.0, ship);
+            double length = 0.0;
+            int randSize = (int) (Math.random() * 3);
+            switch (randSize) {
+                case 0:
+                    length = 15.0;
+                    break;
+                case 1:
+                    length = 30.0;
+                    break;
+                case 2:
+                    length = 60.0;
+                    break;
+            }
+            ast[i] = new Asteroid(length, ship);
         }
         group = new Group();
         group.getChildren().add(ship);
