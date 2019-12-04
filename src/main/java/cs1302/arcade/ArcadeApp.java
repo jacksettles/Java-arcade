@@ -22,6 +22,7 @@ import cs1302.arcade.Asteroid;
  * Application subclass for {@code ArcadeApp}.
  * @version 2019.fa
  */
+
 public class ArcadeApp extends Application {
     Group group = new Group();           // main container
     Random rng = new Random();           // random number generator
@@ -37,6 +38,7 @@ public class ArcadeApp extends Application {
      * node.
      * @return the key event handler
      */
+
     private EventHandler<? super KeyEvent> createKeyHandler(Stage stage, Scene scene) {
         return event -> {
             switch (event.getCode()) {
@@ -44,6 +46,8 @@ public class ArcadeApp extends Application {
                 System.exit(0);
                 break;
             case DIGIT1:
+                chess = new ChessBoard();
+                chess.getSwitch(stage, scene);
                 stage.setScene(chess.getScene());
                 break;
             case DIGIT2:
@@ -67,11 +71,16 @@ public class ArcadeApp extends Application {
     @Override
     public void start(Stage stage) {
 
+        /* You are allowed to rewrite this start method, add other methods,
+         * files, classes, etc., as needed. This currently contains some
+         * simple sample code for mouse and keyboard interactions with a node
+         * (rectangle) in a group.
+         */
+
         //Scene scene = new Scene(group, 640, 480);
         Scene scene = menu.getScene();
         menu.getRoot().setOnKeyPressed(createKeyHandler(stage, scene));
         menu.getSwitch(stage, scene);
-        chess.getSwitch(stage, scene);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
