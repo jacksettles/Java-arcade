@@ -44,3 +44,11 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 2. **TODO:** Figure out ChessPiece interaction with onMouseClicked then work on restrictions for movement. Decide if ChessPieces will have ImageViews as Objects for astetic. Make Asteroid class and work on collision detection.
 
 3. **PROB:** Interaction between ChessPiece and onMouseClicked. Trying to get Coords of Obj selected and moved. Getting the bullet's to move over time.
+
+## WED 2019-12-4 @ 3:00PM EST
+
+1. **DONE:** JS- Added some graphics, collision detection, and asteroids. Asteroids can fade off the side and come out on the other side. They disappear after being blown up. RD - Added piece interaction using 2d ChessPiece array. Added one movement at a time. Add pawn blocking.
+
+2. **TODO:** JS- Scoring and levels for asteroids. RD - Pawn Attack. Other piece movement, should go smoothly now that complications have been worked out with first moving piece.
+
+3. **PROB:** JS- Getting the asteroids to fade off the screen and back on properly. RD - figuring out 2d array was best use for talking between pieces. GridPane Col then Row is a pain with 2d array Row then Col...
