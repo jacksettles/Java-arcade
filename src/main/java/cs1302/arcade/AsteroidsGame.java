@@ -47,8 +47,12 @@ public class AsteroidsGame {
     Rotate right;
     Rotate left;
     Asteroid[] ast = new Asteroid[15];
+    static int score;
+    static int level;
 
     public AsteroidsGame() {
+        score = 0;
+        level = 1;
         ship = new Ship(xCords, yCords);
         ship.setFill(Color.GOLD);
         for (int i = 0; i < 15; i++) {
@@ -74,6 +78,15 @@ public class AsteroidsGame {
         asteroidsScene.setOnKeyPressed(moveShip());
         asteroidsScene.setFill(Color.BLACK);
         this.removeAsteroid();
+        System.out.println("Starting Score: " + score);
+    }
+
+    public static int getScore() {
+        return score;
+    }
+
+    public static void setScore(int s) {
+        score = s;
     }
 
     public Asteroid[] getAsteroids() {
@@ -83,7 +96,7 @@ public class AsteroidsGame {
     public void removeAsteroid() {
         EventHandler<ActionEvent> remove = e -> {
             for (int i = 0; i < ast.length; i++) {
-                if (ast[i].getHitCount() >= 4) {
+                if (ast[i].getHitCount() >= 1) {
                     group.getChildren().remove(ast[i]);
                 }
             }

@@ -9,6 +9,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
+import javafx.util.Duration;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class Ship extends Polygon {
 
@@ -27,6 +32,19 @@ public class Ship extends Polygon {
         angle = 90.0;
         init = true;
         shipBounds = this.getBoundsInParent();
+    }
+
+    public void flash() {
+        EventHandler<ActionEvent> crash = e -> {
+            this.setFill(Color.RED);
+            //this.setFill(Color.GOLD);
+        };
+        Duration dur = new Duration(100.0);
+        KeyFrame kf = new KeyFrame(dur, crash);
+        Timeline tm = new Timeline();
+        tm.setCycleCount(8);
+        tm.getKeyFrames().add(kf);
+        tm.play();
     }
 
     public void flip() {

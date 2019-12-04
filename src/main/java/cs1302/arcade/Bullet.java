@@ -50,19 +50,20 @@ public class Bullet extends Circle {
     public boolean check() {
         boolean hit = false;
         for (Asteroid a : targets) {
-            if (bulletBounds.intersects(a.getBoundsInParent())) {
+            if (bulletBounds.intersects(a.getBoundsInParent()) && a.getActive() == true) {
                 hit = true;
                 alreadyHit = true;
                 a.addHit();
                 a.setFill(explode);
                 a.setActive(false);
-                if (a.getSideLength() == 50.0) {
-                    //update score
+                if (a.getSideLength() == 60.0) {
+                    AsteroidsGame.setScore(AsteroidsGame.getScore() + 25);
                 } else if (a.getSideLength() == 30.0) {
-                    //update score
+                    AsteroidsGame.setScore(AsteroidsGame.getScore() + 50);
                 } else if (a.getSideLength() == 15.0) {
-                    //update score
+                    AsteroidsGame.setScore(AsteroidsGame.getScore() + 75);
                 }
+                System.out.println("Score: " + AsteroidsGame.getScore());
                 break;
             }
         }
