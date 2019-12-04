@@ -8,8 +8,8 @@ public class King extends ChessPiece {
 
     GridPane chessGrid;
 
-    public King(boolean isWhite, int row, int col, GridPane chessGrid) {
-        super(isWhite, row, col, chessGrid);
+    public King(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
+        super(isWhite, row, col, chessGrid, board);
         this.chessGrid = chessGrid;
         this.getRect().setOnMouseClicked(move());
     } //King

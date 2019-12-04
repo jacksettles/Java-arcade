@@ -15,8 +15,8 @@ public class Pawn extends ChessPiece {
     Rectangle[] possibleMoves = new Rectangle[4];
     ChessPiece[] pieces = new ChessPiece[3];
 
-    public Pawn(boolean isWhite, int row, int col, GridPane chessGrid) {
-        super(isWhite, row, col, chessGrid);
+    public Pawn(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
+        super(isWhite, row, col, chessGrid, board);
         this.chessGrid = chessGrid;
         this.getRect().setOnMouseClicked(move());
         for (int i = 0; i < 4; i++) {

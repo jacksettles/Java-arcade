@@ -26,12 +26,15 @@ public class ChessPiece {
     public int yFrom;
     public int xTo;
     public int yTo;
+    public ChessPiece[][] board;
 
-    public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid) {
+
+    public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
         this.chessGrid = chessGrid;
         this.isWhite = isWhite;
         this.row = row;
         this.col = col;
+        this.board = board;
         if (isWhite) {
             r = new Rectangle(40, 40, Color.WHITE);
         } else {
@@ -66,5 +69,9 @@ public class ChessPiece {
     public int getCol() {
         return col;
     } //getCol
+
+    public ChessPiece[][] getBoard() {
+        return board;
+    } //getB
 
 } //ChessPiece

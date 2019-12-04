@@ -37,7 +37,7 @@ public class ArcadeApp extends Application {
      * @return the key event handler
      */
 
-    private EventHandler<? super KeyEvent> createKeyHandler(Stage stage) {
+    private EventHandler<? super KeyEvent> createKeyHandler(Stage stage, Scene scene) {
         return event -> {
             switch (event.getCode()) {
             case LEFT:  // KeyCode.LEFT
@@ -56,6 +56,8 @@ public class ArcadeApp extends Application {
                 System.exit(0);
                 break;
             case DIGIT1:
+                chess = new ChessBoard();
+                chess.getSwitch(stage, scene);
                 stage.setScene(chess.getScene());
                 break;
             case DIGIT2:
@@ -89,12 +91,11 @@ public class ArcadeApp extends Application {
         r.setX(50);                                // 50px in the x direction (right)
         r.setY(50);                                // 50ps in the y direction (down)
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
-        menu.getRoot().setOnKeyPressed(createKeyHandler(stage));// left-right key presses move the rectangle
 
         //Scene scene = new Scene(group, 640, 480);
         Scene scene = menu.getScene();
+        menu.getRoot().setOnKeyPressed(createKeyHandler(stage, scene));
         menu.getSwitch(stage, scene);
-        chess.getSwitch(stage, scene);
         asteroids.getSwitch(stage, scene);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
