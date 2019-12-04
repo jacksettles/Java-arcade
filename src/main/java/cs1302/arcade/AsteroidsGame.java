@@ -32,6 +32,8 @@ import javafx.util.Duration;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
+import cs1302.arcade.Asteroid;
+import javafx.scene.paint.Color;
 
 public class AsteroidsGame {
     Stage stage;
@@ -44,13 +46,54 @@ public class AsteroidsGame {
     Point2D shipCenter;
     Rotate right;
     Rotate left;
+    Asteroid[] ast = new Asteroid[15];
 
     public AsteroidsGame() {
         ship = new Ship(xCords, yCords);
+        ship.setFill(Color.GOLD);
+        for (int i = 0; i < 15; i++) {
+            double length = 0.0;
+            int randSize = (int) (Math.random() * 3);
+            switch (randSize) {
+                case 0:
+                    length = 15.0;
+                    break;
+                case 1:
+                    length = 30.0;
+                    break;
+                case 2:
+                    length = 60.0;
+                    break;
+            }
+            ast[i] = new Asteroid(length, ship);
+        }
         group = new Group();
         group.getChildren().add(ship);
+        group.getChildren().addAll(ast);
         asteroidsScene = new Scene(group, 640, 480);
         asteroidsScene.setOnKeyPressed(moveShip());
+        asteroidsScene.setFill(Color.BLACK);
+        this.removeAsteroid();
+    }
+
+    public Asteroid[] getAsteroids() {
+        return ast;
+    }
+
+    public void removeAsteroid() {
+        EventHandler<ActionEvent> remove = e -> {
+            for (int i = 0; i < ast.length; i++) {
+                if (ast[i].getHitCount() >= 4) {
+                    group.getChildren().remove(ast[i]);
+                }
+            }
+        };
+        Duration dur = new Duration(2000.0);
+        KeyFrame kf = new KeyFrame(dur, remove);
+        Timeline tm = new Timeline();
+        tm.setCycleCount(Timeline.INDEFINITE);
+        tm.getKeyFrames().add(kf);
+        tm.play();
     }
 
     private EventHandler<? super KeyEvent> moveShip() {
@@ -68,21 +111,19 @@ public class AsteroidsGame {
                 shipCenter = ship.getCenter();
                 right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(-15.0);
-                //System.out.println(ship.getAngle());
                 ship.getTransforms().add(right);
                 break;
             case LEFT:
                 shipCenter = ship.getCenter();
                 left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
                 ship.addAngle(15.0);
-                //System.out.println(ship.getAngle());
                 ship.getTransforms().add(left);
                 break;
             case Q:
                 stage.setScene(switchBack);
                 break;
             case SPACE:
-                Bullet b = ship.shoot();
+                Bullet b = ship.shoot(ast);
                 group.getChildren().add(b);
                 b.fly(ship);
                 break;

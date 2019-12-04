@@ -1,11 +1,14 @@
 package cs1302.arcade;
 
+import javafx.scene.paint.Color;
 import cs1302.arcade.Bullet;
 import javafx.scene.transform.Rotate;
 import javafx.scene.shape.Polygon;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.geometry.Bounds;
+import javafx.scene.Group;
 
 public class Ship extends Polygon {
 
@@ -14,14 +17,16 @@ public class Ship extends Polygon {
     private Double[] yCords;
     private boolean init = false;
     private Point2D center;
+    private Bounds shipBounds;
     Scene shipScene;
     Scene swapScene;
     Stage stage;
 
     public Ship(Double[] x, Double[] y) {
         setPos(x, y);
-        angle = 90.0; // might move this line to setPos method
+        angle = 90.0;
         init = true;
+        shipBounds = this.getBoundsInParent();
     }
 
     public void flip() {
@@ -106,17 +111,18 @@ public class Ship extends Polygon {
     public void setSwitch(Stage stage, Scene scene) {
         this.stage = stage;
         swapScene = scene;
-    } //setS
+    } //setSwitch
 
-    public Bullet shoot() {
+    public Bullet shoot(Asteroid[] ast) {
         Bullet b;
         double rad = Math.toRadians(this.getAngle());
         double centerX = this.getLayoutBounds().getWidth() * Math.cos(rad);
         double centerY = this.getLayoutBounds().getHeight() * -Math.sin(rad);
         centerX += this.getTranslateX() + 320.0;
         centerY += this.getTranslateY() + 240.0;
-        b = new Bullet(centerX, centerY, 2.0);
+        b = new Bullet(centerX, centerY, 2.0, ast);
+        b.setFill(Color.RED);
         return b;
     }
 
-} // Asteroids
+} // Ship
