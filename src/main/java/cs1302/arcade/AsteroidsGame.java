@@ -98,6 +98,10 @@ public class AsteroidsGame {
             for (int i = 0; i < ast.length; i++) {
                 if (ast[i].getHitCount() >= 1) {
                     group.getChildren().remove(ast[i]);
+                    if (this.isOutOfAsteroids()) {
+                        ship.resetPos();
+                        this.refillAsteroids();
+                    }
                 }
             }
         };
@@ -107,6 +111,40 @@ public class AsteroidsGame {
         tm.setCycleCount(Timeline.INDEFINITE);
         tm.getKeyFrames().add(kf);
         tm.play();
+    }
+
+    public void refillAsteroids() {
+        int newSize = ast.length + 5;
+        ast = new Asteroid[newSize];
+        for (int i = 0; i < ast.length; i++) {
+            double length = 0.0;
+            int randSize = (int) (Math.random() * 3);
+            switch (randSize) {
+                case 0:
+                    length = 15.0;
+                    break;
+                case 1:
+                    length = 30.0;
+                    break;
+                case 2:
+                    length = 60.0;
+                    break;
+            }
+            ast[i] = new Asteroid(length, ship);
+            ast[i].getTimeLine().play();
+        }
+        group.getChildren().addAll(ast);
+    }
+
+    public boolean isOutOfAsteroids() {
+        boolean empty = true;
+        for (int i = 0; i < ast.length; i++) {
+            if (group.getChildren().contains(ast[i])) {
+                empty = false;
+                break;
+            }
+        }
+        return empty;
     }
 
     private EventHandler<? super KeyEvent> moveShip() {

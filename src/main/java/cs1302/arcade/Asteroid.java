@@ -39,7 +39,13 @@ public class Asteroid extends Rectangle {
         ship = s;
         astBounds = this.getBoundsInParent();
         init = true;
-        this.setFill(ip);
+        try {
+            this.setFill(ip);
+        } catch (NullPointerException npe) {
+            System.out.println("ruh roh raggy");
+        } catch (IllegalArgumentException iae) {
+            System.out.println("bad arg");
+        }
         this.drift();
     }
 

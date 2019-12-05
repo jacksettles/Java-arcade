@@ -37,7 +37,8 @@ public class Ship extends Polygon {
     }
 
     public void flash() {
-        FillTransition blink = new FillTransition(Duration.millis(200.0), this, Color.GOLD, Color.RED);
+        FillTransition blink = new FillTransition(Duration.millis(200.0), this,
+                                                  Color.GOLD, Color.RED);
         blink.setCycleCount(10);
         blink.setAutoReverse(true);
         EventHandler<ActionEvent> enableMobility = e -> {
