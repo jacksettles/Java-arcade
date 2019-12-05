@@ -123,8 +123,8 @@ public class Asteroid extends Rectangle {
             this.setTranslateY(this.getTranslateY() - y2);
             astBounds = this.getBoundsInParent();
             if (this.check() && isActive) {
-//                System.out.println("Crashed into an asteroid :(");
                 ship.flash();
+                ship.resetPos();
             }
             this.flip(astBounds, x2, y2);
         };

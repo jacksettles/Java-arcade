@@ -14,6 +14,7 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.animation.FillTransition;
 
 public class Ship extends Polygon {
 
@@ -23,6 +24,7 @@ public class Ship extends Polygon {
     private boolean init = false;
     private Point2D center;
     private Bounds shipBounds;
+    private boolean canMove = true;
     Scene shipScene;
     Scene swapScene;
     Stage stage;
@@ -35,16 +37,23 @@ public class Ship extends Polygon {
     }
 
     public void flash() {
-        EventHandler<ActionEvent> crash = e -> {
-            this.setFill(Color.RED);
-            //this.setFill(Color.GOLD);
+        FillTransition blink = new FillTransition(Duration.millis(200.0), this, Color.GOLD, Color.RED);
+        blink.setCycleCount(10);
+        blink.setAutoReverse(true);
+        EventHandler<ActionEvent> enableMobility = e -> {
+            canMove = true;
         };
-        Duration dur = new Duration(100.0);
-        KeyFrame kf = new KeyFrame(dur, crash);
-        Timeline tm = new Timeline();
-        tm.setCycleCount(8);
-        tm.getKeyFrames().add(kf);
-        tm.play();
+        blink.setOnFinished(enableMobility);
+        blink.play();
+        canMove = false;
+    }
+
+    public boolean getMove() {
+        return canMove;
+    }
+
+    public void setMove(boolean b) {
+        canMove = b;
     }
 
     public void flip() {
@@ -124,6 +133,11 @@ public class Ship extends Polygon {
 
     public Double[] getY() {
         return yCords;
+    }
+
+    public void resetPos() {
+        this.setTranslateX(0.0);
+        this.setTranslateY(0.0);
     }
 
     public void setSwitch(Stage stage, Scene scene) {

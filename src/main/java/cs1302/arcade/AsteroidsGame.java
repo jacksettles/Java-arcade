@@ -111,36 +111,38 @@ public class AsteroidsGame {
 
     private EventHandler<? super KeyEvent> moveShip() {
         return event -> {
-            switch (event.getCode()) {
-            case UP:
-                Double radAng = Math.toRadians(ship.getAngle());
-                Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
-                Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
-                ship.setTranslateX(ship.getTranslateX() + x);
-                ship.setTranslateY(ship.getTranslateY() - y);
-                ship.flip();
-                break;
-            case RIGHT:
-                shipCenter = ship.getCenter();
-                right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
-                ship.addAngle(-15.0);
-                ship.getTransforms().add(right);
-                break;
-            case LEFT:
-                shipCenter = ship.getCenter();
-                left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
-                ship.addAngle(15.0);
-                ship.getTransforms().add(left);
-                break;
-            case Q:
-                stage.setScene(switchBack);
-                break;
-            case SPACE:
-                Bullet b = ship.shoot(ast);
-                group.getChildren().add(b);
-                b.fly(ship);
-                break;
-            } // switch
+            if (ship.getMove()) {
+                switch (event.getCode()) {
+                case UP:
+                    Double radAng = Math.toRadians(ship.getAngle());
+                    Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
+                    Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
+                    ship.setTranslateX(ship.getTranslateX() + x);
+                    ship.setTranslateY(ship.getTranslateY() - y);
+                    ship.flip();
+                    break;
+                case RIGHT:
+                    shipCenter = ship.getCenter();
+                    right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
+                    ship.addAngle(-15.0);
+                    ship.getTransforms().add(right);
+                    break;
+                case LEFT:
+                    shipCenter = ship.getCenter();
+                    left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
+                    ship.addAngle(15.0);
+                    ship.getTransforms().add(left);
+                    break;
+                case Q:
+                    stage.setScene(switchBack);
+                    break;
+                case SPACE:
+                    Bullet b = ship.shoot(ast);
+                    group.getChildren().add(b);
+                    b.fly(ship);
+                    break;
+                } // switch
+            }
         };
     }
 
