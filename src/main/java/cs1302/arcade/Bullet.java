@@ -81,6 +81,7 @@ public class Bullet extends Circle {
                 bulletBounds = this.getBoundsInParent();
                 if (!alreadyHit && this.check()) {
 //                    System.out.println("It's a hit!");
+                    // also need to add a life after every 10,000 points
                     // this could be where you deactivate the bullet
                 }
             }

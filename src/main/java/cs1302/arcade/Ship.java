@@ -25,6 +25,7 @@ public class Ship extends Polygon {
     private Point2D center;
     private Bounds shipBounds;
     private boolean canMove = true;
+    private int lives;
     Scene shipScene;
     Scene swapScene;
     Stage stage;
@@ -33,6 +34,7 @@ public class Ship extends Polygon {
         setPos(x, y);
         angle = 90.0;
         init = true;
+        lives = 5;
         shipBounds = this.getBoundsInParent();
     }
 
@@ -55,6 +57,14 @@ public class Ship extends Polygon {
 
     public void setMove(boolean b) {
         canMove = b;
+    }
+
+    public void setLives(int newLives) {
+        lives = newLives;
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     public void flip() {

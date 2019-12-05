@@ -116,7 +116,7 @@ public class Asteroid extends Rectangle {
 
     public boolean check() {
         boolean hitShip = false;
-        if (astBounds.intersects(ship.getBoundsInParent())) {
+        if (astBounds.intersects(ship.getBoundsInParent()) && ship.getMove()) {
             hitShip = true;
         }
         return hitShip;
@@ -133,6 +133,8 @@ public class Asteroid extends Rectangle {
             if (this.check() && isActive) {
                 ship.flash();
                 ship.resetPos();
+                ship.setLives(ship.getLives() - 1);
+                System.out.println(ship.getLives());
             }
             this.flip(astBounds, x2, y2);
         };

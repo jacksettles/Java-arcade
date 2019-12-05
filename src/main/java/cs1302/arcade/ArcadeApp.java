@@ -28,7 +28,7 @@ public class ArcadeApp extends Application {
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
     ChessBoard chess = new ChessBoard();
-    AsteroidsGame asteroids = new AsteroidsGame();
+    AsteroidsGame asteroids;
     Asteroid[] gameAsteroids;
     MainMenu menu = new MainMenu();
 

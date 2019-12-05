@@ -189,6 +189,12 @@ public class AsteroidsGame {
                     group.getChildren().add(b);
                     b.fly(ship);
                     break;
+                case D:
+                    Double transX = (Math.random() * 480.0) - 240.0;
+                    Double transY = (Math.random() * 640.0) - 320.0;
+                    ship.setTranslateX(transX);
+                    ship.setTranslateY(transY);
+                    break;
                 } // switch
             }
         };
