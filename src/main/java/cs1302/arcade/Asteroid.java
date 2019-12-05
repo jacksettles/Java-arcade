@@ -39,14 +39,8 @@ public class Asteroid extends Rectangle {
         ship = s;
         astBounds = this.getBoundsInParent();
         init = true;
-        try {
-            this.setFill(ip);
-        } catch (NullPointerException npe) {
-            System.out.println("ruh roh raggy");
-        } catch (IllegalArgumentException iae) {
-            System.out.println("bad arg");
-        }
-        this.drift();
+        this.setFill(ip);
+        this.drift(AsteroidsGame.getLevel());
     }
 
     public Double getSideLength() {
@@ -120,7 +114,7 @@ public class Asteroid extends Rectangle {
         return hitShip;
     }
 
-    public void drift() {
+    public void drift(int level) {
         rad = Math.toRadians(randAngle());
         EventHandler<ActionEvent> moveAst = e -> {
             Double x2 = 1.0 * Math.cos(rad); // amt to move by on x axis
@@ -134,7 +128,8 @@ public class Asteroid extends Rectangle {
             }
             this.flip(astBounds, x2, y2);
         };
-        Duration dur = new Duration(100.0);
+        Double time = 110.0 - (8 * level);
+        Duration dur = new Duration(time);
         KeyFrame kf = new KeyFrame(dur, moveAst);
         tm = new Timeline();
         tm.setCycleCount(Timeline.INDEFINITE);

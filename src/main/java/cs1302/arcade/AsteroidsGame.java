@@ -89,6 +89,14 @@ public class AsteroidsGame {
         score = s;
     }
 
+    public static int getLevel() {
+        return level;
+    }
+
+    public static void setLevel(int lev) {
+        level = lev;
+    }
+
     public Asteroid[] getAsteroids() {
         return ast;
     }
@@ -99,6 +107,8 @@ public class AsteroidsGame {
                 if (ast[i].getHitCount() >= 1) {
                     group.getChildren().remove(ast[i]);
                     if (this.isOutOfAsteroids()) {
+                        level++;
+                        System.out.println("Level " + level);
                         ship.resetPos();
                         this.refillAsteroids();
                     }
