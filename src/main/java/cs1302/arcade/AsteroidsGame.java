@@ -124,7 +124,7 @@ public class AsteroidsGame {
     }
 
     public void refillAsteroids() {
-        int newSize = ast.length + 5;
+        int newSize = ast.length + 3;
         ast = new Asteroid[newSize];
         for (int i = 0; i < ast.length; i++) {
             double length = 0.0;

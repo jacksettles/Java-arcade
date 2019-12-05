@@ -28,10 +28,18 @@ public class Asteroid extends Rectangle {
     private Ship ship;
     private int hitCount = 0;
     private boolean isActive = true;
+    private int speed;
 
     public Asteroid(Double length, Ship s) {
         super(length, length);
         sideLength = length;
+        if (sideLength == 60.0) {
+            speed = 10;
+        } else if (sideLength == 30.0) {
+            speed = 50;
+        } else {
+            speed = 90;
+        }
         Double randX = randX();
         Double randY = randY();
         this.setX(randX);
@@ -40,7 +48,7 @@ public class Asteroid extends Rectangle {
         astBounds = this.getBoundsInParent();
         init = true;
         this.setFill(ip);
-        this.drift(AsteroidsGame.getLevel());
+        this.drift(speed);
     }
 
     public Double getSideLength() {
@@ -69,7 +77,7 @@ public class Asteroid extends Rectangle {
 
     public Double randX() {
         Double x = Math.random() * 640.0;
-        if (x >= 300.00 && x < 340.0) {
+        if (x >= 250.00 && x < 550.0) {
             return randX();
         } else {
             return x;
@@ -78,7 +86,7 @@ public class Asteroid extends Rectangle {
 
     public Double randY() {
         Double y = Math.random() * 480.0;
-        if (y >= 210.0 && y <= 260.0) {
+        if (y >= 200.0 && y <= 300.0) {
             return randY();
         } else {
             return y;
@@ -114,7 +122,7 @@ public class Asteroid extends Rectangle {
         return hitShip;
     }
 
-    public void drift(int level) {
+    public void drift(int sp) {
         rad = Math.toRadians(randAngle());
         EventHandler<ActionEvent> moveAst = e -> {
             Double x2 = 1.0 * Math.cos(rad); // amt to move by on x axis
@@ -128,7 +136,7 @@ public class Asteroid extends Rectangle {
             }
             this.flip(astBounds, x2, y2);
         };
-        Double time = 110.0 - (8 * level);
+        Double time = 100.0 - sp;
         Duration dur = new Duration(time);
         KeyFrame kf = new KeyFrame(dur, moveAst);
         tm = new Timeline();
