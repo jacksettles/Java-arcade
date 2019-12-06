@@ -26,6 +26,7 @@ public class Ship extends Polygon {
     private Bounds shipBounds;
     private boolean canMove = true;
     private int lives;
+    private boolean justCrashed = false;
     Scene shipScene;
     Scene swapScene;
     Stage stage;
@@ -151,19 +152,44 @@ public class Ship extends Polygon {
         this.setTranslateY(0.0);
     }
 
+    public void setCrashed(boolean crashed) {
+        justCrashed = crashed;
+        this.disableCrashing();
+    }
+
+    public boolean justCrashed() {
+        return justCrashed;
+    }
+
+    public void disableCrashing() {
+        EventHandler<ActionEvent> disable = e -> {
+            justCrashed = true;
+        };
+        Duration dur = new Duration(7000.0);
+        KeyFrame kf = new KeyFrame(dur, disable);
+        Timeline tm = new Timeline();
+        tm.setCycleCount(1);
+        EventHandler<ActionEvent> enable = e -> {
+            justCrashed = false;
+        };
+        tm.setOnFinished(enable);
+        tm.getKeyFrames().add(kf);
+        tm.play();
+    }
+
     public void setSwitch(Stage stage, Scene scene) {
         this.stage = stage;
         swapScene = scene;
     } //setSwitch
 
-    public Bullet shoot(Asteroid[] ast) {
+    public Bullet shoot(Asteroid[] ast, Group group) {
         Bullet b;
         double rad = Math.toRadians(this.getAngle());
         double centerX = this.getLayoutBounds().getWidth() * Math.cos(rad);
         double centerY = this.getLayoutBounds().getHeight() * -Math.sin(rad);
         centerX += this.getTranslateX() + 320.0;
         centerY += this.getTranslateY() + 240.0;
-        b = new Bullet(centerX, centerY, 2.0, ast);
+        b = new Bullet(centerX, centerY, 2.0, ast, group);
         b.setFill(Color.RED);
         return b;
     }

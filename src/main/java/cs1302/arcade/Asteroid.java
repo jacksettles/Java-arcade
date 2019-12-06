@@ -130,10 +130,11 @@ public class Asteroid extends Rectangle {
             this.setTranslateX(this.getTranslateX() + x2);
             this.setTranslateY(this.getTranslateY() - y2);
             astBounds = this.getBoundsInParent();
-            if (this.check() && isActive) {
+            if (this.check() && isActive && !ship.justCrashed()) {
                 ship.flash();
                 ship.resetPos();
                 ship.setLives(ship.getLives() - 1);
+                ship.setCrashed(true);
                 System.out.println(ship.getLives());
             }
             this.flip(astBounds, x2, y2);

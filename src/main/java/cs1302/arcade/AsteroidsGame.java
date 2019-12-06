@@ -185,7 +185,7 @@ public class AsteroidsGame {
                     stage.setScene(switchBack);
                     break;
                 case SPACE:
-                    Bullet b = ship.shoot(ast);
+                    Bullet b = ship.shoot(ast, group);
                     group.getChildren().add(b);
                     b.fly(ship);
                     break;
