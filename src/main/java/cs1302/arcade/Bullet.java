@@ -59,8 +59,6 @@ public class Bullet extends Circle {
                 a.setFill(explode);
                 a.setActive(false);
                 this.updateScore(a, ship);
-                System.out.printf("Score: %d\tLives: %d\n",
-                                  AsteroidsGame.getScore(), ship.getLives());
                 break;
             }
         }
@@ -113,6 +111,7 @@ public class Bullet extends Circle {
         } else if (a.getSideLength() == 15.0) {
             AsteroidsGame.setScore(AsteroidsGame.getScore() + 75);
         }
+        AsteroidsGame.setScoreText();
         int newScore = AsteroidsGame.getScore();
         if (newScore >= threshold) {
             ship.setLives(ship.getLives() + 1);

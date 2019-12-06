@@ -134,8 +134,8 @@ public class Asteroid extends Rectangle {
                 ship.flash();
                 ship.resetPos();
                 ship.setLives(ship.getLives() - 1);
+                AsteroidsGame.setLifeText(ship.getLives());
                 ship.setCrashed(true);
-                System.out.println(ship.getLives());
             }
             this.flip(astBounds, x2, y2);
         };

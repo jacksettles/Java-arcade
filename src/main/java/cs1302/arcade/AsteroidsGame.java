@@ -34,6 +34,8 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import cs1302.arcade.Asteroid;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 
 public class AsteroidsGame {
     Stage stage;
@@ -49,6 +51,11 @@ public class AsteroidsGame {
     Asteroid[] ast = new Asteroid[15];
     static int score;
     static int level;
+    static Label scoreboard;
+    static String scoreText = "Score: ";
+    static String levelText = "\tLevel: ";
+    static String lifeText = "\tLife: ";
+    static String gameInfo;
 
     public AsteroidsGame() {
         score = 0;
@@ -71,14 +78,39 @@ public class AsteroidsGame {
             }
             ast[i] = new Asteroid(length, ship);
         }
+        scoreText = "Score: " + score;
+        levelText = "\tLevel: " + level;
+        lifeText = "\tLives: " + ship.getLives();
+        gameInfo = scoreText + levelText + lifeText;;
+        scoreboard  = new Label(gameInfo);
+        scoreboard.setTextFill(Color.WHITE);
+        scoreboard.setTranslateX(240.0);
         group = new Group();
         group.getChildren().add(ship);
         group.getChildren().addAll(ast);
+        group.getChildren().addAll(scoreboard);
         asteroidsScene = new Scene(group, 640, 480);
         asteroidsScene.setOnKeyPressed(moveShip());
         asteroidsScene.setFill(Color.BLACK);
         this.removeAsteroid();
-        System.out.println("Starting Score: " + score);
+    }
+
+    public static void setScoreText() {
+        scoreText = "Score: " + score;
+        gameInfo = scoreText + levelText + lifeText;
+        scoreboard.setText(gameInfo);
+    }
+
+    public static void setLevelText() {
+        levelText = "\tLevel: " + level;
+        gameInfo = scoreText + levelText + lifeText;
+        scoreboard.setText(gameInfo);
+    }
+
+    public static void setLifeText(int lives) {
+        lifeText = "\tLives: " + lives;
+        gameInfo = scoreText + levelText + lifeText;
+        scoreboard.setText(gameInfo);
     }
 
     public static int getScore() {
@@ -108,7 +140,7 @@ public class AsteroidsGame {
                     group.getChildren().remove(ast[i]);
                     if (this.isOutOfAsteroids()) {
                         level++;
-                        System.out.println("Level " + level);
+                        AsteroidsGame.setLevelText();
                         ship.resetPos();
                         this.refillAsteroids();
                     }
