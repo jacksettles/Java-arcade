@@ -13,6 +13,7 @@ import cs1302.arcade.Asteroid;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.Group;
+import cs1302.arcade.AsteroidsGame;
 
 public class Bullet extends Circle {
 
@@ -26,12 +27,14 @@ public class Bullet extends Circle {
     private Image explosion = new Image(explodeLink);
     private ImagePattern explode = new ImagePattern(explosion);
     private Group group;
+    private AsteroidsGame asteroidsGame;
 
-    public Bullet(double centerX, double centerY, double radius, Asteroid[] ast, Group group) {
+    public Bullet(double centerX, double centerY, double radius, Asteroid[] ast, Group group, AsteroidsGame ag) {
         super(centerX, centerY, radius);
         setAsteroids(ast);
         bulletBounds = this.getBoundsInParent();
         this.group = group;
+        asteroidsGame = ag;
     }
 
     public void setAsteroids(Asteroid[] ast) {
@@ -73,7 +76,7 @@ public class Bullet extends Circle {
      *@return threshold the next goal to reach to gain another life.
      */
     public Double findThreshold() {
-        int tempScore = AsteroidsGame.getScore();
+        int tempScore = asteroidsGame.getScore();
         Double threshold;
         Double n = 10000.0;
         if (tempScore < n) {
@@ -105,14 +108,13 @@ public class Bullet extends Circle {
     public void updateScore(Asteroid a, Ship ship) {
         Double threshold = this.findThreshold();
         if (a.getSideLength() == 60.0) {
-            AsteroidsGame.setScore(AsteroidsGame.getScore() + 25);
+            asteroidsGame.setScore(asteroidsGame.getScore() + 25);
         } else if (a.getSideLength() == 30.0) {
-            AsteroidsGame.setScore(AsteroidsGame.getScore() + 50);
+            asteroidsGame.setScore(asteroidsGame.getScore() + 50);
         } else if (a.getSideLength() == 15.0) {
-            AsteroidsGame.setScore(AsteroidsGame.getScore() + 75);
+            asteroidsGame.setScore(asteroidsGame.getScore() + 75);
         }
-        AsteroidsGame.setScoreText();
-        int newScore = AsteroidsGame.getScore();
+        int newScore = asteroidsGame.getScore();
         if (newScore >= threshold) {
             ship.setLives(ship.getLives() + 1);
         }

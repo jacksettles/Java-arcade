@@ -41,29 +41,31 @@ public class AsteroidsGame {
     Stage stage;
     Scene asteroidsScene;
     Scene switchBack;
-    static Group group;
+    Group group;
     Ship ship;
     Double[] xCords = {320.0, 312.929, 327.071};
     Double[] yCords = {225.858, 247.071, 247.071};
     Point2D shipCenter;
     Rotate right;
     Rotate left;
-    Asteroid[] ast = new Asteroid[15];
-    static int score;
-    static int level;
-    static Label scoreboard;
-    static Label finalScore;
-    static String scoreText = "Score: ";
-    static String levelText = "\tLevel: ";
-    static String lifeText = "\tLife: ";
-    static String gameInfo;
-    static String finText = "Final Score: ";
+    Asteroid[] ast;
+    int score;
+    int level;
+    Label scoreboard;
+    Label finalScore;
+    String scoreText = "Score: ";
+    String levelText = "\tLevel: ";
+    String lifeText = "\tLife: ";
+    String gameInfo;
+    String finText = "Final Score: ";
 
     public AsteroidsGame() {
         score = 0;
         level = 1;
         ship = new Ship(xCords, yCords);
         ship.setFill(Color.GOLD);
+        ship.setLives(5);
+        ast = new Asteroid[15];
         for (int i = 0; i < 15; i++) {
             double length = 0.0;
             int randSize = (int) (Math.random() * 3);
@@ -78,16 +80,13 @@ public class AsteroidsGame {
                     length = 60.0;
                     break;
             }
-            ast[i] = new Asteroid(length, ship);
+            ast[i] = new Asteroid(length, ship, this);
         }
-        scoreText = "Score: " + score;
-        levelText = "\tLevel: " + level;
-        lifeText = "\tLives: " + ship.getLives();
-        gameInfo = scoreText + levelText + lifeText;;
-        scoreboard  = new Label(gameInfo);
+        scoreboard  = new Label();
+        scoreboard.setFont(new Font("Comic Sans", 25.0));
         finalScore = new Label();
         scoreboard.setTextFill(Color.WHITE);
-        scoreboard.setTranslateX(240.0);
+        scoreboard.setTranslateX(130.0);
         group = new Group();
         group.getChildren().add(ship);
         group.getChildren().addAll(ast);
@@ -96,48 +95,52 @@ public class AsteroidsGame {
         asteroidsScene.setOnKeyPressed(moveShip());
         asteroidsScene.setFill(Color.BLACK);
         this.removeAsteroid();
+        this.updateScoreboard();
     }
 
-    public static void presentFinalScore() {
+    public Group getGroup() {
+        return group;
+    }
+
+    public void presentFinalScore() {
         finText = "Final Score: " + score;
         finalScore.setText(finText);
+        finalScore.setFont(new Font("Comic Sans", 25.0));
         finalScore.setTextFill(Color.WHITE);
         group.getChildren().add(finalScore);
-        finalScore.setTranslateX(320.0);
+        finalScore.setTranslateX(260.0);
         finalScore.setTranslateY(240.0);
     }
 
-    public static void setScoreText() {
-        scoreText = "Score: " + score;
-        gameInfo = scoreText + levelText + lifeText;
-        scoreboard.setText(gameInfo);
+    public void updateScoreboard() {
+        EventHandler<ActionEvent> update = e -> {
+            scoreText = "Score: " + score;
+            levelText = "\tLevel: " + level;
+            lifeText = "\tLives: " + ship.getLives();
+            gameInfo = scoreText + levelText + lifeText;
+            scoreboard.setText(gameInfo);
+        };
+        Duration dur = new Duration(100.0);
+        KeyFrame kf = new KeyFrame(dur, update);
+        Timeline tm = new Timeline();
+        tm.setCycleCount(Timeline.INDEFINITE);
+        tm.getKeyFrames().add(kf);
+        tm.play();
     }
 
-    public static void setLevelText() {
-        levelText = "\tLevel: " + level;
-        gameInfo = scoreText + levelText + lifeText;
-        scoreboard.setText(gameInfo);
-    }
-
-    public static void setLifeText(int lives) {
-        lifeText = "\tLives: " + lives;
-        gameInfo = scoreText + levelText + lifeText;
-        scoreboard.setText(gameInfo);
-    }
-
-    public static int getScore() {
+    public int getScore() {
         return score;
     }
 
-    public static void setScore(int s) {
+    public void setScore(int s) {
         score = s;
     }
 
-    public static int getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public static void setLevel(int lev) {
+    public void setLevel(int lev) {
         level = lev;
     }
 
@@ -152,7 +155,6 @@ public class AsteroidsGame {
                     group.getChildren().remove(ast[i]);
                     if (this.isOutOfAsteroids()) {
                         level++;
-                        AsteroidsGame.setLevelText();
                         ship.resetPos();
                         this.refillAsteroids();
                     }
@@ -184,7 +186,7 @@ public class AsteroidsGame {
                     length = 60.0;
                     break;
             }
-            ast[i] = new Asteroid(length, ship);
+            ast[i] = new Asteroid(length, ship, this);
             ast[i].getTimeLine().play();
         }
         group.getChildren().addAll(ast);
@@ -203,44 +205,56 @@ public class AsteroidsGame {
 
     private EventHandler<? super KeyEvent> moveShip() {
         return event -> {
-            if (ship.getMove()) {
                 switch (event.getCode()) {
                 case UP:
-                    Double radAng = Math.toRadians(ship.getAngle());
-                    Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
-                    Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
-                    ship.setTranslateX(ship.getTranslateX() + x);
-                    ship.setTranslateY(ship.getTranslateY() - y);
-                    ship.flip();
+                    if (ship.getMove()) {
+                        Double radAng = Math.toRadians(ship.getAngle());
+                        Double x = 10.0 * Math.cos(radAng); // amt to move by on x axis
+                        Double y = 10.0 * Math.sin(radAng); // amt to move by on y axis
+                        ship.setTranslateX(ship.getTranslateX() + x);
+                        ship.setTranslateY(ship.getTranslateY() - y);
+                        ship.flip();
+                    }
                     break;
                 case RIGHT:
-                    shipCenter = ship.getCenter();
-                    right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
-                    ship.addAngle(-15.0);
-                    ship.getTransforms().add(right);
+                    if (ship.getMove()) {
+                        shipCenter = ship.getCenter();
+                        right = new Rotate(15.0, shipCenter.getX(), shipCenter.getY());
+                        ship.addAngle(-15.0);
+                        ship.getTransforms().add(right);
+                    }
                     break;
                 case LEFT:
-                    shipCenter = ship.getCenter();
-                    left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
-                    ship.addAngle(15.0);
-                    ship.getTransforms().add(left);
-                    break;
-                case Q:
-                    stage.setScene(switchBack);
+                    if (ship.getMove()) {
+                        shipCenter = ship.getCenter();
+                        left = new Rotate(-15.0, shipCenter.getX(), shipCenter.getY());
+                        ship.addAngle(15.0);
+                        ship.getTransforms().add(left);
+                    }
                     break;
                 case SPACE:
-                    Bullet b = ship.shoot(ast, group);
-                    group.getChildren().add(b);
-                    b.fly(ship);
+                    if (ship.getMove()) {
+                        Bullet b = ship.shoot(ast, group, this);
+                        group.getChildren().add(b);
+                        b.fly(ship);
+                    }
                     break;
                 case D:
-                    Double transX = (Math.random() * 480.0) - 240.0;
-                    Double transY = (Math.random() * 640.0) - 320.0;
-                    ship.setTranslateX(transX);
-                    ship.setTranslateY(transY);
+                    if (ship.getMove()) {
+                        Double transX = (Math.random() * 480.0) - 240.0;
+                        Double transY = (Math.random() * 640.0) - 320.0;
+                        ship.setTranslateX(transX);
+                        ship.setTranslateY(transY);
+                    }
+                    break;
+                case Q:
+                    group.getChildren().clear();
+                    ship.setLives(5);
+                    score = 0;
+                    level = 1;
+                    stage.setScene(switchBack);
                     break;
                 } // switch
-            }
         };
     }
 

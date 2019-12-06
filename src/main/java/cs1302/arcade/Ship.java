@@ -15,6 +15,7 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.animation.FillTransition;
+import cs1302.arcade.AsteroidsGame;
 
 public class Ship extends Polygon {
 
@@ -47,7 +48,9 @@ public class Ship extends Polygon {
         EventHandler<ActionEvent> enableMobility = e -> {
             canMove = true;
         };
-        blink.setOnFinished(enableMobility);
+        if (lives > 0) {
+            blink.setOnFinished(enableMobility);
+        }
         blink.play();
         canMove = false;
     }
@@ -182,14 +185,14 @@ public class Ship extends Polygon {
         swapScene = scene;
     } //setSwitch
 
-    public Bullet shoot(Asteroid[] ast, Group group) {
+    public Bullet shoot(Asteroid[] ast, Group group, AsteroidsGame ag) {
         Bullet b;
         double rad = Math.toRadians(this.getAngle());
         double centerX = this.getLayoutBounds().getWidth() * Math.cos(rad);
         double centerY = this.getLayoutBounds().getHeight() * -Math.sin(rad);
         centerX += this.getTranslateX() + 320.0;
         centerY += this.getTranslateY() + 240.0;
-        b = new Bullet(centerX, centerY, 2.0, ast, group);
+        b = new Bullet(centerX, centerY, 2.0, ast, group, ag);
         b.setFill(Color.RED);
         return b;
     }

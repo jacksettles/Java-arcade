@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
 import javafx.event.EventHandler;
 import cs1302.arcade.Ship;
+import cs1302.arcade.AsteroidsGame;
 
 /**
  * This class represents an {@code Asteroid} object
@@ -29,9 +30,11 @@ public class Asteroid extends Rectangle {
     private int hitCount = 0;
     private boolean isActive = true;
     private int speed;
+    private AsteroidsGame asteroidsGame;
 
-    public Asteroid(Double length, Ship s) {
+    public Asteroid(Double length, Ship s, AsteroidsGame ag) {
         super(length, length);
+        asteroidsGame = ag;
         sideLength = length;
         if (sideLength == 60.0) {
             speed = 10;
@@ -131,14 +134,15 @@ public class Asteroid extends Rectangle {
             this.setTranslateY(this.getTranslateY() - y2);
             astBounds = this.getBoundsInParent();
             if (this.check() && isActive && !ship.justCrashed()) {
+                ship.setLives(ship.getLives() - 1);
                 ship.flash();
                 ship.resetPos();
-                ship.setLives(ship.getLives() - 1);
-                if (ship.getLives() == 0) {
-                    AsteroidsGame.presentFinalScore();
-                }
-                AsteroidsGame.setLifeText(ship.getLives());
                 ship.setCrashed(true);
+                if (ship.getLives() == 0) {
+                    isActive = false;
+                    asteroidsGame.presentFinalScore();
+                    asteroidsGame.getGroup().getChildren().remove(this);
+                }
             }
             this.flip(astBounds, x2, y2);
         };

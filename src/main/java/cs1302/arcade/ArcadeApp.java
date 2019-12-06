@@ -71,12 +71,6 @@ public class ArcadeApp extends Application {
     @Override
     public void start(Stage stage) {
 
-        /* You are allowed to rewrite this start method, add other methods,
-         * files, classes, etc., as needed. This currently contains some
-         * simple sample code for mouse and keyboard interactions with a node
-         * (rectangle) in a group.
-         */
-
         //Scene scene = new Scene(group, 640, 480);
         Scene scene = menu.getScene();
         menu.getRoot().setOnKeyPressed(createKeyHandler(stage, scene));
