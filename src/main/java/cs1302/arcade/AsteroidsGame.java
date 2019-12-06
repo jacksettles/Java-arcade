@@ -190,6 +190,8 @@ public class AsteroidsGame {
             ast[i].getTimeLine().play();
         }
         group.getChildren().addAll(ast);
+        System.out.println("Should be disabled");
+        ship.setCrashed(true);
     }
 
     public boolean isOutOfAsteroids() {
