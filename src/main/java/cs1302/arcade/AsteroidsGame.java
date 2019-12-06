@@ -41,7 +41,7 @@ public class AsteroidsGame {
     Stage stage;
     Scene asteroidsScene;
     Scene switchBack;
-    Group group;
+    static Group group;
     Ship ship;
     Double[] xCords = {320.0, 312.929, 327.071};
     Double[] yCords = {225.858, 247.071, 247.071};
@@ -52,10 +52,12 @@ public class AsteroidsGame {
     static int score;
     static int level;
     static Label scoreboard;
+    static Label finalScore;
     static String scoreText = "Score: ";
     static String levelText = "\tLevel: ";
     static String lifeText = "\tLife: ";
     static String gameInfo;
+    static String finText = "Final Score: ";
 
     public AsteroidsGame() {
         score = 0;
@@ -83,6 +85,7 @@ public class AsteroidsGame {
         lifeText = "\tLives: " + ship.getLives();
         gameInfo = scoreText + levelText + lifeText;;
         scoreboard  = new Label(gameInfo);
+        finalScore = new Label();
         scoreboard.setTextFill(Color.WHITE);
         scoreboard.setTranslateX(240.0);
         group = new Group();
@@ -93,6 +96,15 @@ public class AsteroidsGame {
         asteroidsScene.setOnKeyPressed(moveShip());
         asteroidsScene.setFill(Color.BLACK);
         this.removeAsteroid();
+    }
+
+    public static void presentFinalScore() {
+        finText = "Final Score: " + score;
+        finalScore.setText(finText);
+        finalScore.setTextFill(Color.WHITE);
+        group.getChildren().add(finalScore);
+        finalScore.setTranslateX(320.0);
+        finalScore.setTranslateY(240.0);
     }
 
     public static void setScoreText() {
