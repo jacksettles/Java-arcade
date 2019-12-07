@@ -36,6 +36,8 @@ import cs1302.arcade.Asteroid;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 public class AsteroidsGame {
     Stage stage;
@@ -190,7 +192,6 @@ public class AsteroidsGame {
             ast[i].getTimeLine().play();
         }
         group.getChildren().addAll(ast);
-        System.out.println("Should be disabled");
         ship.setCrashed(true);
     }
 

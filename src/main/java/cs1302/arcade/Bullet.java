@@ -29,9 +29,18 @@ public class Bullet extends Circle {
     private Group group;
     private AsteroidsGame asteroidsGame;
 
-    public Bullet(double centerX, double centerY, double radius, Asteroid[] ast, Group group, AsteroidsGame ag) {
+    public Bullet(double centerX, double centerY, double radius,
+                  Asteroid[] ast, Group group, AsteroidsGame ag) {
         super(centerX, centerY, radius);
         setAsteroids(ast);
+        bulletBounds = this.getBoundsInParent();
+        this.group = group;
+        asteroidsGame = ag;
+    }
+
+    public Bullet(double centerX, double centerY, double radius,
+                  Group group, AsteroidsGame ag) {
+        super(centerX, centerY, radius);
         bulletBounds = this.getBoundsInParent();
         this.group = group;
         asteroidsGame = ag;
