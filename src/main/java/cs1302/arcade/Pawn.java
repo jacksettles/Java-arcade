@@ -6,6 +6,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import java.util.Arrays;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 public class Pawn extends ChessPiece {
 
@@ -16,12 +18,21 @@ public class Pawn extends ChessPiece {
     Rectangle[] possibleMoves = new Rectangle[4];
     ChessPiece[] pieces = new ChessPiece[3];
     ChessPiece[][] board = new ChessPiece[8][8];
+    Image imgW = new Image("https://publicdomainvectors.org/photos/akiross-Chess-Set-1.png");
+    Image imgB = new Image("https://publicdomainvectors.org/photos/akiross-Chess-Set-7.png");
+    ImagePattern imgPW = new ImagePattern(imgW);
+    ImagePattern imgPB = new ImagePattern(imgB);
 
     public Pawn(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
         super(isWhite, row, col, chessGrid, board);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());
+        if (this.isWhite()) {
+//            this.getRect().setFill(imgPW);
+        } else {
+//            this.getRect().setFill(imgPB);
+        } //if
         for (int i = 0; i < 4; i++) {
             possibleMoves[i] = new Rectangle(40, 40, Color.GRAY);
             possibleMoves[i].setOnMouseClicked(replace(i));
@@ -164,7 +175,6 @@ public class Pawn extends ChessPiece {
             } //bounds
         } //if
         if (!moved) {
-            System.out.println("Made it");
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (this.board[i][j] != null) {

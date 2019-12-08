@@ -23,6 +23,7 @@ import cs1302.arcade.ChessPiece;
 import javafx.scene.shape.Rectangle;
 import cs1302.arcade.Pawn;
 import cs1302.arcade.Rook;
+import javafx.scene.image.Image;
 
 public class ChessBoard {
 
