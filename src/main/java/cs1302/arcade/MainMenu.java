@@ -24,10 +24,12 @@ public class MainMenu {
     Text welcome;
     Text chess;
     Text asteroids;
+    Text controls;
     Text quit;
     String welcText = "Welcome to AverageCodeGuys Arcade!";
     String chessText = "Press '1' to play Chess";
     String astText = "Press '2' to play Asteroids";
+    String controlText = "Press '3' to see game controls";
     String quitText = "Press 'Q' to exit";
     String[] art = {
         "                         <>\n" +
@@ -90,6 +92,7 @@ public class MainMenu {
         welcome = new Text(welcText);
         chess = new Text(chessText);
         asteroids = new Text(astText);
+        controls = new Text(controlText);
         quit = new Text(quitText);
         EventHandler<ActionEvent> handler = event -> {
             updateText();
@@ -100,7 +103,7 @@ public class MainMenu {
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
         artText.setTextAlignment(TextAlignment.CENTER);
-        vbox = new VBox(welcome, chess, asteroids, quit, artText);
+        vbox = new VBox(welcome, chess, asteroids, controls, quit, artText);
         root = new HBox(vbox);
         menuScene = new Scene(root, 640, 480);
     }

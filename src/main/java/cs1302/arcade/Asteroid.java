@@ -20,7 +20,7 @@ import cs1302.arcade.AsteroidsGame;
 public class Asteroid extends Rectangle {
 
     private boolean init = false;
-    private Image astIm = new Image("http://clipart-library.com/image_gallery/275522.png");
+    private Image astIm = new Image("275522.png");
     private ImagePattern ip = new ImagePattern(astIm);
     private Double rad;
     private Double sideLength;

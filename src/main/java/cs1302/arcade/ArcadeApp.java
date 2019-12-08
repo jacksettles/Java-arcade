@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import cs1302.arcade.MainMenu;
 import cs1302.arcade.Asteroid;
+import cs1302.arcade.Controls;
 
 /**
  * Application subclass for {@code ArcadeApp}.
@@ -24,13 +25,14 @@ import cs1302.arcade.Asteroid;
  */
 
 public class ArcadeApp extends Application {
-    Group group = new Group();           // main container
-    Random rng = new Random();           // random number generator
-    Rectangle r = new Rectangle(20, 20); // some rectangle
-    ChessBoard chess = new ChessBoard();
+//    Group group = new Group();           // main container
+//    Random rng = new Random();           // random number generator
+//    Rectangle r = new Rectangle(20, 20); // some rectangle
+    ChessBoard chess;// = new ChessBoard();
     AsteroidsGame asteroids;
     Asteroid[] gameAsteroids;
     MainMenu menu = new MainMenu();
+    Controls controls;
 
     /**
      * Return a key event handler that moves to the rectangle to the left
@@ -56,6 +58,11 @@ public class ArcadeApp extends Application {
                 asteroids.getSwitch(stage, scene);
                 stage.setScene(asteroids.getScene());
                 startAsteroids();
+                break;
+            case DIGIT3:
+                controls = new Controls();
+                controls.getSwitch(stage, scene);
+                stage.setScene(controls.getScene());
                 break;
             } // switch
         };

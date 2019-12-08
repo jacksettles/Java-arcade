@@ -24,10 +24,11 @@ public class Bullet extends Circle {
     private Bounds bulletBounds;
     private Asteroid[] targets;
     private boolean alreadyHit = false;
-    private String explodeLink = "https://media.istockphoto.com/illustrations/explosion"
-        + "-fire-isolated-on-black-background-detonation-bomb-as-game-illustration-"
-        + "id637859556?k=6&m=637859556&s=612x612&w=0&h=XYjy3d7YSrMpRgZFUte7DvL2yJkM"
-        + "ssE3CGcgIGZB1lA=";
+    private String explodeLink = "explosion-fire-isolated-on-black-background-detonation-bomb-as-game-illustration-id637859556?k=6";
+//    private String explodeLink = "https://media.istockphoto.com/illustrations/explosion"
+//        + "-fire-isolated-on-black-background-detonation-bomb-as-game-illustration-"
+//        + "id637859556?k=6&m=637859556&s=612x612&w=0&h=XYjy3d7YSrMpRgZFUte7DvL2yJkM"
+//        + "ssE3CGcgIGZB1lA=";
     private Image explosion = new Image(explodeLink);
     private ImagePattern explode = new ImagePattern(explosion);
     private Group group;
@@ -51,14 +52,6 @@ public class Bullet extends Circle {
         this.group = group;
         asteroidsGame = ag;
     }
-
-    /* public Bullet(double centerX, double centerY, double radius,
-                  Group group, AsteroidsGame ag) {
-        super(centerX, centerY, radius);
-        bulletBounds = this.getBoundsInParent();
-        this.group = group;
-        asteroidsGame = ag;
-    }*/
 
     /**
      * This method sets the Asteroid array
