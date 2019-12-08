@@ -15,6 +15,10 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.Group;
 import cs1302.arcade.AsteroidsGame;
 
+/**
+ * This class represents a {@code Bullet} object,
+ * an extension of Circle.
+ */
 public class Bullet extends Circle {
 
     private Bounds bulletBounds;
@@ -29,6 +33,16 @@ public class Bullet extends Circle {
     private Group group;
     private AsteroidsGame asteroidsGame;
 
+    /**
+     * The sole constructor for a bullet object.
+     *
+     *@param centerX the x coordinate of this bullet's center
+     *@param centerY the y coordinate of this bullet's cente
+     *@param radius the radius of this circle
+     *@param ast a reference to the Asteroid array in AsteroidsGame for collision detection
+     *@param group a reference to the Group from the game for adding and removing bullets
+     *@param ag a reference to the AsteroidsGame this bullet is being added to
+     */
     public Bullet(double centerX, double centerY, double radius,
                   Asteroid[] ast, Group group, AsteroidsGame ag) {
         super(centerX, centerY, radius);
@@ -38,18 +52,30 @@ public class Bullet extends Circle {
         asteroidsGame = ag;
     }
 
-    public Bullet(double centerX, double centerY, double radius,
+    /* public Bullet(double centerX, double centerY, double radius,
                   Group group, AsteroidsGame ag) {
         super(centerX, centerY, radius);
         bulletBounds = this.getBoundsInParent();
         this.group = group;
         asteroidsGame = ag;
-    }
+    }*/
 
+    /**
+     * This method sets the Asteroid array
+     * for detecting collisions.
+     *
+     *@param ast an Asteroid array
+     */
     public void setAsteroids(Asteroid[] ast) {
         targets = ast;
     }
 
+    /**
+     * This method checks to see if this bullet object
+     * is on the screen or not.
+     *
+     *@return onScreen a boolean variable
+     */
     public boolean isOnScreen() {
         boolean onScreen;
         if (this.getTranslateX() < 650.0 && this.getTranslateX() > -650.0
@@ -61,6 +87,13 @@ public class Bullet extends Circle {
         return onScreen;
     } // isOnScreen
 
+    /**
+     * This method checks to see if a bullet object
+     * has hit anyof the asteroids in the Asteroid array,
+     *
+     *@param ship a reference to the ship that is shooting.
+     *@return hit a boolan if this bullet has made a hit.
+     */
     public boolean check(Ship ship) {
         boolean hit = false;
         for (Asteroid a : targets) {
@@ -114,6 +147,14 @@ public class Bullet extends Circle {
         return threshold;
     }
 
+    /**
+     * This method updates the AsteroidsGame score based off of
+     * the size of the asteroid that was hit. Large ones are worth
+     * 25 points, medium are 50, and the smallest asteorids are worth 75.
+     *
+     *@param a a reference to the Asteroid object that was hit
+     *@param ship a reference to the ship that is shooting
+     */
     public void updateScore(Asteroid a, Ship ship) {
         Double threshold = this.findThreshold();
         if (a.getSideLength() == 60.0) {
@@ -129,6 +170,12 @@ public class Bullet extends Circle {
         }
     }
 
+    /**
+     * This method makes the bullet fly 10 spaces every 15
+     * milliseconds.
+     *
+     *@param ship a reference to the ship that shoots the bullet
+     */
     public void fly(Ship ship) {
         EventHandler<ActionEvent> moveBullet = e -> {
             if (this.isOnScreen()) {
