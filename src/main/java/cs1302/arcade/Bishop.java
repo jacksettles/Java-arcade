@@ -71,26 +71,84 @@ public class Bishop extends ChessPiece {
         boolean stopLoop = false;
         this.board = this.getBoard();
         int index = 0;
-        for (int row = this.getRow(); row < 8; row++) { //FIX ALL THIS NEED RATIO
-            for (int col = this.getCol(); col < 8; col++) {
-                if (row == col) {
-                    if (!stopLoop) {
-                        if (this.board[row][col] == null) {
-                            chessGrid.add(possibleMoves[index], col, row);
-                            moved = true;
-                            index++;
-                        } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                            chessGrid.add(possibleMoves[index], col, row);
-                            moved = true;
-                            stopLoop = true;
-                            index++;
-                        } //if
-                    } //if
+        int bCol = this.getCol();
+        int bRow = this.getRow();
+        int col = bCol;
+        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col < 7) {
+                col++;
+                if (this.board[row][col] == null) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    index++;
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    stopLoop = true;
+                    index++;
+                } else {
+                    stopLoop = true;
                 } //if
-            } //for
+            } //if
         } //for
         stopLoop = false;
-
+        col = bCol;
+        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col > 0) {
+                col--;
+                if (this.board[row][col] == null) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    index++;
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    stopLoop = true;
+                    index++;
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col > 0) {
+                col--;
+                if (this.board[row][col] == null) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    index++;
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    stopLoop = true;
+                    index++;
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col < 7) {
+                col++;
+                if (this.board[row][col] == null) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    index++;
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    stopLoop = true;
+                    index++;
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
 
         if (!moved) {
             for (int i = 0; i < 8; i++) {
