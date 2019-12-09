@@ -52,3 +52,9 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 2. **TODO:** JS- Scoring and levels for asteroids. RD - Pawn Attack. Other piece movement, should go smoothly now that complications have been worked out with first moving piece.
 
 3. **PROB:** JS- Getting the asteroids to fade off the screen and back on properly. RD - figuring out 2d array was best use for talking between pieces. GridPane Col then Row is a pain with 2d array Row then Col...
+
+## SUN 2019-12-08 @ 1:13AM EST
+
+1. **DONE:** JS- Just finished up Asteroids code. Levels continue on infinitely (theoretically), d each one has more asteroids than the previous. Scoreboard works properly, and the game ends when you run out of lives. Also I added a Controls menu off of the main menu for both games controls descriptions.
+
+2. **PROB:** JS- Getting the scoreboard to update properly. I ended up making a separate timeline object to do this over and over again to check and see if either the score, the level, or the ship's lives had changed. If they did, then the scoreboard would reflect that update.
