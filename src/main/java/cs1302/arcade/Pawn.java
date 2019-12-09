@@ -73,7 +73,7 @@ public class Pawn extends ChessPiece {
             this.board[row][col] = this;
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-                    if (this.board[i][j] != null) {
+                    if (this.board[i][j] != null && this.isWhite() != this.board[i][j].isWhite()) {
                         this.board[i][j].getRect().setDisable(false);
                         this.board[i][j].setBoard(this.board);
                     } //if

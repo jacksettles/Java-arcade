@@ -21,7 +21,7 @@ public class ChessPiece {
     public Rectangle r;
     public Rectangle prevR;
     public GridPane chessGrid;
-    public boolean firstClick = true;
+    public boolean whiteWent = false;
     public int xFrom;
     public int yFrom;
     public int xTo;
@@ -39,6 +39,7 @@ public class ChessPiece {
             r = new Rectangle(70, 70, Color.WHITE);
         } else {
             r = new Rectangle(70, 70, Color.BLACK);
+            r.setDisable(true);
         } //if
     } //ChessPConstruct
 
@@ -86,4 +87,22 @@ public class ChessPiece {
         this.board = board;
     } //setB
 
+    public boolean getWhiteWent() {
+        return whiteWent;
+    } //getWW
+
+    public void setWhiteWent(boolean ww) {
+        this.whiteWent = ww;
+    } //setWW
+
+    public boolean whiteWentCheck() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j].getWhiteWent()) {
+                    return true;
+                } //if
+            } //for
+        } //for
+        return false;
+    } //wwCheck
 } //ChessPiece
