@@ -5,18 +5,29 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 public class Knight extends ChessPiece {
 
     GridPane chessGrid;
     ChessPiece[][] board;
     Rectangle[] possibleMoves = new Rectangle[8];
+    Image imgW = new Image("akiross-Chess-Set-3.png");
+    Image imgB = new Image("akiross-Chess-Set-9.png");
+    ImagePattern imgPW = new ImagePattern(imgW);
+    ImagePattern imgPB = new ImagePattern(imgB);
 
     public Knight(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
         super(isWhite, row, col, chessGrid, board);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());
+        if (this.isWhite()) {
+            this.getRect().setFill(imgPW);
+        } else {
+            this.getRect().setFill(imgPB);
+        } //if
         for (int i = 0; i < 8; i++) {
             possibleMoves[i] = new Rectangle(40, 40, Color.GRAY);
             possibleMoves[i].setOnMouseClicked(replace(i));

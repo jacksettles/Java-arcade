@@ -36,9 +36,9 @@ public class ChessPiece {
         this.col = col;
         this.board = board;
         if (isWhite) {
-            r = new Rectangle(50, 50, Color.WHITE);
+            r = new Rectangle(70, 70, Color.WHITE);
         } else {
-            r = new Rectangle(50, 50, Color.BLACK);
+            r = new Rectangle(70, 70, Color.BLACK);
         } //if
     } //ChessPConstruct
 
