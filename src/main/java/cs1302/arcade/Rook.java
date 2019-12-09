@@ -95,6 +95,9 @@ public class Rook extends ChessPiece {
                     chessGrid.add(possibleMoves[index], bCol, row);
                     moved = true;
                     stopLoop = true;
+                    if (this.board[row][bCol].isKing()) {
+                        this.board[row][bCol].setCheck(true);
+                    } //if
                     index++;
                 } else {
                     stopLoop = true;
@@ -113,6 +116,9 @@ public class Rook extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][bCol].isKing()) {
+                        this.board[row][bCol].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -130,6 +136,9 @@ public class Rook extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[bRow][col].isKing()) {
+                        this.board[bRow][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -147,6 +156,9 @@ public class Rook extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[bRow][col].isKing()) {
+                        this.board[bRow][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if

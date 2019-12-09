@@ -97,6 +97,9 @@ public class Queen extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -116,6 +119,9 @@ public class Queen extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -135,6 +141,9 @@ public class Queen extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -154,6 +163,9 @@ public class Queen extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -173,6 +185,9 @@ public class Queen extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][bCol].isKing()) {
+                        this.board[row][bCol].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -190,6 +205,9 @@ public class Queen extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][bCol].isKing()) {
+                        this.board[row][bCol].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -207,6 +225,9 @@ public class Queen extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[bRow][col2].isKing()) {
+                        this.board[bRow][col2].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -224,6 +245,9 @@ public class Queen extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[bRow][col2].isKing()) {
+                        this.board[bRow][col2].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if

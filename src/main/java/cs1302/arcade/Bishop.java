@@ -97,6 +97,9 @@ public class Bishop extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -116,6 +119,9 @@ public class Bishop extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -135,6 +141,9 @@ public class Bishop extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
@@ -154,13 +163,15 @@ public class Bishop extends ChessPiece {
                     moved = true;
                     stopLoop = true;
                     index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
                 } else {
                     stopLoop = true;
                 } //if
             } //if
         } //for
         stopLoop = false;
-
         if (!moved) {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {

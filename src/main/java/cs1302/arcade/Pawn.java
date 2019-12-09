@@ -85,6 +85,7 @@ public class Pawn extends ChessPiece {
     public void canMove() {
         boolean moved = false;
         boolean noJump = true;
+        boolean kingAttack = false;
         this.board = this.getBoard();
         if (isWhite) {
             if (firstMove) {
@@ -117,7 +118,9 @@ public class Pawn extends ChessPiece {
                         if(!this.board[this.getRow() - 1][this.getCol() - 1].isWhite()) {
                             chessGrid.add(possibleMoves[2], this.getCol() - 1, this.getRow() - 1);
                             moved = true;
-
+                            if (this.board[this.getRow() - 1][this.getCol() - 1].isKing()) {
+                                this.board[this.getRow() - 1][this.getCol() - 1].setCheck(true);
+                            } //if
                         } //check attack
                     } //check null
                 } //bounds
@@ -126,6 +129,9 @@ public class Pawn extends ChessPiece {
                         if (!this.board[this.getRow() - 1][this.getCol() + 1].isWhite()) {
                             chessGrid.add(possibleMoves[3], this.getCol() + 1, this.getRow() - 1);
                             moved = true;
+                            if (this.board[this.getRow() - 1][this.getCol() + 1].isKing()) {
+                                this.board[this.getRow() - 1][this.getCol() + 1].setCheck(true);
+                            } //if
                         } //check attack
                     } //check null
                 } //bounds
@@ -162,6 +168,9 @@ public class Pawn extends ChessPiece {
                         if(this.board[this.getRow() + 1][this.getCol() - 1].isWhite()) {
                             chessGrid.add(possibleMoves[2], this.getCol() - 1, this.getRow() + 1);
                             moved = true;
+                            if (this.board[this.getRow() + 1][this.getCol() - 1].isKing()) {
+                                this.board[this.getRow() + 1][this.getCol() - 1].setCheck(true);
+                            } //if
                         } //check attack
                     } //check null
                 } //bounds
@@ -170,6 +179,9 @@ public class Pawn extends ChessPiece {
                         if(this.board[this.getRow() + 1][this.getCol() + 1].isWhite()) {
                             chessGrid.add(possibleMoves[3], this.getCol() + 1, this.getRow() + 1);
                             moved = true;
+                            if (this.board[this.getRow() + 1][this.getCol() + 1].isKing()) {
+                                this.board[this.getRow() + 1][this.getCol() + 1].setCheck(true);
+                            } //if
                         } //check attack
                     } //check null
                 } //bounds

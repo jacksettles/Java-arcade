@@ -29,6 +29,7 @@ public class ChessPiece {
     public ChessPiece[][] board;
     public boolean isClicked = false;
     public boolean isKing;
+    public boolean isCheck = false;
 
     public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid,
                       ChessPiece[][] board, boolean isKing) {
@@ -89,4 +90,16 @@ public class ChessPiece {
     public void setBoard(ChessPiece[][] board) {
         this.board = board;
     } //setB
+
+    public boolean isKing() {
+        return isKing;
+    } //isKing
+
+    public boolean isCheck() {
+        return isCheck;
+    } //isKing
+
+    public void setCheck(boolean check) {
+        this.isCheck = check;
+    } //setCheck
 } //ChessPiece
