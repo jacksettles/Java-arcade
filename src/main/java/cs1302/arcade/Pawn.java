@@ -18,8 +18,8 @@ public class Pawn extends ChessPiece {
     Rectangle[] possibleMoves = new Rectangle[4];
     ChessPiece[] pieces = new ChessPiece[3];
     ChessPiece[][] board = new ChessPiece[8][8];
-    Image imgW = new Image("https://publicdomainvectors.org/photos/akiross-Chess-Set-1.png");
-    Image imgB = new Image("https://publicdomainvectors.org/photos/akiross-Chess-Set-7.png");
+    Image imgW = new Image("akiross-Chess-Set-1.png");
+    Image imgB = new Image("akiross-Chess-Set-7.png");
     ImagePattern imgPW = new ImagePattern(imgW);
     ImagePattern imgPB = new ImagePattern(imgB);
 
@@ -29,9 +29,9 @@ public class Pawn extends ChessPiece {
         this.board = board;
         this.getRect().setOnMouseClicked(move());
         if (this.isWhite()) {
-//            this.getRect().setFill(imgPW);
+            this.getRect().setFill(imgPW);
         } else {
-//            this.getRect().setFill(imgPB);
+            this.getRect().setFill(imgPB);
         } //if
         for (int i = 0; i < 4; i++) {
             possibleMoves[i] = new Rectangle(40, 40, Color.GRAY);
