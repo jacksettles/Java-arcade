@@ -28,13 +28,16 @@ public class ChessPiece {
     public int yTo;
     public ChessPiece[][] board;
     public boolean isClicked = false;
+    public boolean isKing;
 
-    public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
+    public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid,
+                      ChessPiece[][] board, boolean isKing) {
         this.chessGrid = chessGrid;
         this.isWhite = isWhite;
         this.row = row;
         this.col = col;
         this.board = board;
+        this.isKing = isKing;
         if (isWhite) {
             r = new Rectangle(70, 70, Color.WHITE);
         } else {
@@ -86,23 +89,4 @@ public class ChessPiece {
     public void setBoard(ChessPiece[][] board) {
         this.board = board;
     } //setB
-
-    public boolean getWhiteWent() {
-        return whiteWent;
-    } //getWW
-
-    public void setWhiteWent(boolean ww) {
-        this.whiteWent = ww;
-    } //setWW
-
-    public boolean whiteWentCheck() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (board[i][j].getWhiteWent()) {
-                    return true;
-                } //if
-            } //for
-        } //for
-        return false;
-    } //wwCheck
 } //ChessPiece

@@ -18,8 +18,8 @@ public class Bishop extends ChessPiece {
     ImagePattern imgPW = new ImagePattern(imgW);
     ImagePattern imgPB = new ImagePattern(imgB);
 
-    public Bishop(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
-        super(isWhite, row, col, chessGrid, board);
+    public Bishop(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board, boolean isKing) {
+        super(isWhite, row, col, chessGrid, board, isKing);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());

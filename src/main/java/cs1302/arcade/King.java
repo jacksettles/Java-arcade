@@ -17,9 +17,10 @@ public class King extends ChessPiece {
     Image imgB = new Image("akiross-Chess-Set-12.png");
     ImagePattern imgPW = new ImagePattern(imgW);
     ImagePattern imgPB = new ImagePattern(imgB);
+    boolean isCheck = false;
 
-    public King(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
-        super(isWhite, row, col, chessGrid, board);
+    public King(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board, boolean isKing) {
+        super(isWhite, row, col, chessGrid, board, isKing);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());
@@ -171,6 +172,7 @@ public class King extends ChessPiece {
         } //if
     } //canMove
 
-
-
+    public void setCheck(boolean check) {
+        this.isCheck = check;
+    } //setCheck
 } //King

@@ -19,8 +19,8 @@ public class Rook extends ChessPiece {
     ImagePattern imgPB = new ImagePattern(imgB);
 
 
-    public Rook(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
-        super(isWhite, row, col, chessGrid, board);
+    public Rook(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board, boolean isKing) {
+        super(isWhite, row, col, chessGrid, board, isKing);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());

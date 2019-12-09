@@ -23,8 +23,8 @@ public class Pawn extends ChessPiece {
     ImagePattern imgPW = new ImagePattern(imgW);
     ImagePattern imgPB = new ImagePattern(imgB);
 
-    public Pawn(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board) {
-        super(isWhite, row, col, chessGrid, board);
+    public Pawn(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board, boolean isKing) {
+        super(isWhite, row, col, chessGrid, board, isKing);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());
@@ -117,6 +117,7 @@ public class Pawn extends ChessPiece {
                         if(!this.board[this.getRow() - 1][this.getCol() - 1].isWhite()) {
                             chessGrid.add(possibleMoves[2], this.getCol() - 1, this.getRow() - 1);
                             moved = true;
+
                         } //check attack
                     } //check null
                 } //bounds
