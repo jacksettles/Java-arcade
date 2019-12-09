@@ -35,6 +35,7 @@ public class ChessPiece {
     public Text score;
     public int valScore = 0;
     public int val;
+    public int total = 0;
 
     public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid,
                       ChessPiece[][] board, boolean isKing, Text score, int val) {
@@ -115,12 +116,27 @@ public class ChessPiece {
     } //setPM
 
     public void setScore() {
-        this.score.setText("" + valScore);
+        score.setText("" + valScore);
     } //setScore
 
-    public void setValScore(int val) {
-        valScore += val;
+    public void setValScore(int inVal) {
+        valScore += inVal;
     } //setVS
+
+    public int getVS() {
+        return valScore;
+    } //getVS
+
+    public void total(boolean isWhite) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j] != null && isWhite == board[i][j].isWhite()) {
+                    total += board[i][j].getVS();
+                    System.out.println(total);
+                } //if
+            } //for
+        } //for
+    } //total
 
     public int getVal() {
         return val;
