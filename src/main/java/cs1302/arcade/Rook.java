@@ -7,6 +7,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.geometry.HPos;
+import javafx.scene.text.Text;
 
 public class Rook extends ChessPiece {
 
@@ -18,9 +20,9 @@ public class Rook extends ChessPiece {
     ImagePattern imgPW = new ImagePattern(imgW);
     ImagePattern imgPB = new ImagePattern(imgB);
 
-
-    public Rook(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board, boolean isKing) {
-        super(isWhite, row, col, chessGrid, board, isKing);
+    public Rook(boolean isWhite, int row, int col, GridPane chessGrid,
+                ChessPiece[][] board, boolean isKing, Text score) {
+        super(isWhite, row, col, chessGrid, board, isKing, score, 5);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());
@@ -32,6 +34,7 @@ public class Rook extends ChessPiece {
         for (int i = 0; i < 14; i++) { //14 max possible moves for a Rook
             possibleMoves[i] = new Rectangle(40, 40, Color.GRAY);
             possibleMoves[i].setOnMouseClicked(replace(i));
+            GridPane.setHalignment(possibleMoves[i], HPos.CENTER);
         } //for
     } //Rook
 
@@ -62,6 +65,14 @@ public class Rook extends ChessPiece {
             chessGrid.getChildren().remove(possibleMoves[index]);
             if (this.board[this.row][this.col] != null) {
                 chessGrid.getChildren().remove(board[row][col].getRect());
+//                for (int i = 0; i < 8; i++) {
+                //                  for (int j = 0; j < 8; j++) {
+                //      if (board[i][j] != null && this.isWhite() == board[i][j].isWhite()) {
+                setValScore(board[this.row][this.col].getVal());
+                //      } //if
+                //      } //for
+                // } //for
+                setScore();
             } //if
             this.setRow(row);
             this.setCol(col);

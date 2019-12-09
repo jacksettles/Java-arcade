@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 import java.util.Arrays;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.geometry.HPos;
+import javafx.scene.text.Text;
 
 public class Pawn extends ChessPiece {
 
@@ -23,8 +25,9 @@ public class Pawn extends ChessPiece {
     ImagePattern imgPW = new ImagePattern(imgW);
     ImagePattern imgPB = new ImagePattern(imgB);
 
-    public Pawn(boolean isWhite, int row, int col, GridPane chessGrid, ChessPiece[][] board, boolean isKing) {
-        super(isWhite, row, col, chessGrid, board, isKing);
+    public Pawn(boolean isWhite, int row, int col, GridPane chessGrid,
+                ChessPiece[][] board, boolean isKing, Text score) {
+        super(isWhite, row, col, chessGrid, board, isKing, score, 1);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());
@@ -36,6 +39,7 @@ public class Pawn extends ChessPiece {
         for (int i = 0; i < 4; i++) {
             possibleMoves[i] = new Rectangle(40, 40, Color.GRAY);
             possibleMoves[i].setOnMouseClicked(replace(i));
+            GridPane.setHalignment(possibleMoves[i], HPos.CENTER);
         } //for
     } //Pawn
 
@@ -66,6 +70,14 @@ public class Pawn extends ChessPiece {
             chessGrid.getChildren().remove(possibleMoves[index]);
             if (this.board[this.row][this.col] != null) {
                 chessGrid.getChildren().remove(board[row][col].getRect());
+                //for (int i = 0; i < 8; i++) {
+                //for (int j = 0; j < 8; j++) {
+                //if (board[i][j] != null && this.isWhite() == board[i][j].isWhite()) {
+                setValScore(board[this.row][this.col].getVal());
+                //} //if
+                //} //for
+                //} //for
+                setScore();
             } //if
             this.setRow(row);
             this.setCol(col);
@@ -200,5 +212,9 @@ public class Pawn extends ChessPiece {
             this.setClicked(true);
         } //if
     } //canMove
+
+    public int getVal() {
+        return val;
+    } //getVal
 
 } //Pawn

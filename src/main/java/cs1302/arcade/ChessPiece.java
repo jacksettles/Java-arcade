@@ -12,6 +12,7 @@ import cs1302.arcade.Knight;
 import cs1302.arcade.Bishop;
 import cs1302.arcade.King;
 import cs1302.arcade.Queen;
+import javafx.scene.text.Text;
 
 public class ChessPiece {
 
@@ -30,15 +31,21 @@ public class ChessPiece {
     public boolean isClicked = false;
     public boolean isKing;
     public boolean isCheck = false;
+    public ChessPiece[] possibleMoves;
+    public Text score;
+    public int valScore = 0;
+    public int val;
 
     public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid,
-                      ChessPiece[][] board, boolean isKing) {
+                      ChessPiece[][] board, boolean isKing, Text score, int val) {
         this.chessGrid = chessGrid;
         this.isWhite = isWhite;
         this.row = row;
         this.col = col;
         this.board = board;
         this.isKing = isKing;
+        this.score = score;
+        this.val = val;
         if (isWhite) {
             r = new Rectangle(70, 70, Color.WHITE);
         } else {
@@ -102,4 +109,20 @@ public class ChessPiece {
     public void setCheck(boolean check) {
         this.isCheck = check;
     } //setCheck
+
+    public void setPM(ChessPiece[] pm) {
+        this.possibleMoves = pm;
+    } //setPM
+
+    public void setScore() {
+        this.score.setText("" + valScore);
+    } //setScore
+
+    public void setValScore(int val) {
+        valScore += val;
+    } //setVS
+
+    public int getVal() {
+        return val;
+    } //
 } //ChessPiece
