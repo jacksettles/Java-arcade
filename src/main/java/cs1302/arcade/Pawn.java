@@ -70,9 +70,7 @@ public class Pawn extends ChessPiece {
             chessGrid.getChildren().remove(possibleMoves[index]);
             if (this.board[this.row][this.col] != null) {
                 chessGrid.getChildren().remove(board[row][col].getRect());
-                this.setValScore(board[this.row][this.col].getVal());
-                this.total(isWhite());
-                this.setScore();
+                setScore(board[row][col].getVal());
             } //if
             this.setRow(row);
             this.setCol(col);
@@ -80,8 +78,10 @@ public class Pawn extends ChessPiece {
             this.board[row][col] = this;
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-                    if (this.board[i][j] != null && this.isWhite() != this.board[i][j].isWhite()) {
-                        this.board[i][j].getRect().setDisable(false);
+                    if (this.board[i][j] != null) {
+                        if (this.isWhite() != this.board[i][j].isWhite()) {
+                            this.board[i][j].getRect().setDisable(false);
+                        } //if
                         this.board[i][j].setBoard(this.board);
                     } //if
                 } //for

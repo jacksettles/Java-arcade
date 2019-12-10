@@ -115,28 +115,9 @@ public class ChessPiece {
         this.possibleMoves = pm;
     } //setPM
 
-    public void setScore() {
-        score.setText("" + valScore);
+    public void setScore(int add) {
+        score.setText("" + (Integer.parseInt(score.getText()) + add));
     } //setScore
-
-    public void setValScore(int inVal) {
-        valScore += inVal;
-    } //setVS
-
-    public int getVS() {
-        return valScore;
-    } //getVS
-
-    public void total(boolean isWhite) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (board[i][j] != null && isWhite == board[i][j].isWhite()) {
-                    total += board[i][j].getVS();
-                    System.out.println(total);
-                } //if
-            } //for
-        } //for
-    } //total
 
     public int getVal() {
         return val;

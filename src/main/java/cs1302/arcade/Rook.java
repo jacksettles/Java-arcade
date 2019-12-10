@@ -65,14 +65,7 @@ public class Rook extends ChessPiece {
             chessGrid.getChildren().remove(possibleMoves[index]);
             if (this.board[this.row][this.col] != null) {
                 chessGrid.getChildren().remove(board[row][col].getRect());
-//                for (int i = 0; i < 8; i++) {
-                //                  for (int j = 0; j < 8; j++) {
-                //      if (board[i][j] != null && this.isWhite() == board[i][j].isWhite()) {
-                setValScore(board[this.row][this.col].getVal());
-                //      } //if
-                //      } //for
-                // } //for
-                setScore();
+                setScore(board[row][col].getVal());
             } //if
             this.setRow(row);
             this.setCol(col);
