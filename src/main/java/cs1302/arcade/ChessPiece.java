@@ -309,4 +309,16 @@ public class ChessPiece {
         return isCheckMate;
     } //checkFCM
 
+    /**
+     *Sets possibleBM to false cause captured.
+     */
+
+    public void captured() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                possibleBM[i][j] = false;
+            } //for
+        } //for
+    } //captured
+
 } //ChessPiece

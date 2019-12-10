@@ -97,6 +97,7 @@ public class Pawn extends ChessPiece {
             if (this.board[this.row][this.col] != null) {
                 chessGrid.getChildren().remove(board[row][col].getRect());
                 setScore(board[row][col].getVal());
+                board[row][col].captured();
             } //if
             this.setRow(row);
             this.setCol(col);

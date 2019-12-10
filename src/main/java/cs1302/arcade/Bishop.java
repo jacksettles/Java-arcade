@@ -10,6 +10,10 @@ import javafx.scene.paint.ImagePattern;
 import javafx.geometry.HPos;
 import javafx.scene.text.Text;
 
+/**
+ *Bishop Child class of ChessPiece.
+ */
+
 public class Bishop extends ChessPiece {
 
     GridPane chessGrid;
@@ -49,6 +53,11 @@ public class Bishop extends ChessPiece {
         } //for
     } //Bishop
 
+    /**
+     * Event handler for piece rectangles.
+     *@return event disables other peices calls canMove().
+     */
+
     private EventHandler<? super MouseEvent> move() {
         return event -> {
             for (int i = 0; i < 8; i++) {
@@ -62,10 +71,16 @@ public class Bishop extends ChessPiece {
         }; //return
     } //move
 
+    /**
+     * Event Handler for moving this peice to new position.
+     *@param index index of the possibleMove chosen.
+     *@return event updates board checks for checkmate/check enables other team peices.
+     */
+
     private EventHandler<? super MouseEvent> replace(int index) {
         return event -> {
-            for(int i = 0; i < 13; i++) {
-                if(i != index) {
+            for (int i = 0; i < 13; i++) {
+                if (i != index) {
                     chessGrid.getChildren().remove(possibleMoves[i]);
                 } //if
             } //for
@@ -77,6 +92,7 @@ public class Bishop extends ChessPiece {
             if (this.board[this.row][this.col] != null) {
                 chessGrid.getChildren().remove(board[row][col].getRect());
                 setScore(board[row][col].getVal());
+                this.board[this.row][this.col].captured();
             } //if
             this.setRow(row);
             this.setCol(col);
@@ -95,9 +111,12 @@ public class Bishop extends ChessPiece {
         }; //return
     } //move
 
+    /**
+     * Checks if piece can move and updates grid if can.
+     */
+
     public void canMove() {
-        boolean moved = false;
-        boolean stopLoop = false;
+        boolean moved, stopLoop  = false;
         this.board = this.getBoard();
         int index = 0;
         int bCol = this.getCol();
@@ -145,51 +164,16 @@ public class Bishop extends ChessPiece {
                 } //if
             } //if
         } //for
-        stopLoop = false;
-        col = bCol;
-        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
-            if (!stopLoop && bRow != row && col > 0) {
-                col--;
-                if (this.board[row][col] == null) {
-                    chessGrid.add(possibleMoves[index], col, row);
-                    moved = true;
-                    index++;
-                } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                    chessGrid.add(possibleMoves[index], col, row);
-                    moved = true;
-                    stopLoop = true;
-                    index++;
-                    if (this.board[row][col].isKing()) {
-                        this.board[row][col].setCheck(true);
-                    } //if
-                } else {
-                    stopLoop = true;
-                } //if
-            } //if
-        } //for
-        stopLoop = false;
-        col = bCol;
-        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
-            if (!stopLoop && bRow != row && col < 7) {
-                col++;
-                if (this.board[row][col] == null) {
-                    chessGrid.add(possibleMoves[index], col, row);
-                    moved = true;
-                    index++;
-                } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                    chessGrid.add(possibleMoves[index], col, row);
-                    moved = true;
-                    stopLoop = true;
-                    index++;
-                    if (this.board[row][col].isKing()) {
-                        this.board[row][col].setCheck(true);
-                    } //if
-                } else {
-                    stopLoop = true;
-                } //if
-            } //if
-        } //for
-        stopLoop = false;
+        moved = canMove2(index);
+        checkMoved(moved);
+    } //canMove
+
+    /**
+     * Enables all pieces if not moved.
+     *@param moved true if moved.
+     */
+
+    public void checkMoved(boolean moved) {
         if (!moved) {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
@@ -199,12 +183,16 @@ public class Bishop extends ChessPiece {
                     } //if
                 } //for
             } //for
-        } else {
-            this.setClicked(true);
         } //if
-    } //canMove
+    } //if
 
-    public void setPBM() {
+    /**
+     *Finished up work of Can move.
+     *@param index continues the index of possible moves.
+     *@return moved true if moved.
+     */
+
+    public boolean canMove2(int index) {
         boolean moved = false;
         boolean stopLoop = false;
         this.board = this.getBoard();
@@ -212,6 +200,61 @@ public class Bishop extends ChessPiece {
         int bRow = this.getRow();
         int col = bCol;
         for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col > 0) {
+                col--;
+                if (this.board[row][col] == null) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    index++;
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    stopLoop = true;
+                    index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col < 7) {
+                col++;
+                if (this.board[row][col] == null) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    index++;
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    chessGrid.add(possibleMoves[index], col, row);
+                    moved = true;
+                    stopLoop = true;
+                    index++;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        return moved;
+    } //canMove2
+
+    /**
+     * Sets the future possible moves of piece.
+     */
+
+    public void setPBM() {
+        boolean stopLoop = false;
+        this.board = this.getBoard();
+        int bCol = this.getCol();
+        int bRow = this.getRow();
+        int col = bCol;
+        for (int row = bRow; row < 8; row++) { //Bottom right diagnol
             if (!stopLoop && bRow != row && col < 7) {
                 col++;
                 if (this.board[row][col] == null) {
@@ -229,7 +272,7 @@ public class Bishop extends ChessPiece {
         } //for
         stopLoop = false;
         col = bCol;
-        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
+        for (int row = bRow; row >= 0; row--) { //Upper left Diagnol
             if (!stopLoop && bRow != row && col > 0) {
                 col--;
                 if (this.board[row][col] == null) {
@@ -245,43 +288,54 @@ public class Bishop extends ChessPiece {
                 } //if
             } //if
         } //for
-        stopLoop = false;
-        col = bCol;
-        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
-            if (!stopLoop && bRow != row && col > 0) {
-                col--;
-                if (this.board[row][col] == null) {
-                    this.setPBM(row, col, true);
-                } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                    stopLoop = true;
-                    this.setPBM(row, col, true);
-                    if (this.board[row][col].isKing()) {
-                        this.board[row][col].setCheck(true);
-                    } //if
-                } else {
-                    stopLoop = true;
-                } //if
-            } //if
-        } //for
-        stopLoop = false;
-        col = bCol;
-        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
-            if (!stopLoop && bRow != row && col < 7) {
-                col++;
-                if (this.board[row][col] == null) {
-                    this.setPBM(row, col, true);
-                } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                    stopLoop = true;
-                    this.setPBM(row, col, true);
-                    if (this.board[row][col].isKing()) {
-                        this.board[row][col].setCheck(true);
-                    } //if
-                } else {
-                    stopLoop = true;
-                } //if
-            } //if
-        } //for
-        stopLoop = false;
+        setPBM2();
     } //setPBM
+
+    /**
+     *Finishes setPBM.
+     */
+
+    public void setPBM2() {
+        boolean stopLoop = false;
+        this.board = this.getBoard();
+        int bCol = this.getCol();
+        int bRow = this.getRow();
+        int col = bCol;
+        for (int row = bRow; row < 8; row++) { //Bottom left Diagnal
+            if (!stopLoop && bRow != row && col > 0) {
+                col--;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    stopLoop = true;
+                    this.setPBM(row, col, true);
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row >= 0; row--) { //Upper right diagnal
+            if (!stopLoop && bRow != row && col < 7) {
+                col++;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    stopLoop = true;
+                    this.setPBM(row, col, true);
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+    } //setPBM2
 
 } //Bishop
