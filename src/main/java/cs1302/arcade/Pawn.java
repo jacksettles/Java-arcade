@@ -86,6 +86,8 @@ public class Pawn extends ChessPiece {
                     } //if
                 } //for
             } //for
+            this.setPBM();
+            checkForCheck();
         }; //return
     } //move
 
@@ -207,6 +209,58 @@ public class Pawn extends ChessPiece {
             this.setClicked(true);
         } //if
     } //canMove
+
+    public void setPBM() {
+        this.board = this.getBoard();
+        if (isWhite) {
+            if ((this.getRow() - 1) >= 0) {
+                if (this.getCol() - 1 >= 0) {
+                    if (this.board[this.getRow() - 1][this.getCol() - 1] != null) {
+                        if(!this.board[this.getRow() - 1][this.getCol() - 1].isWhite()) {
+                            this.setPBM(this.getRow() - 1, this.getCol() - 1, true);
+                            if (this.board[this.getRow() - 1][this.getCol() - 1].isKing()) {
+                                this.board[this.getRow() - 1][this.getCol() - 1].setCheck(true);
+                            } //if
+                        } //check attack
+                    } //check null
+                } //bounds
+                if (this.getCol() + 1 <= 7) {
+                    if (this.board[this.getRow() - 1][this.getCol() + 1] != null) {
+                        if (!this.board[this.getRow() - 1][this.getCol() + 1].isWhite()) {
+                            this.setPBM(this.getRow() - 1, this.getCol() + 1, true);
+                            if (this.board[this.getRow() - 1][this.getCol() + 1].isKing()) {
+                                this.board[this.getRow() - 1][this.getCol() + 1].setCheck(true);
+                            } //if
+                        } //check attack
+                    } //check null
+                } //bounds
+            } //bounds
+            this.setClicked(true);
+        } else { //isBlack
+            if ((this.getRow() + 1) < 8) {
+                if (this.getCol() - 1 >= 0) {
+                    if(this.board[this.getRow() + 1][this.getCol() - 1] != null) {
+                        if(this.board[this.getRow() + 1][this.getCol() - 1].isWhite()) {
+                            this.setPBM(this.getRow() + 1, this.getCol() - 1, true);
+                            if (this.board[this.getRow() + 1][this.getCol() - 1].isKing()) {
+                                this.board[this.getRow() + 1][this.getCol() - 1].setCheck(true);
+                            } //if
+                        } //check attack
+                    } //check null
+                } //bounds
+                if (this.getCol() + 1 < 8) {
+                    if(this.board[this.getRow() + 1][this.getCol() + 1] != null) {
+                        if(this.board[this.getRow() + 1][this.getCol() + 1].isWhite()) {
+                            this.setPBM(this.getRow() + 1, this.getCol() + 1, true);
+                            if (this.board[this.getRow() + 1][this.getCol() + 1].isKing()) {
+                                this.board[this.getRow() + 1][this.getCol() + 1].setCheck(true);
+                            } //if
+                        } //check attack
+                    } //check null
+                } //bounds
+            } //bounds
+        } //if
+    } //setPBM
 
     public int getVal() {
         return val;

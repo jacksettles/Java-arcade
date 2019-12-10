@@ -36,6 +36,7 @@ public class ChessPiece {
     public int valScore = 0;
     public int val;
     public int total = 0;
+    public boolean[][] possibleBM = new boolean[8][8]; //board moves
 
     public ChessPiece(boolean isWhite, int row, int col, GridPane chessGrid,
                       ChessPiece[][] board, boolean isKing, Text score, int val) {
@@ -53,6 +54,11 @@ public class ChessPiece {
             r = new Rectangle(70, 70, Color.BLACK);
             r.setDisable(true);
         } //if
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                possibleBM[i][j] = false;
+            } //for
+        } //for
     } //ChessPConstruct
 
     public Rectangle getRect() {
@@ -121,5 +127,54 @@ public class ChessPiece {
 
     public int getVal() {
         return val;
-    } //
+    } //getVal
+
+    public void setPBM(int row, int col, boolean possible) {
+        possibleBM[row][col] = possible;
+    } //setPBM
+
+    public boolean getPBM(int row, int col) {
+        return possibleBM[row][col];
+    } //getPBM
+
+    public void checkForCheck() {
+        boolean checkMate = false;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j] != null && board[i][j].isKing()) {
+                    if (board[i][j].isCheck()) {
+                        System.out.println("Check!");
+                        checkMate = checkForCheckMate(board[i][j]);
+                    } //if
+                } //if
+            } //for
+        } //for
+        if (checkMate) {
+            System.out.println("CheckMate!");
+        } //if
+    } //checkCheck
+
+    public boolean checkForCheckMate(ChessPiece inCheck) {
+        boolean isCheckMate = true;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j] != null && board[i][j].isWhite() != inCheck.isCheck()) {
+                    if (inCheck.getPBM(i, j)) {
+                        if (board[i][j].getPBM(i, j)) {
+                            inCheck.setPBM(i, j, false);
+                        } //if
+                    } //if
+                } //if
+            } //for
+        } //for
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (inCheck.getPBM(i, j)) {
+                    isCheckMate = false;
+                } //if
+            } //for
+        } //for
+        return isCheckMate;
+    } //checkFCM
+
 } //ChessPiece

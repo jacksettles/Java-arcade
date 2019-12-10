@@ -79,6 +79,8 @@ public class Bishop extends ChessPiece {
                     } //if
                 } //for
             } //for
+            setPBM();
+            checkForCheck();
         }; //return
     } //move
 
@@ -191,5 +193,84 @@ public class Bishop extends ChessPiece {
         } //if
     } //canMove
 
+    public void setPBM() {
+        boolean moved = false;
+        boolean stopLoop = false;
+        this.board = this.getBoard();
+        int bCol = this.getCol();
+        int bRow = this.getRow();
+        int col = bCol;
+        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col < 7) {
+                col++;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    stopLoop = true;
+                    this.setPBM(row, col, true);
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col > 0) {
+                col--;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    stopLoop = true;
+                    this.setPBM(row, col, true);
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col > 0) {
+                col--;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    stopLoop = true;
+                    this.setPBM(row, col, true);
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col < 7) {
+                col++;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    stopLoop = true;
+                    this.setPBM(row, col, true);
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+    } //setPBM
 
 } //Bishop

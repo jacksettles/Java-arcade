@@ -79,6 +79,8 @@ public class Knight extends ChessPiece {
                     } //if
                 } //for
             } //for
+            setPBM();
+            checkForCheck();
         }; //return
     } //move
 
@@ -208,5 +210,99 @@ public class Knight extends ChessPiece {
         } //if
     } //canMove
 
+    public void setPBM() {
+        this.board = this.getBoard();
+        if (this.getRow() + 2 < 8) {
+            if (this.getCol() + 1 < 8) {
+                if (this.board[this.getRow() + 2][this.getCol() + 1] == null) {
+                    this.setPBM(this.getRow() + 2, this.getCol() + 1, true);
+                } else if (this.board[this.getRow() + 2][this.getCol() + 1].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() + 2, this.getCol() + 1, true);
+                    if (this.board[this.getRow() + 2][this.getCol() + 1].isKing()) {
+                        this.board[this.getRow() + 2][this.getCol() + 1].setCheck(true);
+                    } //if
+                } //if
+            } //if
+            if (this.getCol() - 1 >= 0) {
+                if (this.board[this.getRow() + 2][this.getCol() - 1] == null) {
+                    this.setPBM(this.getRow() + 2, this.getCol() - 1, true);
+                } else if (this.board[this.getRow() + 2][this.getCol() - 1].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() + 2, this.getCol() - 1, true);
+                    if (this.board[this.getRow() + 2][this.getCol() - 1].isKing()) {
+                        this.board[this.getRow() + 2][this.getCol() - 1].setCheck(true);
+                    } //if
+                } //if
+            } //if
+        } //bounds
+
+        if (this.getRow() - 2 >= 0) {
+            if (this.getCol() + 1 < 8) {
+                if (this.board[this.getRow() - 2][this.getCol() + 1] == null) {
+                    this.setPBM(this.getRow() - 2, this.getCol() + 1, true);
+                } else if (this.board[this.getRow() - 2][this.getCol() + 1].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() - 2, this.getCol() + 1, true);
+                    if (this.board[this.getRow() - 2][this.getCol() + 1].isKing()) {
+                        this.board[this.getRow() - 2][this.getCol() + 1].setCheck(true);
+                    } //if
+                } //if
+            } //if
+            if (this.getCol() - 1 >= 0) {
+                if (this.board[this.getRow() - 2][this.getCol() - 1] == null) {
+                    this.setPBM(this.getRow() - 2, this.getCol() - 1, true);
+                } else if (this.board[this.getRow() - 2][this.getCol() - 1].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() - 2, this.getCol() - 1, true);
+                    if (this.board[this.getRow() - 2][this.getCol() - 1].isKing()) {
+                        this.board[this.getRow() - 2][this.getCol() - 1].setCheck(true);
+                    } //if
+                } //if
+            } //if
+        } //bounds
+
+        if (this.getCol() + 2 < 8) {
+            if (this.getRow() + 1 < 8) {
+                if (this.board[this.getRow() + 1][this.getCol() + 2] == null) {
+                    this.setPBM(this.getRow() + 1, this.getCol() + 2, true);
+                } else if (this.board[this.getRow() + 1][this.getCol() + 2].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() + 1, this.getCol() + 2, true);
+                    if (this.board[this.getRow() + 1][this.getCol() + 2].isKing()) {
+                        this.board[this.getRow() + 1][this.getCol() + 2].setCheck(true);
+                    } //if
+                } //if
+            } //if
+            if (this.getRow() - 1 >= 0) {
+                if (this.board[this.getRow() - 1][this.getCol() + 2] == null) {
+                    this.setPBM(this.getRow() - 1, this.getCol() + 2, true);
+                } else if (this.board[this.getRow() - 1][this.getCol() + 2].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() - 1, this.getCol() + 2, true);
+                    if (this.board[this.getRow() - 1][this.getCol() + 2].isKing()) {
+                        this.board[this.getRow() - 1][this.getCol() + 2].setCheck(true);
+                    } //if
+                } //if
+            } //if
+        } //bounds
+
+        if (this.getCol() - 2 >= 0) {
+            if (this.getRow() + 1 < 8) {
+                if (this.board[this.getRow() + 1][this.getCol() - 2] == null) {
+                    this.setPBM(this.getRow() + 1, this.getCol() - 2, true);
+                } else if (this.board[this.getRow() + 1][this.getCol() - 2].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() + 1, this.getCol() - 2, true);
+                    if (this.board[this.getRow() + 1][this.getCol() - 2].isKing()) {
+                        this.board[this.getRow() + 1][this.getCol() - 2].setCheck(true);
+                    } //if
+                } //if
+            } //if
+            if (this.getRow() - 1 >= 0) {
+                if (this.board[this.getRow() - 1][this.getCol() - 2] == null) {
+                    this.setPBM(this.getRow() - 1, this.getCol() - 2, true);
+                } else if (this.board[this.getRow() - 1][this.getCol() - 2].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() - 1, this.getCol() - 2, true);
+                    if (this.board[this.getRow() - 1][this.getCol() - 2].isKing()) {
+                        this.board[this.getRow() - 1][this.getCol() - 2].setCheck(true);
+                    } //if
+                } //if
+            } //if
+        } //bounds
+    } //setPBM
 
 } //Knight

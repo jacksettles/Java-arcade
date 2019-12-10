@@ -79,6 +79,8 @@ public class King extends ChessPiece {
                     } //if
                 } //for
             } //for
+            setPBM();
+            checkForCheck();
         }; //return
     } //move
 
@@ -91,6 +93,7 @@ public class King extends ChessPiece {
             if (this.board[this.getRow() + 1][this.getCol()] == null) {
                 chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
                 moved = true;
+                this.setPBM(this.getRow() + 1, this.getCol(), true);
             } else if (this.board[this.getRow() + 1][this.getCol()].isWhite() != this.isWhite()) {
                 chessGrid.add(possibleMoves[0], this.getCol(), this.getRow() + 1);
                 moved = true;
@@ -175,5 +178,69 @@ public class King extends ChessPiece {
             this.setClicked(true);
         } //if
     } //canMove
+
+    public void setPBM() {
+        boolean stopLoop = false;
+        this.board = this.getBoard();
+        int index = 0;
+        if (this.getRow() + 1 < 8) {
+            if (this.board[this.getRow() + 1][this.getCol()] == null) {
+                this.setPBM(this.getRow() + 1, this.getCol(), true);
+            } else if (this.board[this.getRow() + 1][this.getCol()].isWhite() != this.isWhite()) {
+                this.setPBM(this.getRow() + 1, this.getCol(), true);
+            } //if
+            if (this.getCol() + 1 < 8) {
+                if (this.board[this.getRow() + 1][this.getCol() + 1] == null) {
+                    this.setPBM(this.getRow() + 1, this.getCol() + 1, true);
+                } else if (this.board[this.getRow() + 1][this.getCol() + 1].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() + 1, this.getCol(), true);
+                } //if
+            } //if
+            if (this.getCol() - 1 >= 0) {
+                if (this.board[this.getRow() + 1][this.getCol() - 1] == null) {
+                    this.setPBM(this.getRow() + 1, this.getCol() - 1, true);
+                } else if (this.board[this.getRow() + 1][this.getCol() - 1].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() + 1, this.getCol() - 1, true);
+                } //if
+            } //if
+        } //bounds
+
+        if (this.getRow() - 1 >= 0) {
+            if (this.board[this.getRow() - 1][this.getCol()] == null) {
+                this.setPBM(this.getRow() - 1, this.getCol(), true);
+            } else if (this.board[this.getRow() - 1][this.getCol()].isWhite() != this.isWhite()) {
+                this.setPBM(this.getRow() - 1, this.getCol(), true);
+            } //if
+            if (this.getCol() + 1 < 8) {
+                if (this.board[this.getRow() - 1][this.getCol() + 1] == null) {
+                    this.setPBM(this.getRow() - 1, this.getCol() + 1, true);
+                } else if (this.board[this.getRow() - 1][this.getCol() + 1].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() - 1, this.getCol() + 1, true);
+                } //if
+            } //if
+            if (this.getCol() - 1 >= 0) {
+                if (this.board[this.getRow() - 1][this.getCol() - 1] == null) {
+                    this.setPBM(this.getRow() - 1, this.getCol() - 1, true);
+                } else if (this.board[this.getRow() - 1][this.getCol() - 1].isWhite() != this.isWhite()) {
+                    this.setPBM(this.getRow() - 1, this.getCol() - 1, true);
+                } //if
+            } //if
+        } //bounds
+
+        if (this.getCol() + 1 < 8) {
+            if (this.board[this.getRow()][this.getCol() + 1] == null) {
+                this.setPBM(this.getRow(), this.getCol() + 1, true);
+            } else if (this.board[this.getRow()][this.getCol() + 1].isWhite() != this.isWhite()) {
+                this.setPBM(this.getRow(), this.getCol() + 1, true);
+            } //if
+        } //if
+        if (this.getCol() - 1 >= 0) {
+            if (this.board[this.getRow()][this.getCol() - 1] == null) {
+                this.setPBM(this.getRow(), this.getCol() - 1, true);
+            } else if (this.board[this.getRow()][this.getCol() - 1].isWhite() != this.isWhite()) {
+                this.setPBM(this.getRow(), this.getCol() - 1, true);
+            } //if
+        } //if
+    } //setPBM
 
 } //King
