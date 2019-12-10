@@ -26,6 +26,10 @@ import cs1302.arcade.Rook;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 
+/**
+ *Sets up chess board scene with chessPiece objs.
+ */
+
 public class ChessBoard {
 
     Stage stage;
@@ -45,6 +49,11 @@ public class ChessBoard {
     int wScore = 0;
     int bScore = 0;
 
+    /**
+     *Chess Board constructor.
+     *Sets up gridPane and initializes pieces.
+     */
+
     public ChessBoard() {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
@@ -60,8 +69,8 @@ public class ChessBoard {
         // Wouldn't work for the longest time with just code above
         // Had to add constraints to see Color.
         for (int i = 0; i < boardSize; i++) {
-            chessGrid.getColumnConstraints().add(new ColumnConstraints(480/8, 560/8, 720/8));
-            chessGrid.getRowConstraints().add(new RowConstraints(480/8, 560/8, 720/8));
+            chessGrid.getColumnConstraints().add(new ColumnConstraints(480 / 8, 560 / 8, 720 / 8));
+            chessGrid.getRowConstraints().add(new RowConstraints(480 / 8, 560 / 8, 720 / 8));
         } //for
         footing.getChildren().addAll(new Text("White Score: "), whiteScore);
         heading.getChildren().addAll(new Text("Black Score: "), blackScore);
@@ -70,33 +79,50 @@ public class ChessBoard {
         frame.getChildren().addAll(heading, chessGrid, footing);
         chessScene = new Scene(frame, 560, 590);
         chessScene.setOnKeyPressed(e -> { //Able to go back and forth from main to chess
-                if (e.getCode() == KeyCode.Q) {
-                    stage.setScene(switchBack);
-                } //if
-            });
+            if (e.getCode() == KeyCode.Q) {
+                stage.setScene(switchBack);
+            } //if
+        });
     } //ChessBoard Construct
+
+    /**
+     *Fetches the chessScene.
+     *@return the chess Scene.
+     */
 
     public Scene getScene() {
         return chessScene;
     } //getScene
+
+    /**
+     *Fetches menu scene to swap out and gets stage for sending in chess scene.
+     *@param stage for swapping back.
+     *@param scene for swapping back.
+     */
 
     public void getSwitch(Stage stage, Scene scene) {
         this.stage = stage;
         switchBack = scene;
     } //getSwitch
 
+    /**
+     * Adds all the pieces.
+     * 8 pawns each.
+     * Rook, Knight, Bishop, Queen, King for each side.
+     */
+
     public void addPieces() {
-        for (int i = 0; i < boardSize; i++) {
+        for (int i = 0; i < boardSize; i++) { //Black Pawns
             pawnsBlack[i] = new Pawn(false, 1, i, chessGrid, board, false, blackScore);
             chessGrid.add(pawnsBlack[i].getRect(), pawnsBlack[i].getCol(), pawnsBlack[i].getRow());
             board[1][i] = pawnsBlack[i];
         } //for
-        for (int i = 0; i < boardSize; i++) {
+        for (int i = 0; i < boardSize; i++) { //White Pawns
             pawnsWhite[i] = new Pawn(true, 6, i, chessGrid, board, false, whiteScore);
             chessGrid.add(pawnsWhite[i].getRect(), pawnsWhite[i].getCol(), pawnsWhite[i].getRow());
             board[6][i] = pawnsWhite[i];
         } //for
-        Rook rookLW = new Rook(true, 7, 0, chessGrid, board, false, whiteScore);
+        Rook rookLW = new Rook(true, 7, 0, chessGrid, board, false, whiteScore); //White pieces
         chessGrid.add(rookLW.getRect(), rookLW.getCol(), rookLW.getRow());
         board[7][0] = rookLW;
         Rook rookRW = new Rook(true, 7, 7, chessGrid, board, false, whiteScore);
@@ -120,8 +146,7 @@ public class ChessBoard {
         Queen queenW = new Queen(true, 7, 3, chessGrid, board, false, whiteScore);
         chessGrid.add(queenW.getRect(), queenW.getCol(), queenW.getRow());
         board[7][3] = queenW;
-
-        Rook rookLB = new Rook(false, 0, 0, chessGrid, board, false, blackScore);
+        Rook rookLB = new Rook(false, 0, 0, chessGrid, board, false, blackScore); //Now black peices
         chessGrid.add(rookLB.getRect(), rookLB.getCol(), rookLB.getRow());
         board[0][0] = rookLB;
         Rook rookRB = new Rook(false, 0, 7, chessGrid, board, false, blackScore);
