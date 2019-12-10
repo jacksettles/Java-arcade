@@ -139,18 +139,24 @@ public class ChessPiece {
 
     public void checkForCheck() {
         boolean checkMate = false;
+        String str = "";
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (board[i][j] != null && board[i][j].isKing()) {
                     if (board[i][j].isCheck()) {
-                        System.out.println("Check!");
+                        if (board[i][j].isWhite()) {
+                            str = "White is in";
+                        } else {
+                            str = "Black is in";
+                        } //if
+                        System.out.println(str + " Check!");
                         checkMate = checkForCheckMate(board[i][j]);
                     } //if
                 } //if
             } //for
         } //for
         if (checkMate) {
-            System.out.println("CheckMate!");
+            System.out.println(str + " CheckMate!");
         } //if
     } //checkCheck
 
@@ -171,6 +177,7 @@ public class ChessPiece {
             for (int j = 0; j < 8; j++) {
                 if (inCheck.getPBM(i, j)) {
                     isCheckMate = false;
+                    inCheck.setCheck(false);
                 } //if
             } //for
         } //for

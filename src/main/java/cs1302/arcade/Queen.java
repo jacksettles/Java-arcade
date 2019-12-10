@@ -277,18 +277,89 @@ public class Queen extends ChessPiece {
     } //canMove
 
     public void setPBM() {
-        /**    boolean stopLoop = false;
+        boolean stopLoop = false;
         this.board = this.getBoard();
         int bCol = this.getCol();
         int bRow = this.getRow();
         int col = bCol;
-        for (int row = bRow; row < 8; row++) { //Straight down row
+        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col < 7) {
+                col++;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    this.setPBM(row, col, true);
+                    stopLoop = true;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col > 0) {
+                col--;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    stopLoop = true;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col > 0) {
+                col--;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    stopLoop = true;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+        col = bCol;
+        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
+            if (!stopLoop && bRow != row && col < 7) {
+                col++;
+                if (this.board[row][col] == null) {
+                    this.setPBM(row, col, true);
+                } else if (this.board[row][col].isWhite() != this.isWhite()) {
+                    this.setPBM(row, col, true);
+                    stopLoop = true;
+                    if (this.board[row][col].isKing()) {
+                        this.board[row][col].setCheck(true);
+                    } //if
+                } else {
+                    stopLoop = true;
+                } //if
+            } //if
+        } //for
+        stopLoop = false;
+
+        //Rook moves
+         for (int row = bRow; row < 8; row++) { //Straight down row
             if (!stopLoop && bRow != row) {
                 if (this.board[row][bCol] == null) {
                     this.setPBM(row, bCol, true);
                 } else if (this.board[row][bCol].isWhite() != this.isWhite()) {
-                    stopLoop = true;
                     this.setPBM(row, bCol, true);
+                    stopLoop = true;
                     if (this.board[row][bCol].isKing()) {
                         this.board[row][bCol].setCheck(true);
                     } //if
@@ -303,8 +374,8 @@ public class Queen extends ChessPiece {
                 if (this.board[row][bCol] == null) {
                     this.setPBM(row, bCol, true);
                 } else if (this.board[row][bCol].isWhite() != this.isWhite()) {
-                    stopLoop = true;
                     this.setPBM(row, bCol, true);
+                    stopLoop = true;
                     if (this.board[row][bCol].isKing()) {
                         this.board[row][bCol].setCheck(true);
                     } //if
@@ -314,13 +385,13 @@ public class Queen extends ChessPiece {
             } //if
         } //for
         stopLoop = false;
-        for (int col2 = bCol; col2 < 8; col++) { //Straight down col
+        for (int col2 = bCol; col2 < 8; col2++) { //Straight down col
             if (!stopLoop && bCol != col2) {
                 if (this.board[bRow][col2] == null) {
                     this.setPBM(bRow, col2, true);
                 } else if (this.board[bRow][col2].isWhite() != this.isWhite()) {
-                    stopLoop = true;
                     this.setPBM(bRow, col2, true);
+                    stopLoop = true;
                     if (this.board[bRow][col2].isKing()) {
                         this.board[bRow][col2].setCheck(true);
                     } //if
@@ -330,13 +401,13 @@ public class Queen extends ChessPiece {
             } //if
         } //for
         stopLoop = false;
-        for (int col2 = bCol; col2 >= 0; col--) { //Straight up col
+        for (int col2 = bCol; col2 >= 0; col2--) { //Straight up col
             if (!stopLoop && bCol != col2) {
                 if (this.board[bRow][col2] == null) {
                     this.setPBM(bRow, col2, true);
                 } else if (this.board[bRow][col2].isWhite() != this.isWhite()) {
+                    this.setPBM(bRow, col2, true);
                     stopLoop = true;
-                    this.setPBM(bRow, col, true);
                     if (this.board[bRow][col2].isKing()) {
                         this.board[bRow][col2].setCheck(true);
                     } //if
@@ -345,79 +416,7 @@ public class Queen extends ChessPiece {
                 } //if
             } //if
         } //for
-        col = bCol;
-        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
-            if (!stopLoop && bRow != row && col < 7) {
-                col++;
-                if (this.board[row][col] == null) {
-                    this.setPBM(row, col, true);
-                } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                    stopLoop = true;
-                    this.setPBM(row, col, true);
-                    if (this.board[row][col].isKing()) {
-                        this.board[row][col].setCheck(true);
-                    } //if
-                } else {
-                    stopLoop = true;
-                } //if
-            } //if
-        } //for
         stopLoop = false;
-        col = bCol;
-        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
-            if (!stopLoop && bRow != row && col > 0) {
-                col--;
-                if (this.board[row][col] == null) {
-                    this.setPBM(row, col, true);
-                } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                    stopLoop = true;
-                    this.setPBM(row, col, true);
-                    if (this.board[row][col].isKing()) {
-                        this.board[row][col].setCheck(true);
-                    } //if
-                } else {
-                    stopLoop = true;
-                } //if
-            } //if
-        } //for
-        stopLoop = false;
-        col = bCol;
-        for (int row = bRow; row < 8; row++) { //FIX ALL THIS NEED RATIO
-            if (!stopLoop && bRow != row && col > 0) {
-                col--;
-                if (this.board[row][col] == null) {
-                    this.setPBM(row, col, true);
-                } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                    stopLoop = true;
-                    this.setPBM(row, col, true);
-                    if (this.board[row][col].isKing()) {
-                        this.board[row][col].setCheck(true);
-                    } //if
-                } else {
-                    stopLoop = true;
-                } //if
-            } //if
-        } //for
-        stopLoop = false;
-        col = bCol;
-        for (int row = bRow; row >= 0; row--) { //FIX ALL THIS NEED RATIO
-            if (!stopLoop && bRow != row && col < 7) {
-                col++;
-                if (this.board[row][col] == null) {
-                    this.setPBM(row, col, true);
-                } else if (this.board[row][col].isWhite() != this.isWhite()) {
-                    stopLoop = true;
-                    this.setPBM(row, col, true);
-                    if (this.board[row][col].isKing()) {
-                        this.board[row][col].setCheck(true);
-                    } //if
-                } else {
-                    stopLoop = true;
-                } //if
-            } //if
-        } //for
-        stopLoop = false;
-        **/
     } //setPBM
 
 } //Queen
