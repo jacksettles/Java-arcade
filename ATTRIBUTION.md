@@ -20,3 +20,75 @@ authored by members of your project team.
     * targovcom. "Explosion fire isolated on black background. Detonation bomb as game. stock illustration" January 29, 2017
     *https://media.istockphoto.com/illustrations/explosion-fire-isolated-on-black-background-detonation-bomb-as-game-illustration-id637859556?k=6&m=637859556&s=612x612&w=0&h=XYjy3d7YSrMpRgZFUte7DvL2yJkMssE3CGcgIGZB1lA=
     *iStock Content Standard License Agreement
+
+    ## White Pawn
+    *`src/main/resources/akiross-Chess-Set-1.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-1.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## White Rook
+    *`src/main/resources/akiross-Chess-Set-2.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-2.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## White Knight
+    *`src/main/resources/akiross-Chess-Set-3.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-3.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## White Bishop
+    *`src/main/resources/akiross-Chess-Set-4.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-4.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## White Queen
+    *`src/main/resources/akiross-Chess-Set-5.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-5.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## White King
+    *`src/main/resources/akiross-Chess-Set-6.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-6.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## Black Pawn
+    *`src/main/resources/akiross-Chess-Set-7.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-7.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## Black Rook
+    *`src/main/resources/akiross-Chess-Set-8.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-8.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## Black Knight
+    *`src/main/resources/akiross-Chess-Set-9.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-9.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## Black Bishop
+    *`src/main/resources/akiross-Chess-Set-10.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-10.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## Black Queen
+    *`src/main/resources/akiross-Chess-Set-11.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-11.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+    ## Black King
+    *`src/main/resources/akiross-Chess-Set-12.png`
+    *Author Unknown
+    *https://publicdomainvectors.org/photos/akiross-Chess-Set-12.png
+    *CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
