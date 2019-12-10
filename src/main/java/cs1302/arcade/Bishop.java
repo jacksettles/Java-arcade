@@ -190,7 +190,7 @@ public class Bishop extends ChessPiece {
     /**
      *Finished up work of Can move.
      *@param index continues the index of possible move.
-     *@params moved true if moved.
+     *@param moved2 true if moved.
      *@return moved true if moved.
      */
 

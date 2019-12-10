@@ -11,6 +11,10 @@ import javafx.scene.text.Text;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Control class for scene that holds control intructions.
+ */
+
 public class Controls {
 
     private Stage stage;

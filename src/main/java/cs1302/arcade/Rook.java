@@ -178,6 +178,7 @@ public class Rook extends ChessPiece {
     /**
      *Check is can move up or down.
      *@param index index of possibleMoves.
+     *@param moved2 true if moved.
      *@return moved true if peice can move.
      */
 
