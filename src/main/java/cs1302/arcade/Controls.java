@@ -48,8 +48,9 @@ public class Controls {
             + "\tWhite Starts first. As per chess standard regulations:\n"
             + "\tIf you touch a piece you have to move it.\n"
             + "\tClick a piece to see its possible moves\n"
-            + "\tClick where you want the piece to go\n'"
-            + "\tBeginner friendly so no 'en passant.\n";
+            + "\tClick where you want the piece to go\n"
+            + "Points: Pawn=1 Knight=3 Bishop=3 Rook=5 Queen=9.\n"
+            + "\tBeginner friendly so no 'en passant'/Castling.\n";
 
         backText = "\nPress 'Q' to go back to the main menu.";
         asteroidsControls = new Text(astString);
