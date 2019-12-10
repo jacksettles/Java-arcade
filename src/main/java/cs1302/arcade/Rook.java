@@ -10,6 +10,10 @@ import javafx.scene.paint.ImagePattern;
 import javafx.geometry.HPos;
 import javafx.scene.text.Text;
 
+/**
+ * Rook class, child of ChessPiece.
+ */
+
 public class Rook extends ChessPiece {
 
     GridPane chessGrid;
@@ -33,7 +37,7 @@ public class Rook extends ChessPiece {
 
     public Rook(boolean isWhite, int row, int col, GridPane chessGrid,
                 ChessPiece[][] board, boolean isKing, Text score) {
-        super(isWhite, row, col, chessGrid, board, isKing, score, 5);
+        super (isWhite, row, col, chessGrid, board, isKing, score, 5);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());
@@ -49,6 +53,11 @@ public class Rook extends ChessPiece {
         } //for
     } //Rook
 
+    /**
+     * Event handler for piece rectangles.
+     *@return event disables other peices calls canMove().
+     */
+
     private EventHandler<? super MouseEvent> move() {
         return event -> {
             for (int i = 0; i < 8; i++) {
@@ -62,10 +71,16 @@ public class Rook extends ChessPiece {
         }; //return
     } //move
 
+    /**
+     * Event Handler for moving this peice to new position.
+     *@param index index of the possibleMove chosen.
+     *@return event updates board checks for checkmate/check enables other team peices.
+     */
+
     private EventHandler<? super MouseEvent> replace(int index) {
         return event -> {
-            for(int i = 0; i < 14; i++) {
-                if(i != index) {
+            for (int i = 0; i < 14; i++) {
+                if (i != index) {
                     chessGrid.getChildren().remove(possibleMoves[i]);
                 } //if
             } //for
@@ -94,6 +109,10 @@ public class Rook extends ChessPiece {
             checkForCheck();
         }; //return
     } //move
+
+    /**
+     * Checks if piece can move and updates grid if can.
+     */
 
     public void canMove() {
         boolean moved = false;
@@ -141,7 +160,33 @@ public class Rook extends ChessPiece {
                 } //if
             } //if
         } //for
-        stopLoop = false;
+        moved = canMove2(index);
+        if (!moved) {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (this.board[i][j] != null) {
+                        this.board[i][j].getRect().setDisable(false);
+                        this.board[i][j].setBoard(this.board);
+                    } //if
+                } //for
+            } //for
+        } else {
+            this.setClicked(true);
+        } //if
+    } //canMove
+
+    /**
+     *Check is can move up or down.
+     *@param index index of possibleMoves.
+     *@return moved true if peice can move.
+     */
+
+    public boolean canMove2(int index) {
+        boolean moved = false;
+        boolean stopLoop = false;
+        this.board = this.getBoard();
+        int bCol = this.getCol();
+        int bRow = this.getRow();
         for (int col = bCol; col < 8; col++) { //Straight down col
             if (!stopLoop && bCol != col) {
                 if (this.board[bRow][col] == null) {
@@ -182,20 +227,12 @@ public class Rook extends ChessPiece {
             } //if
         } //for
         stopLoop = false;
+        return moved;
+    } //canMove2
 
-        if (!moved) {
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    if (this.board[i][j] != null) {
-                        this.board[i][j].getRect().setDisable(false);
-                        this.board[i][j].setBoard(this.board);
-                    } //if
-                } //for
-            } //for
-        } else {
-            this.setClicked(true);
-        } //if
-    } //canMove
+    /**
+     * Sets the future possible moves of piece.
+     */
 
     public void setPBM() {
         boolean stopLoop = false;
@@ -233,7 +270,18 @@ public class Rook extends ChessPiece {
                 } //if
             } //if
         } //for
-        stopLoop = false;
+        setPBM2();
+    } //setPBM
+
+    /**
+     * Finishes up work of setPBM().
+     */
+
+    public void setPBM2() {
+        boolean stopLoop = false;
+        this.board = this.getBoard();
+        int bCol = this.getCol();
+        int bRow = this.getRow();
         for (int col = bCol; col < 8; col++) { //Straight down col
             if (!stopLoop && bCol != col) {
                 if (this.board[bRow][col] == null) {
@@ -265,6 +313,6 @@ public class Rook extends ChessPiece {
                 } //if
             } //if
         } //for
-    } //setPBM
+    } //setPBM2
 
 } //Rook
