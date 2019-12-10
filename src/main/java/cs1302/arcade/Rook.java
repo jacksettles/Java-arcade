@@ -160,7 +160,7 @@ public class Rook extends ChessPiece {
                 } //if
             } //if
         } //for
-        moved = canMove2(index);
+        moved = canMove2(index, moved);
         if (!moved) {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
@@ -181,8 +181,8 @@ public class Rook extends ChessPiece {
      *@return moved true if peice can move.
      */
 
-    public boolean canMove2(int index) {
-        boolean moved = false;
+    public boolean canMove2(int index, boolean moved2) {
+        boolean moved = moved2;
         boolean stopLoop = false;
         this.board = this.getBoard();
         int bCol = this.getCol();

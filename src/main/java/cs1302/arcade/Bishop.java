@@ -116,7 +116,8 @@ public class Bishop extends ChessPiece {
      */
 
     public void canMove() {
-        boolean moved, stopLoop  = false;
+        boolean moved = false;
+        boolean stopLoop = false;
         this.board = this.getBoard();
         int index = 0;
         int bCol = this.getCol();
@@ -164,7 +165,7 @@ public class Bishop extends ChessPiece {
                 } //if
             } //if
         } //for
-        moved = canMove2(index);
+        moved = canMove2(index, moved);
         checkMoved(moved);
     } //canMove
 
@@ -188,13 +189,14 @@ public class Bishop extends ChessPiece {
 
     /**
      *Finished up work of Can move.
-     *@param index continues the index of possible moves.
+     *@param index continues the index of possible move.
+     *@params moved true if moved.
      *@return moved true if moved.
      */
 
-    public boolean canMove2(int index) {
-        boolean moved = false;
+    public boolean canMove2(int index, boolean moved2) {
         boolean stopLoop = false;
+        boolean moved = moved2;
         this.board = this.getBoard();
         int bCol = this.getCol();
         int bRow = this.getRow();

@@ -10,6 +10,10 @@ import javafx.scene.paint.ImagePattern;
 import javafx.geometry.HPos;
 import javafx.scene.text.Text;
 
+/**
+ * King class child of ChessPiece.
+ */
+
 public class King extends ChessPiece {
 
     GridPane chessGrid;
@@ -33,7 +37,7 @@ public class King extends ChessPiece {
 
     public King(boolean isWhite, int row, int col, GridPane chessGrid,
                 ChessPiece[][] board, boolean isKing, Text score) {
-        super(isWhite, row, col, chessGrid, board, isKing, score, 0);
+        super (isWhite, row, col, chessGrid, board, isKing, score, 0);
         this.chessGrid = chessGrid;
         this.board = board;
         this.getRect().setOnMouseClicked(move());
@@ -49,6 +53,11 @@ public class King extends ChessPiece {
         } //for
     } //King
 
+    /**
+     * Event handler for piece rectangles.
+     *@return event disables other peices calls canMove().
+     */
+
     private EventHandler<? super MouseEvent> move() {
         return event -> {
             for (int i = 0; i < 8; i++) {
@@ -62,10 +71,16 @@ public class King extends ChessPiece {
         }; //return
     } //move
 
+    /**
+     * Event Handler for moving this peice to new position.
+     *@param index index of the possibleMove chosen.
+     *@return event updates board checks for checkmate/check enables other team peices.
+     */
+
     private EventHandler<? super MouseEvent> replace(int index) {
         return event -> {
-            for(int i = 0; i < 8; i++) {
-                if(i != index) {
+            for (int i = 0; i < 8; i++) {
+                if (i != index) {
                     chessGrid.getChildren().remove(possibleMoves[i]);
                 } //if
             } //for
@@ -95,6 +110,10 @@ public class King extends ChessPiece {
         }; //return
     } //move
 
+    /**
+     * Checks if piece can move and updates grid if can.
+     */
+
     public void canMove() {
         boolean moved = false;
         boolean stopLoop = false;
@@ -113,7 +132,8 @@ public class King extends ChessPiece {
                 if (this.board[this.getRow() + 1][this.getCol() + 1] == null) {
                     chessGrid.add(possibleMoves[1], this.getCol() + 1, this.getRow() + 1);
                     moved = true;
-                } else if (this.board[this.getRow() + 1][this.getCol() + 1].isWhite() != this.isWhite()) {
+                } else if (this.board[this.getRow() + 1]
+                           [this.getCol() + 1].isWhite() != this.isWhite()) {
                     chessGrid.add(possibleMoves[1], this.getCol() + 1, this.getRow() + 1);
                     moved = true;
                 } //if
@@ -122,60 +142,14 @@ public class King extends ChessPiece {
                 if (this.board[this.getRow() + 1][this.getCol() - 1] == null) {
                     chessGrid.add(possibleMoves[2], this.getCol() - 1, this.getRow() + 1);
                     moved = true;
-                } else if (this.board[this.getRow() + 1][this.getCol() - 1].isWhite() != this.isWhite()) {
+                } else if (this.board[this.getRow() + 1]
+                           [this.getCol() - 1].isWhite() != this.isWhite()) {
                     chessGrid.add(possibleMoves[2], this.getCol() - 1, this.getRow() + 1);
                     moved = true;
                 } //if
             } //if
         } //bounds
-
-        if (this.getRow() - 1 >= 0) {
-            if (this.board[this.getRow() - 1][this.getCol()] == null) {
-                chessGrid.add(possibleMoves[3], this.getCol(), this.getRow() - 1);
-                moved = true;
-            } else if (this.board[this.getRow() - 1][this.getCol()].isWhite() != this.isWhite()) {
-                chessGrid.add(possibleMoves[3], this.getCol(), this.getRow() - 1);
-                moved = true;
-            } //if
-            if (this.getCol() + 1 < 8) {
-                if (this.board[this.getRow() - 1][this.getCol() + 1] == null) {
-                    chessGrid.add(possibleMoves[4], this.getCol() + 1, this.getRow() - 1);
-                    moved = true;
-                } else if (this.board[this.getRow() - 1][this.getCol() + 1].isWhite() != this.isWhite()) {
-                    chessGrid.add(possibleMoves[4], this.getCol() + 1, this.getRow() - 1);
-                    moved = true;
-                } //if
-            } //if
-            if (this.getCol() - 1 >= 0) {
-                if (this.board[this.getRow() - 1][this.getCol() - 1] == null) {
-                    chessGrid.add(possibleMoves[5], this.getCol() - 1, this.getRow() - 1);
-                    moved = true;
-                } else if (this.board[this.getRow() - 1][this.getCol() - 1].isWhite() != this.isWhite()) {
-                    chessGrid.add(possibleMoves[5], this.getCol() - 1, this.getRow() - 1);
-                    moved = true;
-                } //if
-            } //if
-        } //bounds
-
-        if (this.getCol() + 1 < 8) {
-            if (this.board[this.getRow()][this.getCol() + 1] == null) {
-                chessGrid.add(possibleMoves[6], this.getCol() + 1, this.getRow());
-                moved = true;
-            } else if (this.board[this.getRow()][this.getCol() + 1].isWhite() != this.isWhite()) {
-                chessGrid.add(possibleMoves[6], this.getCol() + 1, this.getRow());
-                moved = true;
-            } //if
-        } //if
-        if (this.getCol() - 1 >= 0) {
-            if (this.board[this.getRow()][this.getCol() - 1] == null) {
-                chessGrid.add(possibleMoves[7], this.getCol() - 1, this.getRow());
-                moved = true;
-            } else if (this.board[this.getRow()][this.getCol() - 1].isWhite() != this.isWhite()) {
-                chessGrid.add(possibleMoves[7], this.getCol() - 1, this.getRow());
-                moved = true;
-            } //if
-        } //if
-
+        moved = canMove2(moved);
         if (!moved) {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
@@ -190,10 +164,71 @@ public class King extends ChessPiece {
         } //if
     } //canMove
 
+    /**
+     *Finishes work of CanMove().
+     *@param move true if moved.
+     *@return moved tru if moved.
+     */
+
+    public boolean canMove2(boolean move) {
+        boolean moved = move;
+        if (this.getRow() - 1 >= 0) {
+            if (this.board[this.getRow() - 1][this.getCol()] == null) {
+                chessGrid.add(possibleMoves[3], this.getCol(), this.getRow() - 1);
+                moved = true;
+            } else if (this.board[this.getRow() - 1][this.getCol()].isWhite() != this.isWhite()) {
+                chessGrid.add(possibleMoves[3], this.getCol(), this.getRow() - 1);
+                moved = true;
+            } //if
+            if (this.getCol() + 1 < 8) {
+                if (this.board[this.getRow() - 1][this.getCol() + 1] == null) {
+                    chessGrid.add(possibleMoves[4], this.getCol() + 1, this.getRow() - 1);
+                    moved = true;
+                } else if (this.board[this.getRow() - 1]
+                           [this.getCol() + 1].isWhite() != this.isWhite()) {
+                    chessGrid.add(possibleMoves[4], this.getCol() + 1, this.getRow() - 1);
+                    moved = true;
+                } //if
+            } //if
+            if (this.getCol() - 1 >= 0) {
+                if (this.board[this.getRow() - 1][this.getCol() - 1] == null) {
+                    chessGrid.add(possibleMoves[5], this.getCol() - 1, this.getRow() - 1);
+                    moved = true;
+                } else if (this.board[this.getRow() - 1]
+                           [this.getCol() - 1].isWhite() != this.isWhite()) {
+                    chessGrid.add(possibleMoves[5], this.getCol() - 1, this.getRow() - 1);
+                    moved = true;
+                } //if
+            } //if
+        } //bounds
+        if (this.getCol() + 1 < 8) {
+            if (this.board[this.getRow()][this.getCol() + 1] == null) {
+                chessGrid.add(possibleMoves[6], this.getCol() + 1, this.getRow());
+                moved = true;
+            } else if (this.board[this.getRow()][this.getCol() + 1].isWhite() != this.isWhite()) {
+                chessGrid.add(possibleMoves[6], this.getCol() + 1, this.getRow());
+                moved = true;
+            } //if
+        } //if
+        if (this.getCol() - 1 >= 0) {
+            if (this.board[this.getRow()][this.getCol() - 1] == null) {
+                chessGrid.add(possibleMoves[7], this.getCol() - 1, this.getRow());
+                moved = true;
+            } else if (this.board[this.getRow()][this.getCol() - 1].isWhite() != this.isWhite()) {
+                chessGrid.add(possibleMoves[7], this.getCol() - 1, this.getRow());
+                moved = true;
+            } //if
+        } //if
+        return moved;
+    } //canMove2
+
+    /**
+     * Sets the future possible moves of piece.
+     */
+
     public void setPBM() {
         boolean stopLoop = false;
         this.board = this.getBoard();
-        int index = 0;
         if (this.getRow() + 1 < 8) {
             if (this.board[this.getRow() + 1][this.getCol()] == null) {
                 this.setPBM(this.getRow() + 1, this.getCol(), true);
@@ -203,19 +238,20 @@ public class King extends ChessPiece {
             if (this.getCol() + 1 < 8) {
                 if (this.board[this.getRow() + 1][this.getCol() + 1] == null) {
                     this.setPBM(this.getRow() + 1, this.getCol() + 1, true);
-                } else if (this.board[this.getRow() + 1][this.getCol() + 1].isWhite() != this.isWhite()) {
+                } else if (this.board[this.getRow() + 1]
+                           [this.getCol() + 1].isWhite() != this.isWhite()) {
                     this.setPBM(this.getRow() + 1, this.getCol(), true);
                 } //if
             } //if
             if (this.getCol() - 1 >= 0) {
                 if (this.board[this.getRow() + 1][this.getCol() - 1] == null) {
                     this.setPBM(this.getRow() + 1, this.getCol() - 1, true);
-                } else if (this.board[this.getRow() + 1][this.getCol() - 1].isWhite() != this.isWhite()) {
+                } else if (this.board[this.getRow() + 1]
+                           [this.getCol() - 1].isWhite() != this.isWhite()) {
                     this.setPBM(this.getRow() + 1, this.getCol() - 1, true);
                 } //if
             } //if
         } //bounds
-
         if (this.getRow() - 1 >= 0) {
             if (this.board[this.getRow() - 1][this.getCol()] == null) {
                 this.setPBM(this.getRow() - 1, this.getCol(), true);
@@ -225,19 +261,28 @@ public class King extends ChessPiece {
             if (this.getCol() + 1 < 8) {
                 if (this.board[this.getRow() - 1][this.getCol() + 1] == null) {
                     this.setPBM(this.getRow() - 1, this.getCol() + 1, true);
-                } else if (this.board[this.getRow() - 1][this.getCol() + 1].isWhite() != this.isWhite()) {
+                } else if (this.board[this.getRow() - 1]
+                           [this.getCol() + 1].isWhite() != this.isWhite()) {
                     this.setPBM(this.getRow() - 1, this.getCol() + 1, true);
                 } //if
             } //if
             if (this.getCol() - 1 >= 0) {
                 if (this.board[this.getRow() - 1][this.getCol() - 1] == null) {
                     this.setPBM(this.getRow() - 1, this.getCol() - 1, true);
-                } else if (this.board[this.getRow() - 1][this.getCol() - 1].isWhite() != this.isWhite()) {
+                } else if (this.board[this.getRow() - 1]
+                           [this.getCol() - 1].isWhite() != this.isWhite()) {
                     this.setPBM(this.getRow() - 1, this.getCol() - 1, true);
                 } //if
             } //if
         } //bounds
+        setPBM2();
+    } //setPBM
 
+    /**
+     *Finishes work of setPBM().
+     */
+
+    public void setPBM2() {
         if (this.getCol() + 1 < 8) {
             if (this.board[this.getRow()][this.getCol() + 1] == null) {
                 this.setPBM(this.getRow(), this.getCol() + 1, true);
@@ -252,6 +297,6 @@ public class King extends ChessPiece {
                 this.setPBM(this.getRow(), this.getCol() - 1, true);
             } //if
         } //if
-    } //setPBM
+    } //setPBM2
 
 } //King
