@@ -20,6 +20,17 @@ public class Knight extends ChessPiece {
     ImagePattern imgPW = new ImagePattern(imgW);
     ImagePattern imgPB = new ImagePattern(imgB);
 
+    /**
+     * Pawn constructor.
+     *@param isWhite true if isWhite false is black.
+     *@param row what row in gridpane.
+     *@param col what cal in gridpane.
+     *@param chessGrid the gridpane it's self.
+     *@param board stores position of pieces.
+     *@param isKing tells if piece is a king.
+     *@param score the text for changing for different team scores.
+     */
+
     public Knight(boolean isWhite, int row, int col, GridPane chessGrid,
                   ChessPiece[][] board, boolean isKing, Text score) {
         super(isWhite, row, col, chessGrid, board, isKing, score, 3);
