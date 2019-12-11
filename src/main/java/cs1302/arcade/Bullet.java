@@ -24,7 +24,8 @@ public class Bullet extends Circle {
     private Bounds bulletBounds;
     private Asteroid[] targets;
     private boolean alreadyHit = false;
-    private String explodeLink = "explosion-fire-isolated-on-black-background-detonation-bomb-as-game-illustration-id637859556?k=6";
+    private String explodeLink = "explosion-fire-isolated-on-black-" +
+        "background-detonation-bomb-as-game-illustration-id637859556?k=6";
 //    private String explodeLink = "https://media.istockphoto.com/illustrations/explosion"
 //        + "-fire-isolated-on-black-background-detonation-bomb-as-game-illustration-"
 //        + "id637859556?k=6&m=637859556&s=612x612&w=0&h=XYjy3d7YSrMpRgZFUte7DvL2yJkM"
@@ -81,7 +82,7 @@ public class Bullet extends Circle {
     } // isOnScreen
 
     /**
-     * This method checks to see if a bullet object
+     * This method checks to see if a bullet object.
      * has hit anyof the asteroids in the Asteroid array,
      *
      *@param ship a reference to the ship that is shooting.

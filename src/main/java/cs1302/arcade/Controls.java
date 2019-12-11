@@ -11,6 +11,10 @@ import javafx.scene.text.Text;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Control class for scene that holds control intructions.
+ */
+
 public class Controls {
 
     private Stage stage;
@@ -45,7 +49,14 @@ public class Controls {
             + "\tit will be unaffected by asteroids for about 5 seconds.\n"
             + "\tThis is done so in case of there being an asteroid at the center,\n"
             + "\tthe player does not continue to 'crash' and lose lives.";
-        chessString = "**Chess Controls**";
+        chessString = "**Chess Controls**\n"
+            + "\tWhite Starts first. As per chess standard regulations:\n"
+            + "\tIf you touch a piece you have to move it.\n"
+            + "\tClick a piece to see its possible moves\n"
+            + "\tClick where you want the piece to go\n"
+            + "Points: Pawn=1 Knight=3 Bishop=3 Rook=5 Queen=9.\n"
+            + "\tBeginner friendly so no 'en passant'/Castling.\n";
+
         backText = "\nPress 'Q' to go back to the main menu.";
         asteroidsControls = new Text(astString);
         chessControls = new Text(chessString);
